@@ -8,7 +8,7 @@ window.abrirPopupContrato = function (lote) {
 // ===============================
 async function carregarClientes() {
     try {
-        const response = await fetch("http://localhost:3000/cliente/");
+        const response = await fetch("https://api-lotes.onrender.com/cliente");
         const json = await response.json();
 
         const clientes = json.data;
@@ -18,7 +18,7 @@ async function carregarClientes() {
 
         clientes.forEach(cliente => {
             const option = document.createElement("option");
-            option.value = cliente.id;
+            option.value = cliente.id_cliente;
             option.textContent = cliente.nome;
             select.appendChild(option);
         });
@@ -39,7 +39,7 @@ document.getElementById("select-clientes").addEventListener("change", async (e) 
         return;
     }
 
-    const response = await fetch(`http://localhost:3000/cliente/${id}`);
+    const response = await fetch(`https://api-lotes.onrender.com/cliente/${id}`);
     const json = await response.json();
 
     const cliente = json.data;
