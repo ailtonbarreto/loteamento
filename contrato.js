@@ -3,7 +3,60 @@ window.abrirPopupContrato = function (lote) {
     window.loteParaContrato = lote;
 };
 
+// ===============================
+// CARREGAR CLIENTES NO SELECT
+// ===============================
+async function carregarClientes() {
+    try {
+        const response = await fetch("http://localhost:3000/cliente/");
+        const json = await response.json();
+
+        const clientes = json.data;
+        const select = document.getElementById("select-clientes");
+
+        select.innerHTML = `<option value="">Selecione um cliente</option>`;
+
+        clientes.forEach(cliente => {
+            const option = document.createElement("option");
+            option.value = cliente.id;
+            option.textContent = cliente.nome;
+            select.appendChild(option);
+        });
+
+    } catch (err) {
+        console.error("Erro ao carregar clientes:", err);
+    }
+}
+
+// ===============================
+// AO SELECIONAR CLIENTE → MOSTRAR NOME
+// ===============================
+document.getElementById("select-clientes").addEventListener("change", async (e) => {
+    const id = e.target.value;
+
+    if (!id) {
+        document.getElementById("cliente").textContent = "Gerar Contrato no Nome de";
+        return;
+    }
+
+    const response = await fetch(`http://localhost:3000/cliente/${id}`);
+    const json = await response.json();
+
+    const cliente = json.data;
+
+    // Exibe o nome no título
+    document.getElementById("cliente").textContent = `Gerar Contrato no Nome de: ${cliente.nome}`;
+
+    // Guarda o cliente para o contrato
+    window.clienteSelecionado = cliente;
+});
+
+// ===============================
+// INICIAR AO CARREGAR A PÁGINA
+// ===============================
 window.addEventListener("DOMContentLoaded", () => {
+
+    carregarClientes();
 
     // FECHAR POPUP
     document.getElementById("popup-close").addEventListener("click", () => {
@@ -13,82 +66,73 @@ window.addEventListener("DOMContentLoaded", () => {
     // GERAR PDF
     document.getElementById("btn-gerar-contrato-final").addEventListener("click", () => {
 
-        const nomeComprador = document.getElementById("comprador-nome").value.trim();
-        const cpfComprador = document.getElementById("comprador-cpf").value.trim();
-        const rgComprador = document.getElementById("comprador-rg").value.trim();
-        const enderecoComprador = document.getElementById("comprador-endereco").value.trim();
+        const lote = window.loteParaContrato;
+        const cliente = window.clienteSelecionado;
 
-        if (!nomeComprador || !cpfComprador || !rgComprador || !enderecoComprador) {
-            alert("Preencha todos os dados do comprador.");
+        if (!cliente) {
+            alert("Selecione um cliente antes de gerar o contrato.");
             return;
         }
 
-        const lote = window.loteParaContrato;
-
-        const vendedor = {
-            nome: "FULANO DE TAL",
-            cpf: "XXX",
-            rg: "XXX",
-            endereco: "Rua XXXX nº XXX, Bairro - Ubatuba/SP"
+        const vendedora = {
+            nome: "VMV INCORPORAÇÕES IMOBILIÁRIAS LTDA",
+            cnpj: "46.155.250/0001-00",
+            endereco: "Rua Rio Solimões 833, Sala 23, Residencial Amazonas, Franca/SP, CEP 14406-012"
         };
 
         const texto = `
 INSTRUMENTO PARTICULAR DE COMPROMISSO DE COMPRA E VENDA
 
-VENDEDOR:
-${vendedor.nome}, RG ${vendedor.rg}, CPF ${vendedor.cpf},
-residente em ${vendedor.endereco}.
+${vendedora.nome}, inscrita no CNPJ nº ${vendedora.cnpj}, com sede à ${vendedora.endereco}, doravante denominada COMPROMITENTE VENDEDORA ou simplesmente VENDEDORA;
 
 COMPRADOR:
-${nomeComprador}, RG ${rgComprador}, CPF ${cpfComprador},
-residente em ${enderecoComprador}.
+${cliente.nome}
 
-OBJETO:
-Lote ${lote.lote} (ID interno ${lote.id}), valor ${lote.valor},
-localizado no CONDOMÍNIO PARK TABATINGA, UBATUBA/SP.
+DO OBJETO DO CONTRATO
+CLÁUSULA PRIMEIRA – A COMPROMITENTE VENDEDORA compromete-se a vender ao COMPRADOR o imóvel descrito:
+Lote ${lote.lote}, ID interno ${lote.id}, localizado no CONDOMÍNIO PARK TABATINGA, UBATUBA/SP.
 
-PREÇO:
-O comprador pagará ao vendedor o valor total de ${lote.valor}.
+DO PREÇO E FORMA DE PAGAMENTO
+CLÁUSULA SEGUNDA – O comprador pagará o valor total de ${lote.valor}.
 
-ARREPENDIMENTO:
-Contrato firmado com renúncia de arrependimento.
+PARÁGRAFO PRIMEIRO – A transferência será realizada após assinatura da minuta de crédito imobiliário.
 
-POSSE:
-A posse será transmitida após pagamento integral.
+DA POSSE
+CLÁUSULA TERCEIRA – A escritura definitiva será outorgada após liberação dos valores do financiamento.
 
-DESPESAS:
-Todas as despesas cartoriais são responsabilidade do comprador.
+DO BEM
+CLÁUSULA QUARTA – O imóvel será entregue conforme estrutura física existente.
 
-MULTA DE MORA:
-Atraso implica multa de 20%.
+DOS ENCARGOS TRIBUTÁRIOS
+CLÁUSULA QUINTA – Encargos passam a ser responsabilidade do comprador após a posse.
 
-RESCISÃO:
-Não pagamento permite rescisão com multa de 20%.
+DOS HONORÁRIOS DA INTERMEDIAÇÃO
+CLÁUSULA SEXTA – Comissão conforme acordado entre as partes.
 
-MULTAS:
-Descumprimento implica multa de 20% sobre o valor total.
+DA RESPONSABILIDADE DAS PARTES
+CLÁUSULA SÉTIMA – O comprador arcará com despesas de escritura e registro.
 
-FORO:
-Comarca de São Paulo/SP.
+PARÁGRAFO ÚNICO – Descumprimento implica multa de 10% sobre o valor total da venda.
+
+DO FORO
+CLÁUSULA OITAVA – Fica eleito o foro de Ubatuba/SP.
 
 Ubatuba, ${new Date().toLocaleDateString("pt-BR")}
 
-VENDEDOR: ${vendedor.nome}
-COMPRADOR: ${nomeComprador}
+VENDEDORA: ${vendedora.nome}
+COMPRADOR: ${cliente.nome}
 
-TESTEMUNHAS:
-__________________________
-__________________________
+____________________________________
+____________________________________
 `;
 
-        // GERAR PDF
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
+        const pdf = new jsPDF({ unit: "mm", format: "a4" });
 
         const linhas = pdf.splitTextToSize(texto, 180);
         pdf.text(linhas, 15, 15);
 
-        pdf.save(`Contrato_${lote.id}.pdf`);
+        pdf.save(`Contrato_${lote.id}_${cliente.nome}.pdf`);
 
         document.getElementById("popup-contrato").style.display = "none";
     });
