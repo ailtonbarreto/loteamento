@@ -72,11 +72,10 @@ body {
     gap: 1.6rem;
 
     .first-line {
-        display: none;
-        /* display: grid; */
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.6rem;
-        width: 50%;
+        width: 100%;
 
         .line-chart {
             grid-column: span 2;
@@ -86,10 +85,6 @@ body {
 
     .second-line {
         width: 100%;
-
-        .chart_card {
-            height: 100%;
-        }
 
     }
 
@@ -105,44 +100,63 @@ body {
 
 }
 
+/* --------------------------------------------------------------------- */
 
+/* CONTAINER DO MAPA */
 #container {
+    position: relative;
+    width: auto;
     height: 100%;
-    width: 100%;
-    padding: 0.5vw;
-    overflow: hidden;
-    background: white;
-    border: 2px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    overflow: auto;
     cursor: grab;
-    box-shadow: var(--box-shadow);
     border-radius: var(--card-border-radius);
-    border: none;
+    box-shadow: var(--box-shadow);
+    padding: 0.3vw;
 }
+
+#container::-webkit-scrollbar {
+    display: none;
+}
+
 
 #mapa {
     position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    /* overflow: hidden; */
+    width: max-content;
+    height: max-content;
+}
+
+/* IMAGEM DO MAPA */
+#map-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 835px;
+
+    /* display: none; */
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 835px;
+    pointer-events: none;
+
+    /* display: none; */
+}
+
+#overlay path {
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 
-#container:active {
-    cursor: grabbing;
-}
 
 
-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: var(--card-border-radius);
-}
 
+/* ---------------------------------------------------------------- */
 
 #tooltip {
     position: absolute;
@@ -186,6 +200,7 @@ path {
 
 }
 
+
 button {
     background-color: #03a77e;
     color: #fff;
@@ -195,7 +210,7 @@ button {
     font-size: 1vw;
 }
 
-#gerar_contrato{
+#gerar_contrato {
     background-color: rgb(5, 123, 202);
 }
 
@@ -220,7 +235,7 @@ button {
     align-items: center;
     z-index: 99999;
 
-    button{
+    button {
         background-color: rgb(5, 123, 202);
     }
 }

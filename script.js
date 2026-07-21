@@ -8,7 +8,7 @@ function iniciarSistema() {
     const wrapper = document.getElementById("mapa");     // DIV que envolve PNG + SVG
     const tooltip = document.getElementById("tooltip");
 
-    
+
 
     const csvURL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vRGiVMZTopUoPycE7RZ-rH1F68nqeqlerv99ngjY4oy8FCe1D-2e5OqTSTn-kCNLS2yfYzVd25hfO3R/pub?gid=0&single=true&output=csv";
@@ -25,7 +25,6 @@ function iniciarSistema() {
             configurarCliqueNosLotes();
             atualizarTotalVendido();
             atualizarDashboard();
-            configurarZoomPan();
         })
         .catch(err => console.error("Erro ao carregar CSV:", err));
 
@@ -281,45 +280,60 @@ function iniciarSistema() {
         if (elVend) elVend.innerText = vendidos;
     }
 
-    // ---------------- Zoom + Pan no wrapper ----------------
-    function configurarZoomPan() {
-        let scale = 1;
-        let originX = 0;
-        let originY = 0;
+    // ----------------------------------------------------------
 
-        let dragging = false;
-        let startX, startY;
+    // ---------------- Arrastar o mapa ----------------
 
-        wrapper.style.transformOrigin = "0 0";
+    const container = document.getElementById("container");
 
-        wrapper.addEventListener("wheel", e => {
-            e.preventDefault();
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let scrollLeft = 0;
+    let scrollTop = 0;
 
-            const zoom = e.deltaY < 0 ? 1.1 : 0.9;
-            scale *= zoom;
+    container.addEventListener("mousedown", (e) => {
 
-            wrapper.style.transform = `scale(${scale}) translate(${originX}px, ${originY}px)`;
-        });
+        isDragging = true;
 
-        wrapper.addEventListener("mousedown", e => {
-            dragging = true;
-            startX = e.clientX;
-            startY = e.clientY;
-        });
+        container.style.cursor = "grabbing";
 
-        wrapper.addEventListener("mousemove", e => {
-            if (!dragging) return;
+        startX = e.pageX;
+        startY = e.pageY;
 
-            originX += (e.clientX - startX) / scale;
-            originY += (e.clientY - startY) / scale;
+        scrollLeft = container.scrollLeft;
+        scrollTop = container.scrollTop;
 
-            wrapper.style.transform = `scale(${scale}) translate(${originX}px, ${originY}px)`;
+        e.preventDefault();
 
-            startX = e.clientX;
-            startY = e.clientY;
-        });
+    });
 
-        wrapper.addEventListener("mouseup", () => (dragging = false));
-        wrapper.addEventListener("mouseleave", () => (dragging = false));
-    }
+    container.addEventListener("mousemove", (e) => {
+
+        if (!isDragging) return;
+
+        const dx = e.pageX - startX;
+        const dy = e.pageY - startY;
+
+        container.scrollLeft = scrollLeft - dx;
+        container.scrollTop = scrollTop - dy;
+
+    });
+
+    window.addEventListener("mouseup", () => {
+
+        isDragging = false;
+
+        container.style.cursor = "grab";
+
+    });
+
+    container.addEventListener("mouseleave", () => {
+
+        isDragging = false;
+
+        container.style.cursor = "grab";
+
+    });
+
 }
