@@ -1,304 +1,338 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <title>Espelho de Venda</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loteamento Pro</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f5f5f7;
+      color: #111827;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR FIXA */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 14px 32px;
+      background: #111827;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .navbar-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s;
+    }
+
+    .navbar-links a:hover {
+      background: #1f2937;
+      color: #fff;
+    }
+
+    /* BOTÃO DE LOGIN DIFERENTE */
+    .btn-login {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+      transition: 0.2s;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
+    }
+
+    /* SEÇÕES */
+    section {
+      padding: 120px 32px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding-top: 160px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #4b5563;
+      margin-bottom: 24px;
+    }
+
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .feature-box {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: 0.2s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .feature-box h3 {
+      margin-bottom: 10px;
+    }
+
+    /* MODAL LOGIN */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal {
+      background: #fff;
+      padding: 24px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal-body input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn-modal {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-cancel {
+      background: #e5e7eb;
+    }
+
+    .btn-submit {
+      background: #111827;
+      color: #fff;
+    }
+  </style>
+</head>
 
 <body>
 
-    <div id="tooltip"></div>
-
-    <div class="dash_container">
-
-        <h2>Espelho de Vendas</h2>
-
-        <div class="analyse">
-
-            <div class="valor_empreendimento">
-
-                <h3>Valor Empreendimento</h3>
-                <h1 id="totalVendido">-</h1>
-
-            </div>
-
-            <div class="qtd_total_lotes">
-
-                <h3>Qtd Lotes</h3>
-                <h1 id="totalLotes">-</h1>
-
-            </div>
-
-            <div class="searches">
-
-                <h3>QTD Disponível</h3>
-                <h1 id="totalDisponiveis">-</h1>
-
-            </div>
-
-            <div class="searches">
-
-                <h3>QTD Vendidos</h3>
-                <h1 id="qtd_lotes">-</h1>
-
-            </div>
-
-            <div class="searches">
-
-                <h3>QTD Reservados</h3>
-                <h1 id="totalReservados">-</h1>
-
-            </div>
-
-            <div class="searches">
-
-                <h3>QTD Bloqueados</h3>
-                <h1 id="qtd_bloqueados">-</h1>
-
-            </div>
-
-
-
-        </div>
-
-
-        <div class="charts-container">
-
-            <div class="first-line">
-
-                <div class="chart_card">
-
-                    <h3>Por Status</h3>
-
-                    <div id="bar_chart"></div>
-
-
-                </div>
-
-                <div class="chart_card">
-
-                    <h3>Gráfico 2</h3>
-
-                    <div id="bar_saida" style="width: 100%; height: 100%;"></div>
-
-
-                </div>
-
-                <div class="chart_card line-chart">
-
-                    <h3>Gráfico 3</h3>
-
-                    <div id="line" style="width: 100%; height: 100%;"></div>
-
-
-                </div>
-
-            </div>
-
-            <div class="second-line">
-
-                <div id="container">
-
-                    <div id="mapa">
-
-                        <img src="loteamento.png" id="map-img">
-
-                        <svg id="overlay" viewBox="0 0 1440 835">
-                            <path id="63" d="M663 319L610.5 309.5L601 360.5L654.5 369.5L663 319Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="62" d="M610.5 309.5L557 300L548.5 343.5L557 353L601 360.5L610.5 309.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="61" d="M888 307L880.5 357L937.5 366L943.5 324L934 315L888 307Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="60" d="M831.5 298.5L824 347L880.5 357L888 307L831.5 298.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="59" d="M777.5 288.5L769.5 337.5L824 347L831.5 298.5L777.5 288.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="58" d="M724 278.5L716 328L769.5 337.5L777.5 288.5L724 278.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="57" d="M618.5 260.5L610.5 309.5L663 319L671.5 269.5L618.5 260.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="56" d="M671.5 269.5L663 319L716 328L724 278.5L671.5 269.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="55" d="M564 260.5L557 300L610.5 309.5L618.5 260.5L573 253L564 260.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="54" d="M463 285L453.5 334.5L501.5 344L510 339L516.5 333.5L523 295.5L463 285Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="53" d="M407.5 275.5L397.5 325L453.5 334.5L463 285L407.5 275.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="52" d="M350.5 266L340 315.5L397.5 325L407.5 275.5L350.5 266Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="51" d="M294.5 256.5L284.5 306L340 315.5L350.5 266L294.5 256.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="50" d="M240 247.5L229.5 297L284.5 306L294.5 256.5L240 247.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="49" d="M184.5 237.5L172.5 287L229.5 297L240 247.5L184.5 237.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="48" d="M122 226.5L111 266L121 278L172.5 287L184.5 237.5L122 226.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="47" d="M472.5 235L463 285L523 295.5L531 252L521 242L472.5 235Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="46" d="M417 226L407.5 275.5L463 285L472.5 235L417 226Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="45" d="M361 216L350.5 266L407.5 275.5L417 226L361 216Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="44" d="M305 206L294.5 256.5L350.5 266L361 216L305 206Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="43" d="M251 196.5L240 247.5L294.5 256.5L305 206L251 196.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="42" d="M196 186.5L184.5 237.5L240 247.5L251 196.5L196 186.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="41" d="M130 197.5L122 226.5L184.5 237.5L196 186.5L162 181.5L145 187.5L130 197.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="40" d="M1315.5 306.5L1310 353L1356.5 361L1370 353L1374 317L1315.5 306.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="39" d="M1260 297.5L1254.5 343L1310 353L1315.5 306.5L1260 297.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="38" d="M1204.5 288L1198.5 333.5L1254.5 343L1260 297.5L1204.5 288Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="37" d="M1150.5 278.5L1144.5 324.5L1198.5 333.5L1204.5 288L1150.5 278.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="36" d="M1096 269L1089.5 315.5L1144.5 324.5L1150.5 278.5L1096 269Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="35" d="M1042.5 260L1036.5 306.5L1089.5 315.5L1096 269L1042.5 260Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="34" d="M986.5 250.5L981.5 289.5L992 299.5L1036.5 306.5L1042.5 260L986.5 250.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="33"
-                                d="M1320.5 257.5L1315.5 306.5L1374 317.5L1378.5 272.5L1369 265.5L1320.5 257.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="32" d="M1266.5 248L1260 297.5L1315.5 306.5L1320.5 257.5L1266.5 248Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="31" d="M1211 238.5L1204.5 288L1260 297.5L1266.5 248L1211 238.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="30" d="M1157 228.5L1150.5 278.5L1204.5 288L1211 238.5L1157 228.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="29" d="M1049 209.5L1042.5 260L1096 269L1103 219L1049 209.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="28" d="M1103 219L1096 269L1150.5 278.5L1157 228.5L1103 219Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="27" d="M993.5 207.5L986.5 250.5L1042.5 260L1049 209.5L1003.5 201.5L993.5 207.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="26" d="M899 234L892.5 281.5L934.5 289.5L950.5 283L955.5 244L899 234Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="25" d="M846 225L838.5 272L892.5 281.5L899 234L846 225Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="24" d="M793 216L785 262L838.5 272L846 225L793 216Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="23" d="M739.5 206L731 252.5L785 262L793 216L739.5 206Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="22" d="M686.5 196.5L678 243.5L731 252.5L739.5 206L686.5 196.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="21" d="M633 186.5L624 235L678 243.5L686.5 196.5L633 186.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="20" d="M578 177.5L570.5 218.5L580.5 228L624 235L633 186.5L578 177.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="19" d="M906 185.5L899 234L955.5 244L962 201L953 193L906 185.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="18" d="M853 176.5L846 225L899 234L906 185.5L853 176.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="17" d="M800.5 167L793 216L846 225L853 176.5L800.5 167Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="16" d="M747.5 157.5L739.5 206L793 216L800.5 167L747.5 157.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="15" d="M694.5 148L686.5 196.5L739.5 206L747.5 157.5L694.5 148Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="14" d="M641 138.5L633 186.5L686.5 196.5L694.5 148L641 138.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="13" d="M585 137.5L578 177.5L633 186.5L641 138.5L594.5 130.5L585 137.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="12" d="M488.5 162L479.5 209.5L526.5 218.5L539 209.5L545 171.5L488.5 162Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="11" d="M433 152.5L423 199.5L479.5 209.5L488.5 162L433 152.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="10" d="M377 143L367 190L423 199.5L433 152.5L377 143Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="9" d="M322.5 133.5L312 180L367 190L377 143L322.5 133.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="8" d="M268 123.5L257 170.5L312 180L322.5 134L268 123.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="7" id="lt7" d="M211.5 114.5L203 147.5L218 164.5L257 170.5L268 123.5L211.5 114.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="6" d="M497 114.5L488.5 162L545 171.5L552 129L541 121.5L497 114.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="5" d="M441.5 105L433 152.5L488.5 162L497 114.5L441.5 105Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="4" d="M387 95.5L377 143L433 152.5L441.5 105L387 95.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="3" d="M333 85.5L322.5 133.5L377 143L387 95.5L333 85.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="2" d="M279 76L268 123.5L322.5 133.5L333 85.5L279 76Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="1"
-                                d="M212 90.5448L211.5 114.5L268 123.5L279 76L242.083 71L224.534 77.9931L212 90.5448Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                        </svg>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <div id="sidebar">
-                <div id="sidebar-close">X</div>
-
-                <h2>Detalhes do Lote</h2>
-
-                <p><strong>Lote:</strong> <span id="sb-lote"></span></p>
-                <p><strong>Valor:</strong> <span id="sb-valor"></span></p>
-
-                <p><strong>Status:</strong></p>
-
-                <select id="sb-status-select">
-
-                    <option value="disponível">Disponível</option>
-                    <option value="reservado">Reservado</option>
-                    <option value="vendido">Vendido</option>
-                    <option value="bloqueado">Bloqueado</option>
-
-                </select>
-
-                <button id="btn-salvar-status">Salvar</button>
-
-                <button id="gerar_contrato">Gerar Contrato</button>
-
-
-            </div>
-
-            <!-- HTML do popup -->
-            <div id="popup-contrato">
-                <div id="popup-box">
-                    <div id="popup-close">X</div>
-
-                    <h2>Dados do Comprador</h2>
-
-                    <select id="select-clientes">
-                        <option value="">Selecione um cliente</option>
-                    </select>
-
-
-                    <h2 id="cliente">Gerar Contrato no Nome de</h2>
-
-
-                    <button id="btn-gerar-contrato-final">Gerar Contrato</button>
-                </div>
-            </div>
-
-            <!-- SEUS SCRIPTS -->
-            <script src="script.js" defer></script>
-            <script src="contrato.js" defer></script>
-            <script src="dash.js" defer></script>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-logo">Loteamento Pro</div>
+    <div class="navbar-links">
+      <a href="#hero">Início</a>
+      <a href="#features">Recursos</a>
+      <a href="#sobre">Sobre</a>
+      <button class="btn-login" id="btnLogin">Login</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <h1>Gestão moderna de loteamentos</h1>
+    <p>Controle vendas, visualize lotes e acompanhe tudo em um painel intuitivo.</p>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <h2>Recursos poderosos</h2>
+    <div class="features">
+      <div class="feature-box">
+        <h3>Mapa Interativo</h3>
+        <p>Visualize lotes vendidos, reservados e disponíveis em tempo real.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Gestão de Clientes</h3>
+        <p>Organize compradores, propostas e documentos com facilidade.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Relatórios Inteligentes</h3>
+        <p>Acompanhe o desempenho do loteamento com gráficos e métricas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <h2>Sobre o sistema</h2>
+    <p>Desenvolvido para loteadoras que buscam eficiência, organização e tecnologia de ponta.</p>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <h2>Fale conosco</h2>
+    <p>Entre em contato para demonstrações, propostas e suporte.</p>
+  </section>
+
+  <!-- MODAL LOGIN -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Login</h2>
+        <button id="btnCloseModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="email" id="email" placeholder="E-mail" />
+        <input type="password" id="senha" placeholder="Senha" />
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal btn-cancel" id="btnCancelar">Cancelar</button>
+        <button class="btn-modal btn-submit" id="btnEntrar">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const btnLogin = document.getElementById("btnLogin");
+    const btnCloseModal = document.getElementById("btnCloseModal");
+    const btnCancelar = document.getElementById("btnCancelar");
+    const btnEntrar = document.getElementById("btnEntrar");
+
+    btnLogin.onclick = () => modalBackdrop.style.display = "flex";
+    btnCloseModal.onclick = () => modalBackdrop.style.display = "none";
+    btnCancelar.onclick = () => modalBackdrop.style.display = "none";
+
+    btnEntrar.onclick = () => {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      if (!email || !senha) {
+        alert("Preencha e-mail e senha.");
+        return;
+      }
+
+      alert("Login enviado!");
+      modalBackdrop.style.display = "none";
+    };
+
+    modalBackdrop.onclick = (e) => {
+      if (e.target === modalBackdrop) modalBackdrop.style.display = "none";
+    };
+
+
+    async function login() {
+      const user = document.getElementById('nome').value;
+      const password = document.getElementById('senha').value;
+      const spinner = document.getElementById('spinner');
+
+      spinner.style.display = 'flex';
+
+      const response = await fetch('https://api-checkin-7zte.onrender.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user, password })
+      });
+
+      const data = await response.json();
+      const msg = document.getElementById('mensagem');
+
+      if (response.ok) {
+        localStorage.setItem('nome', user);
+        sessionStorage.setItem('logon', 'ok')
+        window.location.href = "./home/home.html";
+
+      } else {
+        spinner.style.display = 'none';
+        msg.innerHTML = `${data.error}`;
+      }
+    }
+
+  </script>
 
 </body>
-
-
 
 </html>
