@@ -64,6 +64,10 @@ function iniciarSistema() {
                 path.style.fill = "#DEAB05";
                 path.style.opacity = "0.5";
 
+            } else if (status === "bloqueado") {
+                path.style.fill = "#de0505";
+                path.style.opacity = "0.5";
+
             } else {
                 path.style.fill = "transparent";
                 path.style.opacity = "1";
@@ -192,8 +196,8 @@ function iniciarSistema() {
 
     // ---------------- Valores e contadores ----------------
 
-function parseValor(valorStr) {
-    return Number(valorStr);
+    function parseValor(valorStr) {
+        return Number(valorStr);
 
         // Troca vírgula por ponto
         valorStr = valorStr.replace(",", ".");
