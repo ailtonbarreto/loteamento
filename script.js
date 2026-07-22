@@ -1,90 +1,69 @@
-// Arquitetura: DOM pronto → frame renderizado → iniciarSistema()
 window.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(() => iniciarSistema());
 });
 
 function iniciarSistema() {
-    const svg = document.getElementById("overlay");      // SVG overlay
-    const wrapper = document.getElementById("mapa");     // DIV que envolve PNG + SVG
+    const svg = document.getElementById("overlay");
+    const wrapper = document.getElementById("mapa");
     const tooltip = document.getElementById("tooltip");
 
 
+    fetch("https://api-lotes.onrender.com/loteamentos")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erro ao buscar os lotes.");
+            }
+            return response.json();
+        })
+        .then(data => {
 
-    const csvURL =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vRGiVMZTopUoPycE7RZ-rH1F68nqeqlerv99ngjY4oy8FCe1D-2e5OqTSTn-kCNLS2yfYzVd25hfO3R/pub?gid=0&single=true&output=csv";
+            lotes = {};
 
-    let lotes = {};
+            // AQUI ESTÁ O AJUSTE
+            data.data.forEach(item => {
+                lotes[item.id_lote] = item;
+            });
 
-    // ---------------- CSV ----------------
-    fetch(csvURL)
-        .then(res => res.text())
-        .then(csv => {
-            processarCSV(csv);
             pintarLotes();
             configurarTooltip();
             configurarCliqueNosLotes();
             atualizarTotalVendido();
             atualizarDashboard();
+
+            window.lotes = lotes;
+            window.dispatchEvent(new Event("lotesCarregados"));
+
         })
-        .catch(err => console.error("Erro ao carregar CSV:", err));
+        .catch(err => console.error(err));
 
-    function parseCSVLine(line) {
-        const result = [];
-        let current = "";
-        let insideQuotes = false;
-
-        for (let i = 0; i < line.length; i++) {
-            const c = line[i];
-
-            if (c === '"') {
-                insideQuotes = !insideQuotes;
-            } else if (c === ',' && !insideQuotes) {
-                result.push(current.trim());
-                current = "";
-            } else {
-                current += c;
-            }
-        }
-        result.push(current.trim());
-        return result;
-    }
-
-    function processarCSV(csv) {
-        const linhas = csv.trim().split("\n");
-        const cabecalho = parseCSVLine(linhas.shift());
-
-        linhas.forEach(linha => {
-            const valores = parseCSVLine(linha);
-            const item = {};
-
-            cabecalho.forEach((coluna, i) => {
-                item[coluna.trim()] = valores[i]
-                    ? valores[i].trim().replace(/^"|"$/g, "")
-                    : "";
-            });
-
-            lotes[item.id] = item;
-        });
-    }
 
     // ---------------- Pintar lotes ----------------
+
     function pintarLotes() {
-        svg.querySelectorAll("path[id^='lt']").forEach(path => {
+        svg.querySelectorAll("path").forEach(path => {
             const id = path.id;
             const lote = lotes[id];
-            if (!lote) return;
+
+            if (!lote) {
+                path.style.fill = "transparent";
+                path.style.opacity = "1";
+                return;
+            }
 
             const status = lote.status.toLowerCase();
 
             if (status === "disponível") {
                 path.style.fill = "#29DE05";
                 path.style.opacity = "0.5";
+
             } else if (status === "vendido") {
-                path.style.fill = "#DE0505";
+                path.style.fill = "#02b1dd";
                 path.style.opacity = "0.5";
+
             } else if (status === "reservado") {
                 path.style.fill = "#DEAB05";
                 path.style.opacity = "0.5";
+
             } else {
                 path.style.fill = "transparent";
                 path.style.opacity = "1";
@@ -92,27 +71,32 @@ function iniciarSistema() {
         });
     }
 
+
+
     // ---------------- Tooltip ----------------
+
     function configurarTooltip() {
-        svg.querySelectorAll("path[id^='lt']").forEach(path => {
+        svg.querySelectorAll("path").forEach(path => {
             path.style.cursor = "pointer";
 
             path.addEventListener("mouseenter", () => {
                 const id = path.id;
                 const lote = lotes[id];
+
                 if (!lote) return;
 
                 const rect = path.getBoundingClientRect();
 
                 tooltip.innerHTML = `
-                    <b>${lote.lote}</b><br>
-                    Valor: ${lote.valor}<br>
-                    Status: ${lote.status}
-                    `;
+                <b>${lote.lote}</b><br>
+                Valor: R$ ${lote.valor}<br>
+                Status: ${lote.status}
+            `;
 
                 tooltip.style.display = "block";
-                tooltip.style.left = (rect.left + rect.width / 2) + "px";
-                tooltip.style.top = (rect.top + rect.height / 2) + "px";
+
+                tooltip.style.left = rect.left + rect.width / 2 + "px";
+                tooltip.style.top = rect.top + rect.height / 2 + "px";
             });
 
             path.addEventListener("mouseleave", () => {
@@ -121,14 +105,17 @@ function iniciarSistema() {
         });
     }
 
+
     // ---------------- Clique → Sidebar ----------------
+
     function configurarCliqueNosLotes() {
-        svg.querySelectorAll("path[id^='lt']").forEach(path => {
+        svg.querySelectorAll("path").forEach(path => {
             path.addEventListener("click", () => {
                 abrirSidebar(path.id);
             });
         });
     }
+
 
     function abrirSidebar(id) {
         const lote = lotes[id];
@@ -192,7 +179,7 @@ function iniciarSistema() {
             path.style.fill = "#29DE05";
             path.style.opacity = "0.5";
         } else if (status === "vendido") {
-            path.style.fill = "#DE0505";
+            path.style.fill = "#02b1dd";
             path.style.opacity = "0.5";
         } else if (status === "reservado") {
             path.style.fill = "#DEAB05";
@@ -204,14 +191,14 @@ function iniciarSistema() {
     }
 
     // ---------------- Valores e contadores ----------------
-    function parseValor(valorStr) {
-        return Number(
-            valorStr
-                .replace("R$", "")
-                .replace(/\s/g, "")
-                .replace(/\./g, "")
-                .replace(",", ".")
-        );
+
+function parseValor(valorStr) {
+    return Number(valorStr);
+
+        // Troca vírgula por ponto
+        valorStr = valorStr.replace(",", ".");
+
+        return Number(valorStr);
     }
 
     function calcularTotalVendido() {
@@ -221,16 +208,13 @@ function iniciarSistema() {
             const lote = lotes[id];
             if (!lote) continue;
 
-            const status = lote.status.toLowerCase();
-
-            if (status === "vendido") {
-                const valor = parseValor(lote.valor);
-                total += valor;
-            }
+            const valor = parseValor(lote.valor);
+            total += valor;
         }
 
         return total;
     }
+
 
     function atualizarTotalVendido() {
         const total = calcularTotalVendido();
@@ -241,6 +225,8 @@ function iniciarSistema() {
                 minimumFractionDigits: 2
             });
     }
+
+    // ---------------------------------------
 
     function contarLotes() {
         return Object.keys(lotes).length;
@@ -272,7 +258,7 @@ function iniciarSistema() {
         const elTotal = document.getElementById("totalLotes");
         const elDisp = document.getElementById("totalDisponiveis");
         const elRes = document.getElementById("totalReservados");
-        const elVend = document.getElementById("totalVendidos");
+        const elVend = document.getElementById("qtd_lotes");
 
         if (elTotal) elTotal.innerText = total;
         if (elDisp) elDisp.innerText = disponiveis;

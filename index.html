@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <title>Espelho de Venda</title>
 </head>
 
@@ -37,7 +38,7 @@
             <div class="searches">
 
                 <h3>QTD Vendidos</h3>
-                <h1 id="totalVendidos">0</h1>
+                <h1 id="qtd_lotes">0</h1>
 
             </div>
 
@@ -63,9 +64,9 @@
 
                 <div class="chart_card">
 
-                    <h3>Gráfico 1</h3>
+                    <h3>Por Status</h3>
 
-                    <div id="pie" style="width: 100%; height: 100%;"></div>
+                    <div id="bar_chart"></div>
 
 
                 </div>
@@ -99,134 +100,132 @@
                         <img src="loteamento.png" id="map-img">
 
                         <svg id="overlay" viewBox="0 0 1440 835">
-                            <path id="lt63" d="M663 319L610.5 309.5L601 360.5L654.5 369.5L663 319Z" stroke="black"
+                            <path id="63" d="M663 319L610.5 309.5L601 360.5L654.5 369.5L663 319Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt62" d="M610.5 309.5L557 300L548.5 343.5L557 353L601 360.5L610.5 309.5Z"
+                            <path id="62" d="M610.5 309.5L557 300L548.5 343.5L557 353L601 360.5L610.5 309.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt61" d="M888 307L880.5 357L937.5 366L943.5 324L934 315L888 307Z" stroke="black"
+                            <path id="61" d="M888 307L880.5 357L937.5 366L943.5 324L934 315L888 307Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt60" d="M831.5 298.5L824 347L880.5 357L888 307L831.5 298.5Z" stroke="black"
+                            <path id="60" d="M831.5 298.5L824 347L880.5 357L888 307L831.5 298.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt59" d="M777.5 288.5L769.5 337.5L824 347L831.5 298.5L777.5 288.5Z" stroke="black"
+                            <path id="59" d="M777.5 288.5L769.5 337.5L824 347L831.5 298.5L777.5 288.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt58" d="M724 278.5L716 328L769.5 337.5L777.5 288.5L724 278.5Z" stroke="black"
+                            <path id="58" d="M724 278.5L716 328L769.5 337.5L777.5 288.5L724 278.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt57" d="M618.5 260.5L610.5 309.5L663 319L671.5 269.5L618.5 260.5Z" stroke="black"
+                            <path id="57" d="M618.5 260.5L610.5 309.5L663 319L671.5 269.5L618.5 260.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt56" d="M671.5 269.5L663 319L716 328L724 278.5L671.5 269.5Z" stroke="black"
+                            <path id="56" d="M671.5 269.5L663 319L716 328L724 278.5L671.5 269.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt55" d="M564 260.5L557 300L610.5 309.5L618.5 260.5L573 253L564 260.5Z"
+                            <path id="55" d="M564 260.5L557 300L610.5 309.5L618.5 260.5L573 253L564 260.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt54" d="M463 285L453.5 334.5L501.5 344L510 339L516.5 333.5L523 295.5L463 285Z"
+                            <path id="54" d="M463 285L453.5 334.5L501.5 344L510 339L516.5 333.5L523 295.5L463 285Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt53" d="M407.5 275.5L397.5 325L453.5 334.5L463 285L407.5 275.5Z" stroke="black"
+                            <path id="53" d="M407.5 275.5L397.5 325L453.5 334.5L463 285L407.5 275.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt52" d="M350.5 266L340 315.5L397.5 325L407.5 275.5L350.5 266Z" stroke="black"
+                            <path id="52" d="M350.5 266L340 315.5L397.5 325L407.5 275.5L350.5 266Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt51" d="M294.5 256.5L284.5 306L340 315.5L350.5 266L294.5 256.5Z" stroke="black"
+                            <path id="51" d="M294.5 256.5L284.5 306L340 315.5L350.5 266L294.5 256.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt50" d="M240 247.5L229.5 297L284.5 306L294.5 256.5L240 247.5Z" stroke="black"
+                            <path id="50" d="M240 247.5L229.5 297L284.5 306L294.5 256.5L240 247.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt49" d="M184.5 237.5L172.5 287L229.5 297L240 247.5L184.5 237.5Z" stroke="black"
+                            <path id="49" d="M184.5 237.5L172.5 287L229.5 297L240 247.5L184.5 237.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt48" d="M122 226.5L111 266L121 278L172.5 287L184.5 237.5L122 226.5Z"
+                            <path id="48" d="M122 226.5L111 266L121 278L172.5 287L184.5 237.5L122 226.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="47" d="M472.5 235L463 285L523 295.5L531 252L521 242L472.5 235Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="46" d="M417 226L407.5 275.5L463 285L472.5 235L417 226Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="45" d="M361 216L350.5 266L407.5 275.5L417 226L361 216Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="44" d="M305 206L294.5 256.5L350.5 266L361 216L305 206Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="43" d="M251 196.5L240 247.5L294.5 256.5L305 206L251 196.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="42" d="M196 186.5L184.5 237.5L240 247.5L251 196.5L196 186.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="41" d="M130 197.5L122 226.5L184.5 237.5L196 186.5L162 181.5L145 187.5L130 197.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt47" d="M472.5 235L463 285L523 295.5L531 252L521 242L472.5 235Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt46" d="M417 226L407.5 275.5L463 285L472.5 235L417 226Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt45" d="M361 216L350.5 266L407.5 275.5L417 226L361 216Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt44" d="M305 206L294.5 256.5L350.5 266L361 216L305 206Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt43" d="M251 196.5L240 247.5L294.5 256.5L305 206L251 196.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt42" d="M196 186.5L184.5 237.5L240 247.5L251 196.5L196 186.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt41"
-                                d="M130 197.5L122 226.5L184.5 237.5L196 186.5L162 181.5L145 187.5L130 197.5Z"
+                            <path id="40" d="M1315.5 306.5L1310 353L1356.5 361L1370 353L1374 317L1315.5 306.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt40" d="M1315.5 306.5L1310 353L1356.5 361L1370 353L1374 317L1315.5 306.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt39" d="M1260 297.5L1254.5 343L1310 353L1315.5 306.5L1260 297.5Z" stroke="black"
+                            <path id="39" d="M1260 297.5L1254.5 343L1310 353L1315.5 306.5L1260 297.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt38" d="M1204.5 288L1198.5 333.5L1254.5 343L1260 297.5L1204.5 288Z"
+                            <path id="38" d="M1204.5 288L1198.5 333.5L1254.5 343L1260 297.5L1204.5 288Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="37" d="M1150.5 278.5L1144.5 324.5L1198.5 333.5L1204.5 288L1150.5 278.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt37" d="M1150.5 278.5L1144.5 324.5L1198.5 333.5L1204.5 288L1150.5 278.5Z"
+                            <path id="36" d="M1096 269L1089.5 315.5L1144.5 324.5L1150.5 278.5L1096 269Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="35" d="M1042.5 260L1036.5 306.5L1089.5 315.5L1096 269L1042.5 260Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="34" d="M986.5 250.5L981.5 289.5L992 299.5L1036.5 306.5L1042.5 260L986.5 250.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt36" d="M1096 269L1089.5 315.5L1144.5 324.5L1150.5 278.5L1096 269Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt35" d="M1042.5 260L1036.5 306.5L1089.5 315.5L1096 269L1042.5 260Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt34" d="M986.5 250.5L981.5 289.5L992 299.5L1036.5 306.5L1042.5 260L986.5 250.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt33"
+                            <path id="33"
                                 d="M1320.5 257.5L1315.5 306.5L1374 317.5L1378.5 272.5L1369 265.5L1320.5 257.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt32" d="M1266.5 248L1260 297.5L1315.5 306.5L1320.5 257.5L1266.5 248Z"
+                            <path id="32" d="M1266.5 248L1260 297.5L1315.5 306.5L1320.5 257.5L1266.5 248Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt31" d="M1211 238.5L1204.5 288L1260 297.5L1266.5 248L1211 238.5Z" stroke="black"
+                            <path id="31" d="M1211 238.5L1204.5 288L1260 297.5L1266.5 248L1211 238.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt30" d="M1157 228.5L1150.5 278.5L1204.5 288L1211 238.5L1157 228.5Z"
+                            <path id="30" d="M1157 228.5L1150.5 278.5L1204.5 288L1211 238.5L1157 228.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="29" d="M1049 209.5L1042.5 260L1096 269L1103 219L1049 209.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="28" d="M1103 219L1096 269L1150.5 278.5L1157 228.5L1103 219Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="27" d="M993.5 207.5L986.5 250.5L1042.5 260L1049 209.5L1003.5 201.5L993.5 207.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt29" d="M1049 209.5L1042.5 260L1096 269L1103 219L1049 209.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt28" d="M1103 219L1096 269L1150.5 278.5L1157 228.5L1103 219Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt27" d="M993.5 207.5L986.5 250.5L1042.5 260L1049 209.5L1003.5 201.5L993.5 207.5Z"
+                            <path id="26" d="M899 234L892.5 281.5L934.5 289.5L950.5 283L955.5 244L899 234Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt26" d="M899 234L892.5 281.5L934.5 289.5L950.5 283L955.5 244L899 234Z"
+                            <path id="25" d="M846 225L838.5 272L892.5 281.5L899 234L846 225Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="24" d="M793 216L785 262L838.5 272L846 225L793 216Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="23" d="M739.5 206L731 252.5L785 262L793 216L739.5 206Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="22" d="M686.5 196.5L678 243.5L731 252.5L739.5 206L686.5 196.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="21" d="M633 186.5L624 235L678 243.5L686.5 196.5L633 186.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="20" d="M578 177.5L570.5 218.5L580.5 228L624 235L633 186.5L578 177.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt25" d="M846 225L838.5 272L892.5 281.5L899 234L846 225Z" stroke="black"
+                            <path id="19" d="M906 185.5L899 234L955.5 244L962 201L953 193L906 185.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt24" d="M793 216L785 262L838.5 272L846 225L793 216Z" stroke="black"
+                            <path id="18" d="M853 176.5L846 225L899 234L906 185.5L853 176.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt23" d="M739.5 206L731 252.5L785 262L793 216L739.5 206Z" stroke="black"
+                            <path id="17" d="M800.5 167L793 216L846 225L853 176.5L800.5 167Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt22" d="M686.5 196.5L678 243.5L731 252.5L739.5 206L686.5 196.5Z" stroke="black"
+                            <path id="16" d="M747.5 157.5L739.5 206L793 216L800.5 167L747.5 157.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt21" d="M633 186.5L624 235L678 243.5L686.5 196.5L633 186.5Z" stroke="black"
+                            <path id="15" d="M694.5 148L686.5 196.5L739.5 206L747.5 157.5L694.5 148Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt20" d="M578 177.5L570.5 218.5L580.5 228L624 235L633 186.5L578 177.5Z"
+                            <path id="14" d="M641 138.5L633 186.5L686.5 196.5L694.5 148L641 138.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="13" d="M585 137.5L578 177.5L633 186.5L641 138.5L594.5 130.5L585 137.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt19" d="M906 185.5L899 234L955.5 244L962 201L953 193L906 185.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt18" d="M853 176.5L846 225L899 234L906 185.5L853 176.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt17" d="M800.5 167L793 216L846 225L853 176.5L800.5 167Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt16" d="M747.5 157.5L739.5 206L793 216L800.5 167L747.5 157.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt15" d="M694.5 148L686.5 196.5L739.5 206L747.5 157.5L694.5 148Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt14" d="M641 138.5L633 186.5L686.5 196.5L694.5 148L641 138.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt13" d="M585 137.5L578 177.5L633 186.5L641 138.5L594.5 130.5L585 137.5Z"
+                            <path id="12" d="M488.5 162L479.5 209.5L526.5 218.5L539 209.5L545 171.5L488.5 162Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt12" d="M488.5 162L479.5 209.5L526.5 218.5L539 209.5L545 171.5L488.5 162Z"
+                            <path id="11" d="M433 152.5L423 199.5L479.5 209.5L488.5 162L433 152.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="10" d="M377 143L367 190L423 199.5L433 152.5L377 143Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="9" d="M322.5 133.5L312 180L367 190L377 143L322.5 133.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="8" d="M268 123.5L257 170.5L312 180L322.5 134L268 123.5Z" stroke="black"
+                                stroke-width="2" fill="transparent" />
+                            <path id="7" id="lt7" d="M211.5 114.5L203 147.5L218 164.5L257 170.5L268 123.5L211.5 114.5Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt11" d="M433 152.5L423 199.5L479.5 209.5L488.5 162L433 152.5Z" stroke="black"
+                            <path id="6" d="M497 114.5L488.5 162L545 171.5L552 129L541 121.5L497 114.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt10" d="M377 143L367 190L423 199.5L433 152.5L377 143Z" stroke="black"
+                            <path id="5" d="M441.5 105L433 152.5L488.5 162L497 114.5L441.5 105Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt9" d="M322.5 133.5L312 180L367 190L377 143L322.5 133.5Z" stroke="black"
+                            <path id="4" d="M387 95.5L377 143L433 152.5L441.5 105L387 95.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt8" d="M268 123.5L257 170.5L312 180L322.5 134L268 123.5Z" stroke="black"
+                            <path id="3" d="M333 85.5L322.5 133.5L377 143L387 95.5L333 85.5Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt7" id="lt7"
-                                d="M211.5 114.5L203 147.5L218 164.5L257 170.5L268 123.5L211.5 114.5Z" stroke="black"
+                            <path id="2" d="M279 76L268 123.5L322.5 133.5L333 85.5L279 76Z" stroke="black"
                                 stroke-width="2" fill="transparent" />
-                            <path id="lt6" d="M497 114.5L488.5 162L545 171.5L552 129L541 121.5L497 114.5Z"
-                                stroke="black" stroke-width="2" fill="transparent" />
-                            <path id="lt5" d="M441.5 105L433 152.5L488.5 162L497 114.5L441.5 105Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt4" d="M387 95.5L377 143L433 152.5L441.5 105L387 95.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt3" d="M333 85.5L322.5 133.5L377 143L387 95.5L333 85.5Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt2" d="M279 76L268 123.5L322.5 133.5L333 85.5L279 76Z" stroke="black"
-                                stroke-width="2" fill="transparent" />
-                            <path id="lt1"
+                            <path id="1"
                                 d="M212 90.5448L211.5 114.5L268 123.5L279 76L242.083 71L224.534 77.9931L212 90.5448Z"
                                 stroke="black" stroke-width="2" fill="transparent" />
                         </svg>
@@ -282,7 +281,7 @@
             <!-- SEUS SCRIPTS -->
             <script src="script.js" defer></script>
             <script src="contrato.js" defer></script>
-
+            <script src="dash.js" defer></script>
 
 </body>
 

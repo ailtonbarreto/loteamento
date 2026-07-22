@@ -85,7 +85,6 @@ body {
 
     .second-line {
         width: 100%;
-
     }
 
 }
@@ -100,6 +99,13 @@ body {
 
 }
 
+#bar_chart{
+    height: 100%;
+    width: 100%;
+    margin-bottom: -16vw;
+    
+}
+
 /* --------------------------------------------------------------------- */
 
 /* CONTAINER DO MAPA */
@@ -111,7 +117,7 @@ body {
     cursor: grab;
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
-    padding: 0.3vw;
+    border: 0.2vw solid var(--color-background);
 }
 
 #container::-webkit-scrollbar {
@@ -125,15 +131,12 @@ body {
     height: max-content;
 }
 
-/* IMAGEM DO MAPA */
 #map-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 1440px;
     height: 835px;
-
-    /* display: none; */
 }
 
 #overlay {
@@ -143,8 +146,6 @@ body {
     width: 1440px;
     height: 835px;
     pointer-events: none;
-
-    /* display: none; */
 }
 
 #overlay path {
@@ -286,7 +287,6 @@ screen and (orientation: portrait) {
 
     }
 
-
     .analyse {
         grid-template-columns: 1fr;
         gap: 5vw;
@@ -305,8 +305,8 @@ screen and (orientation: portrait) {
         gap: 1.6rem;
 
         .first-line {
-            display: none;
-            /* display: flex; */
+            /* display: none; */
+            display: flex;
             flex-direction: column;
             gap: 1.6rem;
             width: 100%;
@@ -341,5 +341,12 @@ screen and (orientation: portrait) {
         }
 
     }
+
+    #container {
+
+        border: 1vw solid var(--color-background);
+
+    }
+
 
 }
