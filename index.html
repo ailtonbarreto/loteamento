@@ -262,7 +262,7 @@
       </div>
 
       <div class="modal-body">
-        <input type="email" id="email" placeholder="E-mail" />
+        <input type="text" id="nome" placeholder="Usuário" />
         <input type="password" id="senha" placeholder="Senha" />
       </div>
 
@@ -285,53 +285,40 @@
     btnCancelar.onclick = () => modalBackdrop.style.display = "none";
 
     btnEntrar.onclick = () => {
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+      async function login() {
+        const user = document.getElementById('nome').value;
+        const password = document.getElementById('senha').value;
 
-      if (!email || !senha) {
-        alert("Preencha e-mail e senha.");
-        return;
+        const response = await fetch('https://api-lotes.onrender.com/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ user, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('nome', user);
+          sessionStorage.setItem('logon', 'ok');
+          window.location.href = "./home/home.html";
+        } else {
+          alert("Usuário ou senha incorretos");
+          console.log(data.error);
+        }
       }
 
-      alert("Login enviado!");
-      modalBackdrop.style.display = "none";
+      login(); // 🔥 AGORA FUNCIONA
     };
+
 
     modalBackdrop.onclick = (e) => {
       if (e.target === modalBackdrop) modalBackdrop.style.display = "none";
     };
 
-
-    async function login() {
-      const user = document.getElementById('nome').value;
-      const password = document.getElementById('senha').value;
-      const spinner = document.getElementById('spinner');
-
-      spinner.style.display = 'flex';
-
-      const response = await fetch('https://api-checkin-7zte.onrender.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user, password })
-      });
-
-      const data = await response.json();
-      const msg = document.getElementById('mensagem');
-
-      if (response.ok) {
-        localStorage.setItem('nome', user);
-        sessionStorage.setItem('logon', 'ok')
-        window.location.href = "./home/home.html";
-
-      } else {
-        spinner.style.display = 'none';
-        msg.innerHTML = `${data.error}`;
-      }
-    }
-
   </script>
+
 
 </body>
 
