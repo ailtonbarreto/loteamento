@@ -39,15 +39,14 @@ body {
 
 .analyse {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 1.6rem;
 }
 
 .analyse>div {
-    background-color: #fff;
-    color: var(--color-text);
-    backdrop-filter: blur(10px);
+    color: var(--color-background);
     padding: var(--card-padding);
+    background-color: #9b9b9b;
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
     transition: all 0.3s ease;
@@ -58,11 +57,23 @@ body {
     height: 8vw;
 }
 
-
-.analyse h3 {
-    margin-left: 0.6rem;
-    font-size: 1rem;
+.analyse div:nth-of-type(3) {
+    background-color: #29DE05;
 }
+
+.analyse div:nth-of-type(4) {
+    background-color: #02b1dd;
+}
+
+.analyse div:nth-of-type(5) {
+    background-color: #DEAB05;
+}
+
+.analyse div:nth-of-type(6) {
+    background-color: #de0505;
+}
+
+
 
 .charts-container {
     height: 70vh;
@@ -99,11 +110,11 @@ body {
 
 }
 
-#bar_chart{
+#bar_chart {
     height: 100%;
     width: 100%;
     margin-bottom: -16vw;
-    
+
 }
 
 /* --------------------------------------------------------------------- */

@@ -94,6 +94,7 @@ function iniciarSistema() {
                 tooltip.innerHTML = `
                 <b>${lote.lote}</b><br>
                 Valor: R$ ${lote.valor}<br>
+                Metragem: ${lote.metragem}<br>
                 Status: ${lote.status}
             `;
 
@@ -155,6 +156,7 @@ function iniciarSistema() {
     });
 
     // ---------------- Salvar status ----------------
+
     document.getElementById("btn-salvar-status").addEventListener("click", () => {
         const id = window.loteSelecionado;
         const lote = lotes[id];
@@ -162,14 +164,33 @@ function iniciarSistema() {
 
         const novoStatus = document.getElementById("sb-status-select").value;
 
-        lote.status = novoStatus;
+        fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ status: novoStatus })
+        })
+            .then(res => res.json())
+            .then(data => {
 
-        atualizarCorDoLote(id);
-        atualizarTotalVendido();
-        atualizarDashboard();
+                lote.status = novoStatus;
+                atualizarCorDoLote(id);
+                atualizarTotalVendido();
+                atualizarDashboard();
+                gerarGraficoStatus();
 
-        document.getElementById("sidebar").style.display = "none";
+                alert(`Status do lote ${lote.lote} atualizado para: ${novoStatus}`);
+
+                document.getElementById("sidebar").style.display = "none";
+            })
+            .catch(err => {
+                console.error("Erro ao atualizar status:", err);
+
+                alert("Erro ao atualizar o status. Tente novamente.");
+            });
     });
+
 
     function atualizarCorDoLote(id) {
         const lote = lotes[id];
@@ -188,6 +209,9 @@ function iniciarSistema() {
         } else if (status === "reservado") {
             path.style.fill = "#DEAB05";
             path.style.opacity = "0.5";
+        } else if (status === "bloqueado") {
+            path.style.fill = "#de0505";
+            path.style.opacity = "0.5";
         } else {
             path.style.fill = "transparent";
             path.style.opacity = "1";
@@ -199,7 +223,6 @@ function iniciarSistema() {
     function parseValor(valorStr) {
         return Number(valorStr);
 
-        // Troca vírgula por ponto
         valorStr = valorStr.replace(",", ".");
 
         return Number(valorStr);
@@ -218,7 +241,6 @@ function iniciarSistema() {
 
         return total;
     }
-
 
     function atualizarTotalVendido() {
         const total = calcularTotalVendido();
@@ -240,6 +262,7 @@ function iniciarSistema() {
         let disponiveis = 0;
         let reservados = 0;
         let vendidos = 0;
+        let bloqueados = 0;
 
         for (const id in lotes) {
             const lote = lotes[id];
@@ -250,25 +273,30 @@ function iniciarSistema() {
             if (status === "disponível") disponiveis++;
             if (status === "reservado") reservados++;
             if (status === "vendido") vendidos++;
+            if (status === "bloqueado") bloqueados++;
+
         }
 
-        return { disponiveis, reservados, vendidos };
+        return { disponiveis, reservados, vendidos, bloqueados };
     }
 
     function atualizarDashboard() {
         const total = contarLotes();
-        const { disponiveis, reservados, vendidos } = contarStatus();
+        const { disponiveis, reservados, vendidos, bloqueados } = contarStatus();
 
         const elTotal = document.getElementById("totalLotes");
         const elDisp = document.getElementById("totalDisponiveis");
         const elRes = document.getElementById("totalReservados");
         const elVend = document.getElementById("qtd_lotes");
+        const elBloq = document.getElementById("qtd_bloqueados");
 
         if (elTotal) elTotal.innerText = total;
         if (elDisp) elDisp.innerText = disponiveis;
         if (elRes) elRes.innerText = reservados;
         if (elVend) elVend.innerText = vendidos;
+        if (elBloq) elBloq.innerText = bloqueados;
     }
+
 
     // ----------------------------------------------------------
 

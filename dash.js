@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
         gerarGraficoStatus();
     });
 
-    function gerarGraficoStatus() {
+    window.gerarGraficoStatus = function () {
 
         const lotes = window.lotes;
 
@@ -15,13 +15,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         Object.values(lotes).forEach(lote => {
             const status = lote.status.toLowerCase();
-            const valor = Number(lote.valor); 
+            const valor = Number(lote.valor);
 
             if (status === "disponível") disponivel += valor;
             else if (status === "vendido") vendido += valor;
             else if (status === "reservado") reservado += valor;
             else if (status === "bloqueado") bloqueado += valor;
-
         });
 
         let dados = [
@@ -29,7 +28,6 @@ window.addEventListener("DOMContentLoaded", () => {
             { nome: "Vendido", valor: vendido, cor: "#02b1dd" },
             { nome: "Reservado", valor: reservado, cor: "#DEAB05" },
             { nome: "Bloqueado", valor: bloqueado, cor: "#de0505" }
-
         ];
 
         dados.sort((b, a) => b.valor - a.valor);
@@ -42,7 +40,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const myChart = echarts.init(chartDom);
 
         const option = {
-
             tooltip: {
                 trigger: "item",
                 formatter: (params) => {
@@ -52,7 +49,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     })}`;
                 }
             },
-
             grid: {
                 left: "5%",
                 right: "5%",
@@ -60,23 +56,17 @@ window.addEventListener("DOMContentLoaded", () => {
                 top: "10%",
                 containLabel: true
             },
-
-            xAxis: {
-                show: false
-            },
-
+            xAxis: { show: false },
             yAxis: {
                 type: "category",
                 data: nomes,
                 axisLabel: { color: "#0a0404", fontSize: 14 }
             },
-
             series: [
                 {
                     type: "bar",
                     data: valores,
                     barWidth: 35,
-
                     label: {
                         show: true,
                         position: "right",
@@ -90,7 +80,6 @@ window.addEventListener("DOMContentLoaded", () => {
                             });
                         }
                     },
-
                     itemStyle: {
                         color: function (params) {
                             return cores[params.dataIndex];
@@ -101,8 +90,6 @@ window.addEventListener("DOMContentLoaded", () => {
             ]
         };
 
-        myChart.setOption(option); 
-    
+        myChart.setOption(option);
     }
-
-})
+});
