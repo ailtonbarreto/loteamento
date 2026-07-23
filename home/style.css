@@ -86,14 +86,11 @@ body {
         gap: 1.6rem;
         width: 100%;
 
-        .table-chart {
-            grid-column: span 2;
-            height: 100%;
-        }
     }
 
     .second-line {
         width: 100%;
+        height: auto;
     }
 
 }
@@ -108,17 +105,54 @@ body {
 
 }
 
-#bar_chart, #graficoFunil {
+#bar_chart,
+#graficoFunil {
     height: 100%;
     width: 100%;
     margin-bottom: -16vw;
 
 }
 
-#tabelaLotes{
+.charts-container {
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 1.6rem;
+}
+
+/* ---------------------------------------------------------------------- */
+
+.card-table {
+    grid-column: span 2;
+    height: 100%;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.card-table::-webkit-scrollbar {
     display: none;
 }
 
+#tabelaLotes {
+    display: block;
+    height: 1vh !important;
+    border-collapse: collapse;
+}
+
+#tabelaLotes thead th {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+    padding: 8px;
+    text-align: center;
+}
+
+#tabelaLotes tbody {
+    padding: 8px;
+    text-align: center;
+}
 
 /* --------------------------------------------------------------------- */
 
@@ -166,10 +200,6 @@ body {
     pointer-events: auto;
     cursor: pointer;
 }
-
-
-
-
 
 /* ---------------------------------------------------------------- */
 

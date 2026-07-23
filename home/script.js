@@ -78,20 +78,14 @@ function iniciarSistema() {
     }
 
     function criarTabelaLotes() {
-        const tabela = document.getElementById("tabelaLotes");
 
-        tabela.innerHTML = `
-        <tr>
-            <th>Lote</th>
-            <th>Valor</th>
-            <th>Status</th>
-            <th>Metragem</th>
-            <th>Vendedor</th>
-        </tr>
-    `;
+        const tbody = document.querySelector("#tabelaLotes tbody");
+
+        let html = "";
 
         Object.values(lotes).forEach(item => {
-            tabela.innerHTML += `
+
+            html += `
             <tr>
                 <td>${item.lote}</td>
                 <td>${item.valor}</td>
@@ -100,9 +94,11 @@ function iniciarSistema() {
                 <td>${item.vendedor}</td>
             </tr>
         `;
-        });
-    }
 
+        });
+
+        tbody.innerHTML = html;
+    }
 
     // ---------------- Tooltip ----------------
 

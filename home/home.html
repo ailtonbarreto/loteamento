@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <title>Espelho de Venda</title>
@@ -22,7 +22,8 @@
 
             <h2>Espelho de Vendas</h2>
 
-            <span class="material-symbols-outlined" style="cursor: pointer;" onclick="window.location.href='../index.html'">
+            <span class="material-symbols-outlined" style="cursor: pointer;"
+                onclick="window.location.href='../index.html'">
                 logout
             </span>
 
@@ -101,11 +102,27 @@
 
                 </div>
 
-                <div class="chart_card table-chart">
+                <div class="chart_card card-table">
 
-                    <h3>Tabela de Vendas</h3>
 
-                    <table id="tabelaLotes"></table>
+                    <table id="tabelaLotes">
+
+                        <thead>
+                            <tr>
+                                <th>Lote</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Metragem</th>
+                                <th>Vendedor</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                        </tbody>   
+
+                    </table>
 
 
                 </div>
@@ -303,10 +320,9 @@
                 </div>
             </div>
 
-            <!-- SEUS SCRIPTS -->
-            <script src="contrato.js" defer></script>
-            <script src="script.js" defer></script>
-            <script src="dash.js" defer></script>
+            <script src="contrato.js"></script>
+            <script src="script.js"></script>
+            <script src="dash.js"></script>
 
 </body>
 
