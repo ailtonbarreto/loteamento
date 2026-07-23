@@ -127,7 +127,7 @@ body {
     grid-column: span 2;
     height: 100%;
     overflow: auto;
-    padding: 1rem;
+    padding: 0.5vw;
 }
 
 .card-table::-webkit-scrollbar {
@@ -152,7 +152,25 @@ body {
 #tabelaLotes tbody {
     padding: 8px;
     text-align: center;
+    font-weight: bold;
 }
+
+.status-disponivel {
+    color: #29DE05;
+}
+
+.status-vendido {
+    color: #02b1dd;
+}
+
+.status-reservado {
+    color: #DEAB05;
+}
+
+.status-bloqueado {
+    color: #de0505;
+}
+
 
 /* --------------------------------------------------------------------- */
 

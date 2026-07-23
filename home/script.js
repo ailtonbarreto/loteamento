@@ -85,10 +85,34 @@ function iniciarSistema() {
 
         Object.values(lotes).forEach(item => {
 
+            let classe = "";
+
+            switch (item.status.toLowerCase()) {
+
+                case "disponível":
+                    classe = "status-disponivel";
+                    break;
+
+                case "reservado":
+                    classe = "status-reservado";
+                    break;
+
+                case "vendido":
+                    classe = "status-vendido";
+                    break;
+
+                case "bloqueado":
+                    classe = "status-bloqueado";
+                    break;
+
+            }
+
             html += `
-            <tr>
+            <tr class="${classe}">
                 <td>${item.lote}</td>
-                <td>${item.valor}</td>
+                <td>R$ ${Number(item.valor).toLocaleString("pt-BR", {
+                minimumFractionDigits: 2
+            })}</td>
                 <td>${item.status}</td>
                 <td>${item.metragem}</td>
                 <td>${item.vendedor}</td>
