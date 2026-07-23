@@ -73,8 +73,6 @@ body {
     background-color: #de0505;
 }
 
-
-
 .charts-container {
     height: 70vh;
     display: flex;
@@ -88,7 +86,7 @@ body {
         gap: 1.6rem;
         width: 100%;
 
-        .line-chart {
+        .table-chart {
             grid-column: span 2;
             height: 100%;
         }
@@ -110,12 +108,17 @@ body {
 
 }
 
-#bar_chart {
+#bar_chart, #graficoFunil {
     height: 100%;
     width: 100%;
     margin-bottom: -16vw;
 
 }
+
+#tabelaLotes{
+    display: none;
+}
+
 
 /* --------------------------------------------------------------------- */
 

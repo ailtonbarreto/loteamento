@@ -19,7 +19,6 @@ function iniciarSistema() {
 
             lotes = {};
 
-            // AQUI ESTÁ O AJUSTE
             data.data.forEach(item => {
                 lotes[item.id_lote] = item;
             });
@@ -28,10 +27,13 @@ function iniciarSistema() {
             configurarTooltip();
             configurarCliqueNosLotes();
             atualizarTotalVendido();
+            criarTabelaLotes();
             atualizarDashboard();
 
             window.lotes = lotes;
             window.dispatchEvent(new Event("lotesCarregados"));
+
+
 
         })
         .catch(err => console.error(err));
@@ -75,6 +77,31 @@ function iniciarSistema() {
         });
     }
 
+    function criarTabelaLotes() {
+        const tabela = document.getElementById("tabelaLotes");
+
+        tabela.innerHTML = `
+        <tr>
+            <th>Lote</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Metragem</th>
+            <th>Vendedor</th>
+        </tr>
+    `;
+
+        Object.values(lotes).forEach(item => {
+            tabela.innerHTML += `
+            <tr>
+                <td>${item.lote}</td>
+                <td>${item.valor}</td>
+                <td>${item.status}</td>
+                <td>${item.metragem}</td>
+                <td>${item.vendedor}</td>
+            </tr>
+        `;
+        });
+    }
 
 
     // ---------------- Tooltip ----------------
@@ -141,10 +168,11 @@ function iniciarSistema() {
             btnContrato.style.display = "block";
             btnContrato.onclick = () =>
                 window.abrirPopupContrato({
-                    id,
+                    id: id,
                     lote: lote.lote,
                     valor: lote.valor
                 });
+
         } else {
             btnContrato.style.display = "none";
         }
@@ -178,6 +206,7 @@ function iniciarSistema() {
                 atualizarCorDoLote(id);
                 atualizarTotalVendido();
                 atualizarDashboard();
+                criarTabelaLotes();
                 gerarGraficoStatus();
 
                 alert(`Status do lote ${lote.lote} atualizado para: ${novoStatus}`);

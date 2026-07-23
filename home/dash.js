@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("lotesCarregados", () => {
         gerarGraficoStatus();
+        gerarGraficoFunil();
     });
 
     window.gerarGraficoStatus = function () {
@@ -86,6 +87,47 @@ window.addEventListener("DOMContentLoaded", () => {
                         },
                         borderRadius: 4
                     }
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+
+    function gerarGraficoFunil() {
+        const chartDom = document.getElementById('graficoFunil');
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            series: [
+                {
+                    name: 'Fase',
+                    type: 'funnel',
+                    left: '0%',
+                    top: 30,
+                    bottom: 24,
+                    width: '100%',
+                    min: 0,
+                    max: 100,
+                    minSize: '0%',
+                    maxSize: '90%',
+                    sort: 'descending',
+                    gap: 5,
+                    label: {
+                        show: true,
+                        position: 'inside'
+                    },
+                    data: [
+                        { value: 100, name: 'Exposição' },
+                        { value: 80, name: 'Interessados' },
+                        { value: 60, name: 'Visitas' },
+                        { value: 40, name: 'Propostas' },
+                        { value: 20, name: 'Vendas' }
+                    ]
                 }
             ]
         };
