@@ -30,6 +30,39 @@ body {
 
 }
 
+/* ---------------------------------------------------------- */
+/* SPINNER */
+
+#spinner {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #02010160;
+    z-index: 2001;
+}
+
+#loading {
+    height: 60px;
+    width: 60px;
+    border: 8px solid #ffffff;
+    border-top: 8px solid #111827;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .dash_container {
     display: grid;
     width: 97%;
@@ -251,7 +284,7 @@ path {
     display: none;
     gap: 1.4rem;
     flex-direction: column;
-    z-index: 9999;
+    z-index: 200;
 
     select {
         background-color: #9b9b9b;
@@ -273,8 +306,13 @@ path {
 }
 
 
-#gerar_contrato {
+#btn-gerar-contrato-final {
     background-color: rgb(5, 123, 202);
+    color: #fff;
+    padding: 0.4vw;
+    border-radius: 0.5vw;
+    width: 100%;
+    font-size: 1.3rem;
 }
 
 #sidebar-close {

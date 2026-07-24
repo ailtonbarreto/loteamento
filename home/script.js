@@ -6,6 +6,7 @@ function iniciarSistema() {
     const svg = document.getElementById("overlay");
     const wrapper = document.getElementById("mapa");
     const tooltip = document.getElementById("tooltip");
+    const spinner = document.getElementById('spinner');
 
 
     fetch("https://api-lotes.onrender.com/loteamentos")
@@ -210,7 +211,10 @@ function iniciarSistema() {
         const lote = lotes[id];
         if (!lote) return;
 
+        spinner.style.display = 'flex';
+
         const novoStatus = document.getElementById("sb-status-select").value;
+        
 
         fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
             method: "PUT",
@@ -229,7 +233,7 @@ function iniciarSistema() {
                 criarTabelaLotes();
                 gerarGraficoStatus();
 
-                alert(`Status do lote ${lote.lote} atualizado para: ${novoStatus}`);
+                spinner.style.display = 'none';
 
                 document.getElementById("sidebar").style.display = "none";
             })
