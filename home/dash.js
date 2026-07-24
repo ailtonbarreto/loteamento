@@ -100,8 +100,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const option = {
             tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b} : {c}%'
+                show: false   // REMOVE O TOOLTIP
             },
             series: [
                 {
@@ -119,7 +118,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     gap: 5,
                     label: {
                         show: true,
-                        position: 'inside'
+                        position: 'inside',
+                        formatter: '{b}: {c}'   // TEXTO DENTRO DA LABEL = FASE + VALOR
                     },
                     data: [
                         { value: 100, name: 'Exposição' },
@@ -134,4 +134,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
         myChart.setOption(option);
     }
+
 });

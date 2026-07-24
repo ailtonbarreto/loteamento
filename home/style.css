@@ -258,20 +258,20 @@ path {
         padding: 0.3vw;
         color: #fff;
         border-radius: 0.3vw;
-        font-size: 1vw;
+        font-size: 1.3rem;
+    }
+
+    button {
+        background-color: #03a77e;
+        color: #fff;
+        padding: 0.4vw;
+        border-radius: 0.5vw;
+        width: 100%;
+        font-size: 1.3rem;
     }
 
 }
 
-
-button {
-    background-color: #03a77e;
-    color: #fff;
-    padding: 0.4vw;
-    border-radius: 0.5vw;
-    width: 100%;
-    font-size: 1vw;
-}
 
 #gerar_contrato {
     background-color: rgb(5, 123, 202);
