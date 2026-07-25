@@ -73,7 +73,7 @@
       text-align: center;
       padding-top: 160px;
 
-      div{
+      div {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -253,7 +253,7 @@
 
   </div>
 
- 
+
   <nav class="navbar">
 
     <div class="navbar-logo">Loteamento Pro</div>
@@ -363,16 +363,23 @@
 
         const data = await response.json();
 
+        console.log("Status:", response.status);
+        console.log("Resposta:", data);
+
         if (response.ok) {
           localStorage.setItem('nome', user);
           sessionStorage.setItem('logon', 'ok');
+          sessionStorage.setItem("usuarioTipo", data.usuario.tipo);
+          sessionStorage.setItem("usuarioId", data.usuario.id);
           window.location.href = "./home/home.html";
+
+
         } else {
           spinner.style.display = 'none';
         }
       }
 
-      login(); // 🔥 AGORA FUNCIONA
+      login();
     };
 
 

@@ -7,9 +7,11 @@ function iniciarSistema() {
     const wrapper = document.getElementById("mapa");
     const tooltip = document.getElementById("tooltip");
     const spinner = document.getElementById('spinner');
+    const tipo = sessionStorage.getItem("usuarioTipo");
+    const id = sessionStorage.getItem("usuarioId");
 
-
-    fetch("https://api-lotes.onrender.com/loteamentos")
+    fetch(`https://api-lotes.onrender.com/loteamentos?tipo=${tipo}&id=${id}`)
+    
         .then(response => {
             if (!response.ok) {
                 throw new Error("Erro ao buscar os lotes.");
@@ -17,6 +19,7 @@ function iniciarSistema() {
             return response.json();
         })
         .then(data => {
+
 
             lotes = {};
 
@@ -214,7 +217,7 @@ function iniciarSistema() {
         spinner.style.display = 'flex';
 
         const novoStatus = document.getElementById("sb-status-select").value;
-        
+
 
         fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
             method: "PUT",
