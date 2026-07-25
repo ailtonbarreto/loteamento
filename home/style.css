@@ -19,9 +19,9 @@
 body {
     font-family: 'Poppins', sans-serif;
     font-size: 0.88rem;
-    user-select: none;
     background: var(--color-background);
     font-size: 14px;
+    /* user-select: none; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -182,6 +182,7 @@ body {
     text-align: center;
     /* font-size: 18px; */
 }
+
 
 #tabelaLotes tbody {
     padding: 8px;
@@ -379,6 +380,10 @@ button {
 
 @media screen and (max-width: 768px),
 screen and (orientation: portrait) {
+
+    body{
+        user-select: none;
+    }
 
     .dash_container {
         width: 100%;

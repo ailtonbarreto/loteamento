@@ -11,7 +11,7 @@ function iniciarSistema() {
     const id = sessionStorage.getItem("usuarioId");
 
     fetch(`https://api-lotes.onrender.com/loteamentos?tipo=${tipo}&id=${id}`)
-    
+
         .then(response => {
             if (!response.ok) {
                 throw new Error("Erro ao buscar os lotes.");
@@ -81,52 +81,51 @@ function iniciarSistema() {
         });
     }
 
-    function criarTabelaLotes() {
+function criarTabelaLotes() {
 
-        const tbody = document.querySelector("#tabelaLotes tbody");
+    const tbody = document.querySelector("#tabelaLotes tbody");
 
-        let html = "";
+    let html = "";
 
-        Object.values(lotes).forEach(item => {
+    Object.values(lotes).forEach(item => {
 
-            let classe = "";
+        let classe = "";
 
-            switch (item.status.toLowerCase()) {
+        switch (item.status.toLowerCase()) {
+            case "disponível": classe = "status-disponivel"; break;
+            case "reservado": classe = "status-reservado"; break;
+            case "vendido": classe = "status-vendido"; break;
+            case "bloqueado": classe = "status-bloqueado"; break;
+        }
 
-                case "disponível":
-                    classe = "status-disponivel";
-                    break;
-
-                case "reservado":
-                    classe = "status-reservado";
-                    break;
-
-                case "vendido":
-                    classe = "status-vendido";
-                    break;
-
-                case "bloqueado":
-                    classe = "status-bloqueado";
-                    break;
-
-            }
-
-            html += `
+        html += `
             <tr class="${classe}">
                 <td>${item.lote}</td>
-                <td>R$ ${Number(item.valor).toLocaleString("pt-BR", {
-                minimumFractionDigits: 2
-            })}</td>
+                <td>R$ ${Number(item.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
                 <td>${item.status}</td>
                 <td>${item.metragem}</td>
-                <td>${item.vendedor}</td>
+                <td class="col-vendedor">${item.vendedor}</td>
             </tr>
         `;
+    });
 
-        });
+    // Primeiro insere o HTML
+    tbody.innerHTML = html;
 
-        tbody.innerHTML = html;
+    // Agora aplica a regra de esconder a coluna
+    const tipoUsuario = sessionStorage.getItem("usuarioTipo");
+
+    if (tipoUsuario !== "1") {
+        // Esconde o cabeçalho
+        const thVendedor = document.getElementById("col-vendedor");
+        if (thVendedor) thVendedor.style.display = "none";
+
+        // Esconde todas as células da coluna
+        const tdsVendedor = document.querySelectorAll(".col-vendedor");
+        tdsVendedor.forEach(td => td.style.display = "none");
     }
+}
+
 
     // ---------------- Tooltip ----------------
 
@@ -142,9 +141,15 @@ function iniciarSistema() {
 
                 const rect = path.getBoundingClientRect();
 
+                const formatarMoeda = (v) =>
+                    new Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    }).format(v);
+
                 tooltip.innerHTML = `
                 <b>${lote.lote}</b><br>
-                Valor: R$ ${lote.valor}<br>
+                Valor: ${formatarMoeda(lote.valor)}<br>
                 Metragem: ${lote.metragem}<br>
                 Status: ${lote.status}
             `;
@@ -161,7 +166,6 @@ function iniciarSistema() {
         });
     }
 
-
     // ---------------- Clique → Sidebar ----------------
 
     function configurarCliqueNosLotes() {
@@ -172,31 +176,52 @@ function iniciarSistema() {
         });
     }
 
-
     function abrirSidebar(id) {
         const lote = lotes[id];
         if (!lote) return;
 
+        const tipoUsuario = sessionStorage.getItem("usuarioTipo");
+
+        if (lote.status.toLowerCase() === "bloqueado" && tipoUsuario !== "1") {
+            return;
+        }
+
+        const formatarMoeda = (v) =>
+            new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }).format(v);
+
         document.getElementById("sb-lote").innerText = lote.lote || id;
-        document.getElementById("sb-valor").innerText = lote.valor;
+        document.getElementById("sb-valor").innerText = formatarMoeda(lote.valor);
 
         const select = document.getElementById("sb-status-select");
+        const opcaoBloqueado = document.getElementById("opcao-bloqueado");
+
+        if (tipoUsuario === "1") {
+            opcaoBloqueado.hidden = false;
+            select.disabled = false;
+        } else {
+            opcaoBloqueado.hidden = true;
+            select.disabled = false;
+        }
+
         select.value = lote.status.toLowerCase();
 
         document.getElementById("sidebar").style.display = "flex";
-
         window.loteSelecionado = id;
 
         const btnContrato = document.getElementById("gerar_contrato");
+
         if (lote.status.toLowerCase() === "disponível") {
             btnContrato.style.display = "block";
             btnContrato.onclick = () =>
                 window.abrirPopupContrato({
                     id: id,
                     lote: lote.lote,
-                    valor: lote.valor
+                    valor: lote.valor,
+                    valorFormatado: formatarMoeda(lote.valor)
                 });
-
         } else {
             btnContrato.style.display = "none";
         }
@@ -352,9 +377,6 @@ function iniciarSistema() {
         if (elVend) elVend.innerText = vendidos;
         if (elBloq) elBloq.innerText = bloqueados;
     }
-
-
-    // ----------------------------------------------------------
 
     // ---------------- Arrastar o mapa ----------------
 

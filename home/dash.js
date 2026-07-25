@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", () => {
             },
             grid: {
                 left: "5%",
-                right: "5%",
+                right: "35%",
                 bottom: "5%",
                 top: "10%",
                 containLabel: true
@@ -100,7 +100,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const option = {
             tooltip: {
-                show: false   // REMOVE O TOOLTIP
+                show: false 
             },
             series: [
                 {
@@ -119,12 +119,12 @@ window.addEventListener("DOMContentLoaded", () => {
                     label: {
                         show: true,
                         position: 'inside',
-                        formatter: '{b}: {c}'   // TEXTO DENTRO DA LABEL = FASE + VALOR
+                        formatter: '{b}: {c}'
                     },
                     data: [
-                        { value: 100, name: 'Exposição' },
+                        { value: 200, name: 'Exposição' },
                         { value: 80, name: 'Interessados' },
-                        { value: 60, name: 'Visitas' },
+                        { value: 40, name: 'Visitas' },
                         { value: 40, name: 'Propostas' },
                         { value: 20, name: 'Vendas' }
                     ]
