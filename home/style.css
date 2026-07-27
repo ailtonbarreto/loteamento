@@ -477,8 +477,8 @@ screen and (orientation: portrait) {
 
     }
 
-    #tabelaLotes tbody {
-        font-size: 2.5vw;
+    .card-table{
+        display: none;
     }
 
 
