@@ -470,6 +470,11 @@ screen and (orientation: portrait) {
             padding: 2vw;
         }
 
+        button {
+            font-size: 4vw;
+            padding: 2vw;
+        }
+
     }
 
     #tabelaLotes tbody {
