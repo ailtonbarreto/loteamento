@@ -180,7 +180,7 @@ body {
     z-index: 10;
     padding: 8px;
     text-align: center;
-    
+
 }
 
 
@@ -339,6 +339,14 @@ path {
     align-items: center;
     z-index: 99999;
 
+    select {
+        font-size: 1vw;
+        background-color: #b0b0b1;
+        color: var(--color-background);
+        border-radius: 0.5vw;
+        padding: 0.5vw;
+    }
+
     button {
         background-color: rgb(5, 123, 202);
     }
@@ -382,7 +390,7 @@ button {
 @media screen and (max-width: 768px),
 screen and (orientation: portrait) {
 
-    body{
+    body {
         user-select: none;
     }
 
@@ -455,10 +463,18 @@ screen and (orientation: portrait) {
 
     }
 
-    
-#tabelaLotes tbody {
-    font-size: 3vw;
-}
+    #popup-contrato {
+
+        select {
+            font-size: 3vw;
+            padding: 1vw;
+        }
+
+    }
+
+    #tabelaLotes tbody {
+        font-size: 3vw;
+    }
 
 
 }
