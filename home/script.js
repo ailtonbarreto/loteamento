@@ -194,6 +194,8 @@ function criarTabelaLotes() {
 
         document.getElementById("sb-lote").innerText = lote.lote || id;
         document.getElementById("sb-valor").innerText = formatarMoeda(lote.valor);
+        document.getElementById("sb-vendedor").innerText = lote.vendedor;
+
 
         const select = document.getElementById("sb-status-select");
         const opcaoBloqueado = document.getElementById("opcao-bloqueado");
