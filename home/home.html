@@ -281,55 +281,120 @@
             </div>
 
             <div id="sidebar">
+
                 <div id="sidebar-close">X</div>
 
-                <h2>Detalhes do Lote</h2>
+                <h2>Simulação</h2>
 
                 <p><strong>Lote:</strong> <span id="sb-lote"></span></p>
-                <p><strong>Valor:</strong> <span id="sb-valor"></span></p>
-                <p><strong>Vendedor:</strong> <span id="sb-vendedor"></span></p>
 
-                <p><strong>Status:</strong></p>
+                <p><strong>Valor:</strong> <span id="sb-valor"></span></p>
 
                 <select id="sb-status-select">
 
                     <option value="disponível">Disponível</option>
+
                     <option value="reservado">Reservado</option>
+
                     <option value="vendido">Vendido</option>
+
                     <option value="bloqueado" id="opcao-bloqueado">Bloqueado</option>
 
                 </select>
+
+                <div class="sidebar_card">
+
+                    <h3>Percentual Entrada</h3>
+
+                    <select id="percentual_entrada">
+
+                        <option value="0.1">10%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.3">30%</option>
+
+                    </select>
+
+
+                </div>
+
+                <div class="sidebar_card">
+
+
+                    <h3>Taxa Juros</h3>
+
+                    <select id="taxa_juros">
+
+                        <option value="0.01">1% a.m</option>
+                        <option value="0.02">2% a.m</option>
+                        <option value="0.05">5% a.m</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="sidebar_card">
+
+                    <h3>Parcelamento Residual</h3>
+
+                    <select id="parcelas">
+
+                        <option value="12">12 Vezes</option>
+                        <option value="24">24 Vezes</option>
+                        <option value="36">36 Vezes</option>
+                        <option value="48">48 Vezes</option>
+                        <option value="60">60 Vezes</option>
+                        <option value="72">72 Vezes</option>
+                        <option value="84">85 Vezes</option>
+                        <option value="96">96 Vezes</option>
+
+                    </select>
+
+
+                </div>
+
+
+                <div id="simulacao"></div>
+
 
                 <button id="btn-salvar-status">Salvar</button>
 
                 <button id="gerar_contrato">Gerar Contrato</button>
 
 
+
             </div>
 
-            <!-- HTML do popup -->
             <div id="popup-contrato">
+
                 <div id="popup-box">
+
                     <div id="popup-close">X</div>
 
                     <h2>Dados do Comprador</h2>
 
                     <select id="select-clientes">
+
                         <option value="">Selecione um cliente</option>
+
                     </select>
 
-
-                    <h2 id="cliente">Gerar Contrato no Nome de</h2>
-
-
                     <button id="btn-gerar-contrato-final">Baixar</button>
+
                 </div>
+
             </div>
 
-            <script src="contrato.js"></script>
-            <script src="script.js"></script>
-            <script src="dash.js"></script>
 
+        </div>
+
+
+    </div>
+
+    <script src="contrato.js"></script>
+    <script src="script.js"></script>
+    <script src="dash.js"></script>
+    <script src="simulation.js"></script>
 </body>
 
 

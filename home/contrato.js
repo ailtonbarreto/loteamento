@@ -145,8 +145,6 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             ]
         }),
 
-        // LINHA EM BRANCO
-        // new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
 
         // "E, de outro lado,"
         new Paragraph({
@@ -162,9 +160,6 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             ]
         }),
 
-        // LINHA EM BRANCO
-        // new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-
         // COMPRADOR
         new Paragraph({
             alignment: AlignmentType.LEFT,
@@ -172,7 +167,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `${cliente.nome}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do RG: ${cliente.rg}, CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, aqui denominado, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
+                    text: `${cliente.nome}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do RG: ${cliente.rg}, CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
                     font: "Times New Roman",
                     size: 24
                 })
@@ -261,8 +256,19 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
                     font: "Times New Roman",
                     size: 24
                 }),
+            ]
+        }),
+
+        // LINHA EM BRANCO
+        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+
+        new Paragraph({
+            alignment: AlignmentType.LEFT,
+            indent: { firstLine: 720 },
+            spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
+            children: [
                 new TextRun({
-                    text: " PARÁGRAFO PRIMEIRO - A transferência do imóvel será realizada tão logo for feita a assinatura da minuta de crédito imobiliário perante a instituição financeira escolhida pelo comprador. O imóvel deverá ser entregue livre e desembaraçado de quaisquer ônus, hipotecas, encargos ou gravames, quites de impostos, taxas e contribuições, hipotecas legais ou convencionais, débitos de IPTU (Imposto Territorial Urbano), condomínio, água, luz, gás, entre outras dívidas provenientes do imóvel em si ou de seu uso.",
+                    text: "PARÁGRAFO PRIMEIRO - A transferência do imóvel será realizada tão logo for feita a assinatura da minuta de crédito imobiliário perante a instituição financeira escolhida pelo comprador. O imóvel deverá ser entregue livre e desembaraçado de quaisquer ônus, hipotecas, encargos ou gravames, quites de impostos, taxas e contribuições, hipotecas legais ou convencionais, débitos de IPTU (Imposto Territorial Urbano), condomínio, água, luz, gás, entre outras dívidas provenientes do imóvel em si ou de seu uso.",
                     font: "Times New Roman",
                     size: 24
                 })
@@ -676,7 +682,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
         ]
     });
 
-    const nomeArquivo = `Contrato_${lote.id} - ${cliente.nome}.docx`;
+    const nomeArquivo = `Contrato Lote ${lote.id} - ${cliente.nome}.docx`;
 
     Packer.toBlob(doc).then(blob => {
         const link = document.createElement("a");
