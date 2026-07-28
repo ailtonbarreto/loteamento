@@ -311,11 +311,12 @@ path {
 .sidebar_card{
     display: flex;
     flex-direction: column;
-    background-color: #5b8dfa;
-    padding: 1vw;
-    color: var(--color-background);
-    border-radius: 1vw;
-    gap: 1vw;
+    background-color: #fff;
+    padding: 0.5vw;
+    color: var(--color-shadow);
+    border-radius: 0.5vw;
+    gap: 0.3vw;
+    box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
 }
 
 

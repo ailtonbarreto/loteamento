@@ -33,6 +33,8 @@
 
         document.getElementById("simulacao").innerHTML = `
 
+            <h2>Simulação</h2>
+
             <hr>
 
             <p><strong>Valor do lote:</strong> ${moeda(valorLote)}</p>
@@ -41,13 +43,10 @@
 
             <p><strong>Saldo financiado:</strong> ${moeda(saldo)}</p>
 
-            <p><strong>Parcelas:</strong> ${parcelas}x</p>
+            <p><strong>Parcelas:</strong> ${parcelas}</p>
 
             <p><strong>Valor da parcela:</strong> ${moeda(parcela)}</p>
 
-            <p><strong>Total pago:</strong> ${moeda(totalPago)}</p>
-
-            <p><strong>Total de juros:</strong> ${moeda(juros)}</p>
 
         `;
 

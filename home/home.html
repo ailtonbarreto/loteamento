@@ -290,17 +290,26 @@
 
                 <p><strong>Valor:</strong> <span id="sb-valor"></span></p>
 
-                <select id="sb-status-select">
+                <div class="sidebar_card">
 
-                    <option value="disponível">Disponível</option>
+                    <h3>Status</h3>
 
-                    <option value="reservado">Reservado</option>
+                    <select id="sb-status-select">
 
-                    <option value="vendido">Vendido</option>
+                        <option value="disponível">Disponível</option>
 
-                    <option value="bloqueado" id="opcao-bloqueado">Bloqueado</option>
+                        <option value="reservado">Reservado</option>
 
-                </select>
+                        <option value="vendido">Vendido</option>
+
+                        <option value="bloqueado" id="opcao-bloqueado">Bloqueado</option>
+
+                    </select>
+
+
+                </div>
+
+
 
                 <div class="sidebar_card">
 
@@ -354,7 +363,11 @@
                 </div>
 
 
-                <div id="simulacao"></div>
+                <div id="simulacao" class="sidebar_card">
+
+
+
+                </div>
 
 
                 <button id="btn-salvar-status">Salvar</button>
