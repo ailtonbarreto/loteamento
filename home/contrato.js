@@ -344,7 +344,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
         }),
 
         // LINHA EM BRANCO DUPLA
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+
         new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
 
         // DOS ENCARGOS TRIBUTÁRIOS

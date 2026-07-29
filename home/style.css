@@ -279,7 +279,7 @@ path {
     position: fixed;
     right: 0;
     top: 0;
-    width: 280px;
+    width: 350px;
     height: 100vh;
     background: #fff;
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
@@ -306,6 +306,14 @@ path {
         font-size: 1.3rem;
     }
 
+    #gerar_contrato{
+        background-color: #02b1dd;
+    }
+
+    #gerar-reserva{
+        background-color: #DEAB05;
+    }
+
 }
 
 .sidebar_card{
@@ -321,7 +329,7 @@ path {
 
 
 #btn-gerar-contrato-final {
-    background-color: rgb(5, 123, 202);
+    background-color: #02b1dd;
     color: #fff;
     padding: 0.4vw;
     border-radius: 0.5vw;

@@ -81,24 +81,24 @@ function iniciarSistema() {
         });
     }
 
-function criarTabelaLotes() {
+    function criarTabelaLotes() {
 
-    const tbody = document.querySelector("#tabelaLotes tbody");
+        const tbody = document.querySelector("#tabelaLotes tbody");
 
-    let html = "";
+        let html = "";
 
-    Object.values(lotes).forEach(item => {
+        Object.values(lotes).forEach(item => {
 
-        let classe = "";
+            let classe = "";
 
-        switch (item.status.toLowerCase()) {
-            case "disponível": classe = "status-disponivel"; break;
-            case "reservado": classe = "status-reservado"; break;
-            case "vendido": classe = "status-vendido"; break;
-            case "bloqueado": classe = "status-bloqueado"; break;
-        }
+            switch (item.status.toLowerCase()) {
+                case "disponível": classe = "status-disponivel"; break;
+                case "reservado": classe = "status-reservado"; break;
+                case "vendido": classe = "status-vendido"; break;
+                case "bloqueado": classe = "status-bloqueado"; break;
+            }
 
-        html += `
+            html += `
             <tr class="${classe}">
                 <td>${item.lote}</td>
                 <td>R$ ${Number(item.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
@@ -107,24 +107,24 @@ function criarTabelaLotes() {
                 <td class="col-vendedor">${item.vendedor}</td>
             </tr>
         `;
-    });
+        });
 
-    // Primeiro insere o HTML
-    tbody.innerHTML = html;
+        // Primeiro insere o HTML
+        tbody.innerHTML = html;
 
-    // Agora aplica a regra de esconder a coluna
-    const tipoUsuario = sessionStorage.getItem("usuarioTipo");
+        // Agora aplica a regra de esconder a coluna
+        const tipoUsuario = sessionStorage.getItem("usuarioTipo");
 
-    if (tipoUsuario !== "1") {
-        // Esconde o cabeçalho
-        const thVendedor = document.getElementById("col-vendedor");
-        if (thVendedor) thVendedor.style.display = "none";
+        if (tipoUsuario !== "1") {
+            // Esconde o cabeçalho
+            const thVendedor = document.getElementById("col-vendedor");
+            if (thVendedor) thVendedor.style.display = "none";
 
-        // Esconde todas as células da coluna
-        const tdsVendedor = document.querySelectorAll(".col-vendedor");
-        tdsVendedor.forEach(td => td.style.display = "none");
+            // Esconde todas as células da coluna
+            const tdsVendedor = document.querySelectorAll(".col-vendedor");
+            tdsVendedor.forEach(td => td.style.display = "none");
+        }
     }
-}
 
 
     // ---------------- Tooltip ----------------
@@ -196,17 +196,42 @@ function criarTabelaLotes() {
         document.getElementById("sb-valor").innerText = formatarMoeda(lote.valor);
 
 
-
         const select = document.getElementById("sb-status-select");
         const opcaoBloqueado = document.getElementById("opcao-bloqueado");
+        const opcaoVendido = document.getElementById("opcao-vendido");
+        const status = lote.status.toLowerCase();
 
         if (tipoUsuario === "1") {
+
             opcaoBloqueado.hidden = false;
+            opcaoVendido.hidden = false;
             select.disabled = false;
+
         } else {
+
             opcaoBloqueado.hidden = true;
-            select.disabled = false;
+            opcaoVendido.hidden = true;
+
+            if (status === "vendido") {
+                select.disabled = true;
+            } else {
+                select.disabled = false;
+            }
+
         }
+
+        const btn_salvar = document.getElementById("btn-salvar-status");
+
+        if(tipoUsuario === "1"){
+
+            btn_salvar.style.display = "block";
+
+        }else{
+
+            btn_salvar.style.display = "none";
+
+        }
+
 
         select.value = lote.status.toLowerCase();
 
@@ -228,6 +253,7 @@ function criarTabelaLotes() {
             btnContrato.style.display = "none";
         }
     }
+
 
     // ---------------- Fechar sidebar ----------------
     document.getElementById("sidebar-close").addEventListener("click", () => {
@@ -272,6 +298,58 @@ function criarTabelaLotes() {
 
                 alert("Erro ao atualizar o status. Tente novamente.");
             });
+    });
+
+    // ------------------------------------------------------------------------------------------
+    // GERAR VENDA E ALTERAR STATUS PARA VENDIDO
+
+    document.getElementById("btn-gerar-contrato-final").addEventListener("click", () => {
+
+        const spinner = document.getElementById("spinner");
+        const id = window.loteParaContrato.id;
+
+        spinner.style.display = "flex";
+
+        fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                status: "vendido"
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (window.lotes && window.lotes[id]) {
+                    window.lotes[id].status = "vendido";
+                }
+
+                atualizarCorDoLote(id);
+                atualizarTotalVendido();
+                atualizarDashboard();
+                criarTabelaLotes();
+
+                if (typeof gerarGraficoStatus === "function") {
+                    gerarGraficoStatus();
+                }
+
+                spinner.style.display = "none";
+
+                document.getElementById("sidebar").style.display = "none";
+
+            })
+            .catch(err => {
+
+                console.error("Erro ao atualizar status:", err);
+
+                spinner.style.display = "none";
+
+                alert("Erro ao atualizar o status. Tente novamente.");
+
+            });
+
     });
 
 
