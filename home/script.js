@@ -239,8 +239,6 @@ function iniciarSistema() {
 
         const btnContrato = document.getElementById("gerar_contrato");
         const btnReserva = document.getElementById("gerar-reserva");
-
-
         if (status === "disponível") {
 
             btnContrato.style.display = "block";
@@ -254,7 +252,12 @@ function iniciarSistema() {
                     valorFormatado: formatarMoeda(lote.valor)
                 });
 
-        } else if (status === "reservado" || status === "vendido") {
+        } else if (status === "reservado") {
+
+            btnContrato.style.display = "block";
+            btnReserva.style.display = "none";
+
+        } else if (status === "vendido") {
 
             btnContrato.style.display = "none";
             btnReserva.style.display = "none";
@@ -262,11 +265,11 @@ function iniciarSistema() {
         } else {
 
             btnContrato.style.display = "none";
-            btnReserva.style.display = "block"; // ou "none", se preferir esconder também nos demais status
+            btnReserva.style.display = "block";
 
         }
-    }
 
+    }
 
     // ---------------- Fechar sidebar ----------------
     document.getElementById("sidebar-close").addEventListener("click", () => {
