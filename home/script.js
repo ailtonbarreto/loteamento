@@ -20,7 +20,6 @@ function iniciarSistema() {
         })
         .then(data => {
 
-
             lotes = {};
 
             data.data.forEach(item => {
@@ -109,18 +108,15 @@ function iniciarSistema() {
         `;
         });
 
-        // Primeiro insere o HTML
         tbody.innerHTML = html;
 
-        // Agora aplica a regra de esconder a coluna
         const tipoUsuario = sessionStorage.getItem("usuarioTipo");
 
         if (tipoUsuario !== "1") {
-            // Esconde o cabeçalho
+
             const thVendedor = document.getElementById("col-vendedor");
             if (thVendedor) thVendedor.style.display = "none";
 
-            // Esconde todas as células da coluna
             const tdsVendedor = document.querySelectorAll(".col-vendedor");
             tdsVendedor.forEach(td => td.style.display = "none");
         }
@@ -221,15 +217,17 @@ function iniciarSistema() {
         }
 
         const btn_salvar = document.getElementById("btn-salvar-status");
+        const select_card = document.getElementById("select_card");
 
-        if(tipoUsuario === "1"){
+        if (tipoUsuario === "1") {
 
             btn_salvar.style.display = "block";
+            select_card.style.display = "flex";
 
-        }else{
+        } else {
 
             btn_salvar.style.display = "none";
-
+            select_card.style.display = "none";
         }
 
 
@@ -237,11 +235,17 @@ function iniciarSistema() {
 
         document.getElementById("sidebar").style.display = "flex";
         window.loteSelecionado = id;
+        window.loteParaContrato = lote;
 
         const btnContrato = document.getElementById("gerar_contrato");
+        const btnReserva = document.getElementById("gerar-reserva");
 
-        if (lote.status.toLowerCase() === "disponível") {
+
+        if (status === "disponível") {
+
             btnContrato.style.display = "block";
+            btnReserva.style.display = "block";
+
             btnContrato.onclick = () =>
                 window.abrirPopupContrato({
                     id: id,
@@ -249,8 +253,17 @@ function iniciarSistema() {
                     valor: lote.valor,
                     valorFormatado: formatarMoeda(lote.valor)
                 });
-        } else {
+
+        } else if (status === "reservado" || status === "vendido") {
+
             btnContrato.style.display = "none";
+            btnReserva.style.display = "none";
+
+        } else {
+
+            btnContrato.style.display = "none";
+            btnReserva.style.display = "block"; // ou "none", se preferir esconder também nos demais status
+
         }
     }
 
@@ -351,6 +364,59 @@ function iniciarSistema() {
             });
 
     });
+
+    // -------------------------------------------------------------------
+    // GERAR PROPOSTA E ALTERAR STATUS PARA RESERVADO
+
+
+    document.getElementById("gerar-reserva").addEventListener("click", () => {
+
+        const spinner = document.getElementById("spinner");
+        const id = window.loteSelecionado;
+
+        if (!id) {
+            alert("Nenhum lote selecionado para reserva.");
+            return;
+        }
+
+        spinner.style.display = "flex";
+
+        fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                status: "reservado"
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if (window.lotes && window.lotes[id]) {
+                    window.lotes[id].status = "reservado";
+                }
+
+                atualizarCorDoLote(id);
+                atualizarTotalVendido();
+                atualizarDashboard();
+                criarTabelaLotes();
+
+                if (typeof gerarGraficoStatus === "function") {
+                    gerarGraficoStatus();
+                }
+
+                spinner.style.display = "none";
+                document.getElementById("sidebar").style.display = "none";
+            })
+            .catch(err => {
+                console.error("Erro ao atualizar status:", err);
+                spinner.style.display = "none";
+                alert("Erro ao atualizar o status. Tente novamente.");
+            });
+
+    });
+
 
 
     function atualizarCorDoLote(id) {

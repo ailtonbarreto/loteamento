@@ -279,7 +279,7 @@ path {
     position: fixed;
     right: 0;
     top: 0;
-    width: 350px;
+    width: 450px;
     height: 100vh;
     background: #fff;
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
@@ -289,7 +289,7 @@ path {
     flex-direction: column;
     z-index: 200;
 
-    select {
+    select, #valor_entrada {
         background-color: #9b9b9b;
         padding: 0.3vw;
         color: #fff;

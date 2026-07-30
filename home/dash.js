@@ -122,9 +122,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         formatter: '{b}: {c}'
                     },
                     data: [
-                        { value: 200, name: 'Exposição' },
                         { value: 80, name: 'Interessados' },
-                        { value: 40, name: 'Visitas' },
+                        { value: 55, name: 'Visitas' },
                         { value: 40, name: 'Propostas' },
                         { value: 20, name: 'Vendas' }
                     ]
