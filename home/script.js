@@ -239,18 +239,21 @@ function iniciarSistema() {
 
         const btnContrato = document.getElementById("gerar_contrato");
         const btnReserva = document.getElementById("gerar-reserva");
+
+        // O botão sempre terá a ação configurada
+        btnContrato.onclick = () => {
+            window.abrirPopupContrato({
+                id: id,
+                lote: lote.lote,
+                valor: lote.valor,
+                valorFormatado: formatarMoeda(lote.valor)
+            });
+        };
+
         if (status === "disponível") {
 
             btnContrato.style.display = "block";
             btnReserva.style.display = "block";
-
-            btnContrato.onclick = () =>
-                window.abrirPopupContrato({
-                    id: id,
-                    lote: lote.lote,
-                    valor: lote.valor,
-                    valorFormatado: formatarMoeda(lote.valor)
-                });
 
         } else if (status === "reservado") {
 
