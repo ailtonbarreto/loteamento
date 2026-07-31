@@ -495,6 +495,15 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
                     font: "Times New Roman",
                     size: 24
                 }),
+            ]
+        }),
+
+        new Paragraph({
+            alignment: AlignmentType.LEFT,
+            indent: { firstLine: 720 },
+            spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
+            children: [
+
                 new TextRun({
                     text: " PARÁGRAFO ÚNICO: No caso de descumprimento de qualquer cláusula deste contrato, ficará a parte inadimplente sujeita à multa de 10% (dez por cento), calculada sobre o valor total da venda constante na cláusula segunda do presente Instrumento Particular de Compromisso de Compra e Venda, bem como, ao pagamento dos honorários devidos à imobiliária intermediadora do negócio, além da restituição dos valores pagos, corrigidos monetariamente. Salvo exceção de impedimento bancário.",
                     font: "Times New Roman",
@@ -503,7 +512,6 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             ]
         }),
 
-        // LINHA EM BRANCO
         new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
 
         // DO FORO
