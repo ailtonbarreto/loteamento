@@ -88,6 +88,7 @@ body {
     justify-content: space-around;
     text-align: left;
     height: 8vw;
+    font-size: 0.7vw;
 }
 
 .analyse div:nth-of-type(3) {
@@ -215,7 +216,7 @@ body {
     position: relative;
     width: auto;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     cursor: grab;
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
@@ -289,7 +290,8 @@ path {
     flex-direction: column;
     z-index: 200;
 
-    select, #valor_entrada {
+    select,
+    #valor_entrada {
         background-color: #9b9b9b;
         padding: 0.3vw;
         color: #fff;
@@ -306,17 +308,17 @@ path {
         font-size: 1.3rem;
     }
 
-    #gerar_contrato{
+    #gerar_contrato {
         background-color: #02b1dd;
     }
 
-    #gerar-reserva{
+    #gerar-reserva {
         background-color: #DEAB05;
     }
 
 }
 
-.sidebar_card{
+.sidebar_card {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -404,6 +406,13 @@ button {
     cursor: pointer;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
 /* ----------------------------------------------------------------------- */
 
 @media screen and (max-width: 768px),
@@ -429,6 +438,7 @@ screen and (orientation: portrait) {
 
     .analyse>div {
         height: 20vw;
+        font-size: 3vw;
     }
 
     .charts-container {
@@ -474,6 +484,10 @@ screen and (orientation: portrait) {
 
         }
 
+    }
+
+    #sidebar {
+        width: 100vw;
     }
 
     #container {

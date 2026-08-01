@@ -94,6 +94,8 @@ window.addEventListener("DOMContentLoaded", () => {
         myChart.setOption(option);
     }
 
+    // -------------------------------------------------------------------------
+
     function gerarGraficoFunil() {
         const chartDom = document.getElementById('graficoFunil');
         const myChart = echarts.init(chartDom);
@@ -122,10 +124,10 @@ window.addEventListener("DOMContentLoaded", () => {
                         formatter: '{b}: {c}'
                     },
                     data: [
-                        { value: 80, name: 'Interessados' },
-                        { value: 55, name: 'Visitas' },
-                        { value: 40, name: 'Propostas' },
-                        { value: 20, name: 'Vendas' }
+                        { value: 80, name: 'Cadastros'},
+                        { value: 55, name: 'Visitas'},
+                        { value: 40, name: 'Propostas'},
+                        { value: 20, name: 'Vendas'}
                     ]
                 }
             ]

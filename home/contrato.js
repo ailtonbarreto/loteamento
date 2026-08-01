@@ -46,7 +46,7 @@ async function carregarClientes() {
 
             option.value = cliente.id_cliente;
 
-            option.textContent = `${cliente.nome} - CPF ${cliente.cpf}`;
+            option.textContent = `${cliente.nome}`;
 
             option.dataset.cliente = JSON.stringify(cliente);
 

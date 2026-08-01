@@ -1,0 +1,63 @@
+/* ---------------------- MENU LATERAL ---------------------- */
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: -270px;
+    width: 270px;
+    height: 100%;
+    background-color: #fff;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 999;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#menu.open {
+    left: 0;
+}
+
+#menu-toggle {
+    font-size: 1.9rem;
+    color: #035199;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.close-menu {
+    font-size: 2.4rem;
+    color: #000;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    align-self: flex-end;
+    padding: 0 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #000;
+    cursor: pointer;
+    padding: 0.9rem;
+    font-size: 1.25rem;
+}
+
+.active{
+    background-color: #04579b;
+    color: #fff;
+}
+
+.menu-item span.material-symbols-outlined {
+    font-size: 2.2rem;
+}
+
+
+.menu-toggle,
+.logout-btn {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
