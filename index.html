@@ -159,10 +159,6 @@
       color: #fff;
     }
 
-    .btn-cancel {
-      background: #e40303;
-    }
-
     .btn-submit {
       background: #111827;
     }
@@ -264,7 +260,6 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal btn-cancel" id="btnCancelar">Cancelar</button>
         <button class="btn-modal btn-submit" id="btnEntrar">Entrar</button>
       </div>
     </div>
@@ -274,7 +269,6 @@
 
     const btnLogin = document.getElementById("btnLogin");
     const btnCloseModal = document.getElementById("btnCloseModal");
-    const btnCancelar = document.getElementById("btnCancelar");
     const btnEntrar = document.getElementById("btnEntrar");
     const spinner = document.getElementById('spinner');
 
@@ -282,7 +276,6 @@
 
     btnLogin.onclick = () => modalBackdrop.style.display = "flex";
     btnCloseModal.onclick = () => modalBackdrop.style.display = "none";
-    btnCancelar.onclick = () => modalBackdrop.style.display = "none";
 
 
     btnEntrar.onclick = () => {
