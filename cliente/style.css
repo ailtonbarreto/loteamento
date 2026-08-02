@@ -7,18 +7,17 @@
  }
 
  body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    display: flex;
-    justify-content: center;
+   font-family: Arial, sans-serif;
+   display: flex;
+   justify-content: center;
+   height: 110vh;
  }
 
  .container {
-    background: white;
-    padding: 25px;
-    width: 100vw;
-    height: 100vh;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   width: 100vw;
+   height: 110vh;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   padding: 10vw 5vw;
  }
 
  h2 {
@@ -33,11 +32,11 @@
  }
 
  form input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+   width: 100%;
+   padding: 8px;
+   margin-top: 5px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
  }
 
  button {

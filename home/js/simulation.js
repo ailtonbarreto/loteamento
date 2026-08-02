@@ -235,31 +235,67 @@ async function carregarClientes() {
     }
 }
 
-
 // ----------------------------------------------------------
-
 
 document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
 
+    const comprador_select = document.getElementById("select-clientes-simulacao");
+    const option = comprador_select.selectedOptions[0];
+
+    if (!option || !option.dataset.cliente) {
+        alert("Selecione um cliente antes de gerar a proposta.");
+        return;
+    }
+
+    const cliente = JSON.parse(option.dataset.cliente);
+
+    const entrada = Number(document.getElementById("valor_entrada").value || 0);
+    const taxa = Number(document.getElementById("taxa_juros").value);
+    const parcelas = Number(document.getElementById("parcelas").value);
+    const tipo = document.getElementById("tipo_financiamento").value;
+
+    const textoValorLote = document.getElementById("sb-valor").innerText;
+    const valorLote = Number(
+        textoValorLote.replace("R$", "").replace(/\./g, "").replace(",", ".").trim()
+    );
+
+    const saldoFinanciado = valorLote - entrada;
+
+    let valorParcela = 0;
+
+    if (tipo === "price") {
+        valorParcela =
+            saldoFinanciado *
+            (taxa * Math.pow(1 + taxa, parcelas)) /
+            (Math.pow(1 + taxa, parcelas) - 1);
+    }
+
+    if (tipo === "sac") {
+        const amortizacao = saldoFinanciado / parcelas;
+        const jurosPrimeira = saldoFinanciado * taxa;
+        valorParcela = amortizacao + jurosPrimeira;
+    }
+
+    const moeda = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
     gerarPropostaDOCX({
-        nomeComprador: "Nome Comprador",
-        identificacaoLote: "Id do Lote",
-        cidadeUF: "cidade/UF",
-        valorTotal: "R$ 0,00",
-        // entrada: moeda(Number(document.getElementById("valor_entrada").value || 0)),
-        entrada: "R$ 0,00",
-        saldoFinanciado: "R$ 0,00",
-        parcelas: "0",
-        valorParcela: "R$ 0,00",
-        diaVencimento: "DD/MM/AAAA",
-        validade: "DD/MM/AAAA",
-        vendedor: "corretor_nome",
-        telefone: "xxxxxxxxxxxx",
-        email: "teste@email.com"
+        nomeComprador: cliente.nome,
+        identificacaoLote: document.getElementById("sb-lote").innerText,
+        loteamento: "Loteamento Horizontal",
+        cidadeUF: `${cliente.cidade}/${cliente.uf}`,
+        valorTotal: moeda(valorLote),
+        entrada: moeda(entrada),
+        saldoFinanciado: moeda(saldoFinanciado),
+        parcelas,
+        valorParcela: moeda(valorParcela),
+        diaVencimento: "10",
+        validade: "30 dias",
+        vendedor: "Nome do corretor",
+        telefone: cliente.telefone || "Não informado",
+        email: cliente.email || "Não informado"
     });
 
-    const popup_reserva = document.getElementById("popup-simulacao");
-    popup_reserva.style.display = "none";
-
+    document.getElementById("popup-simulacao").style.display = "none";
 });
+
 

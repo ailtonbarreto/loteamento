@@ -299,6 +299,7 @@ path {
     gap: 1.4rem;
     flex-direction: column;
     z-index: 200;
+    overflow-y: auto;
 
     select,
     #valor_entrada {
@@ -326,6 +327,10 @@ path {
         background-color: #DEAB05;
     }
 
+}
+
+#sidebar::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar_card {
