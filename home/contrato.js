@@ -167,7 +167,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `${cliente.nome}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do RG: ${cliente.rg}, CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
+                    text: `${cliente.nome}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
                     font: "Times New Roman",
                     size: 24
                 })

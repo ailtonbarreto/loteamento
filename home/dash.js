@@ -42,13 +42,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const option = {
             tooltip: {
-                trigger: "item",
-                formatter: (params) => {
-                    return `${params.name}: ${params.value.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL"
-                    })}`;
-                }
+                show: false,
+
             },
             grid: {
                 left: "5%",
