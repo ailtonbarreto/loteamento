@@ -371,11 +371,11 @@ function iniciarSistema() {
 
     });
 
+
     // -------------------------------------------------------------------
     // GERAR PROPOSTA E ALTERAR STATUS PARA RESERVADO
 
-
-    document.getElementById("gerar-reserva").addEventListener("click", () => {
+    document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
 
         const spinner = document.getElementById("spinner");
         const id = window.loteSelecionado;
@@ -423,7 +423,7 @@ function iniciarSistema() {
 
     });
 
-
+// --------------------------------------------------------------------
 
     function atualizarCorDoLote(id) {
         const lote = lotes[id];

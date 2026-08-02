@@ -182,23 +182,73 @@ function gerarPropostaDOCX({
     });
 }
 
+// -------------------------------------------------------------------------------------
+// ABRIR POPUP DE GERAR PROPOSTA
+
+document.getElementById("popup-simulacao-close").addEventListener("click", () => {
+
+    const popup_reserva = document.getElementById("popup-simulacao");
+    popup_reserva.style.display = "none";
+
+});
+
+// -------------------------------------------------------------------------------------
+
 document.getElementById("gerar-reserva").addEventListener("click", () => {
 
-    console.log("clicou");
+    const popup_reserva = document.getElementById("popup-simulacao");
+    carregarClientes();
+    popup_reserva.style.display = "flex";
+
+});
+
+// ------------------------------------------------------------------------------------
+
+async function carregarClientes() {
+
+    const comprador_select = document.getElementById("select-clientes-simulacao");
+
+    comprador_select.innerHTML = `
+        <option value="">Selecione um cliente</option>
+    `;
+
+    try {
+
+        const response = await fetch("https://api-lotes.onrender.com/cliente");
+        const json = await response.json();
+
+        json.data.forEach(cliente => {
+
+            const option = document.createElement("option");
+
+            option.value = cliente.id_cliente;
+            option.textContent = cliente.nome;
+            option.dataset.cliente = JSON.stringify(cliente);
+
+            comprador_select.appendChild(option); // ← CORRETO
+
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Erro ao carregar os clientes.");
+    }
+}
+
+
+// ----------------------------------------------------------
+
+
+document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
 
     gerarPropostaDOCX({
-        // nomeComprador: document.getElementById("nome_comprador").value,
         nomeComprador: "Nome Comprador",
         identificacaoLote: "Id do Lote",
-        loteamento: "loteamento",
         cidadeUF: "cidade/UF",
         valorTotal: "R$ 0,00",
         // entrada: moeda(Number(document.getElementById("valor_entrada").value || 0)),
         entrada: "R$ 0,00",
-
-        // saldoFinanciado: moeda(valorLote - Number(document.getElementById("valor_entrada").value || 0)),
         saldoFinanciado: "R$ 0,00",
-
         parcelas: "0",
         valorParcela: "R$ 0,00",
         diaVencimento: "DD/MM/AAAA",
@@ -207,6 +257,9 @@ document.getElementById("gerar-reserva").addEventListener("click", () => {
         telefone: "xxxxxxxxxxxx",
         email: "teste@email.com"
     });
+
+    const popup_reserva = document.getElementById("popup-simulacao");
+    popup_reserva.style.display = "none";
 
 });
 

@@ -155,6 +155,16 @@ body {
     gap: 1.6rem;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    div {
+        width: 48%;
+    }
+}
+
 /* ---------------------------------------------------------------------- */
 
 .card-table {
@@ -280,7 +290,7 @@ path {
     position: fixed;
     right: 0;
     top: 0;
-    width: 450px;
+    width: 500px;
     height: 100vh;
     background: #fff;
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
@@ -330,7 +340,7 @@ path {
 }
 
 
-#btn-gerar-contrato-final {
+#btn-gerar-contrato-final, #btn-gerar-simulacao {
     background-color: #02b1dd;
     color: #fff;
     padding: 0.4vw;
@@ -348,7 +358,7 @@ path {
     font-weight: bold;
 }
 
-#popup-contrato {
+#popup-contrato, #popup-simulacao {
     position: fixed;
     top: 0;
     left: 0;
@@ -373,7 +383,7 @@ path {
     }
 }
 
-#popup-box {
+.popup-box{
     background: #fff;
     width: 400px;
     padding: 20px;
@@ -385,7 +395,8 @@ path {
     gap: 15px;
 }
 
-#popup-close {
+
+#popup-close, #popup-simulacao-close {
     position: absolute;
     right: 15px;
     top: 10px;
