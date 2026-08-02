@@ -491,7 +491,7 @@ screen and (orientation: portrait) {
     }
 
     #container {
-
+        overflow: auto;
         border: 1vw solid var(--color-background);
 
     }
