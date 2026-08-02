@@ -222,10 +222,10 @@ async function carregarClientes() {
             const option = document.createElement("option");
 
             option.value = cliente.id_cliente;
-            option.textContent = cliente.nome;
+            option.textContent = cliente.nome.toUpperCase();
             option.dataset.cliente = JSON.stringify(cliente);
 
-            comprador_select.appendChild(option); // ← CORRETO
+            comprador_select.appendChild(option);
 
         });
 
