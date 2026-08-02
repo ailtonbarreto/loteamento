@@ -46,7 +46,7 @@ async function carregarClientes() {
 
             option.value = cliente.id_cliente;
 
-            option.textContent = `${cliente.nome}`;
+            option.textContent = `${cliente.nome}`.toUpperCase();
 
             option.dataset.cliente = JSON.stringify(cliente);
 
@@ -167,7 +167,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `${cliente.nome}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
+                    text: `${cliente.nome.toUpperCase()}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
                     font: "Times New Roman",
                     size: 24
                 })
