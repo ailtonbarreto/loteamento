@@ -197,14 +197,14 @@ document.getElementById("popup-simulacao-close").addEventListener("click", () =>
 document.getElementById("gerar-reserva").addEventListener("click", () => {
 
     const popup_reserva = document.getElementById("popup-simulacao");
-    carregarClientes();
+    carregarClientesSimulacao();
     popup_reserva.style.display = "flex";
 
 });
 
 // ------------------------------------------------------------------------------------
 
-async function carregarClientes() {
+async function carregarClientesSimulacao() {
 
     const comprador_select = document.getElementById("select-clientes-simulacao");
 
