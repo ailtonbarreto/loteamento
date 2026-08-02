@@ -621,64 +621,6 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             ]
         }),
 
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-
-        new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [
-                new TextRun({
-                    text: "TESTEMUNHAS:",
-                    font: "Times New Roman",
-                    size: 24
-                })
-            ]
-        }),
-
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-
-        new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [
-                new TextRun({
-                    text: "Nome completo: NOME TESTEMUNHA 1",
-                    font: "Times New Roman",
-                    size: 24
-                })
-            ]
-        }),
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-        new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [
-                new TextRun({
-                    text: "CPF: XXX.XXX.XXX-XX.",
-                    font: "Times New Roman",
-                    size: 24
-                })
-            ]
-        }),
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-        new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [
-                new TextRun({
-                    text: "Nome completo: NOME TESTEMUNHA 2",
-                    font: "Times New Roman",
-                    size: 24
-                })
-            ]
-        }),
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-        new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [
-                new TextRun({
-                    text: "CPF: XXX.XXX.XXX-XX.",
-                    font: "Times New Roman",
-                    size: 24
-                })
-            ]
-        })
     ];
 
     const doc = new Document({
