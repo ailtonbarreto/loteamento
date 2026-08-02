@@ -76,13 +76,23 @@
 
             const dados = {
                 nome: document.getElementById("nome").value,
+                cpf: document.getElementById("cpf").value,
                 email: document.getElementById("email").value,
                 telefone: document.getElementById("telefone").value,
-                endereco: document.getElementById("endereco").value
+                logradouro: document.getElementById("endereco").value,
+                numero: document.getElementById("numero").value,
+                complemento: document.getElementById("complemento").value,
+                bairro: document.getElementById("bairro").value,
+                cidade: document.getElementById("cidade").value,
+                uf: document.getElementById("estado").value,
+                cep: document.getElementById("cep").value,
+                profissao: document.getElementById("profissao").value,
+                renda: document.getElementById("renda").value,
+                id_corretor: 1 // se quiser, pode pegar dinamicamente depois
             };
 
             try {
-                const resposta = await fetch("http://localhost:3000/clientes", {
+                const resposta = await fetch("https://api-lotes.onrender.com/insert_cliente", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -93,13 +103,16 @@
                 const resultado = await resposta.json();
 
                 document.getElementById("mensagem").innerText =
-                    resposta.ok ? "Cliente cadastrado com sucesso!" : "Erro ao cadastrar: " + resultado.mensagem;
+                    resposta.ok
+                        ? "Cliente cadastrado com sucesso!"
+                        : "Erro ao cadastrar: " + resultado.erro;
 
             } catch (erro) {
                 document.getElementById("mensagem").innerText = "Erro de conexão com o servidor";
                 console.error(erro);
             }
         });
+
 
     </script>
 </body>
