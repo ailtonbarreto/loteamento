@@ -46,7 +46,7 @@ async function carregarClientes() {
 
             option.value = cliente.id_cliente;
 
-            option.textContent = `${cliente.nome}`.toUpperCase();
+            option.textContent = `${cliente.nome.toUpperCase()}`;
 
             option.dataset.cliente = JSON.stringify(cliente);
 
