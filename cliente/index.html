@@ -88,15 +88,13 @@
                 cep: document.getElementById("cep").value,
                 profissao: document.getElementById("profissao").value,
                 renda: document.getElementById("renda").value,
-                id_corretor: 1 // se quiser, pode pegar dinamicamente depois
+                id_corretor: 1
             };
 
             try {
                 const resposta = await fetch("https://api-lotes.onrender.com/insert_cliente", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dados)
                 });
 
@@ -105,7 +103,7 @@
                 document.getElementById("mensagem").innerText =
                     resposta.ok
                         ? "Cliente cadastrado com sucesso!"
-                        : "Erro ao cadastrar: " + resultado.erro;
+                        : `Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`;
 
             } catch (erro) {
                 document.getElementById("mensagem").innerText = "Erro de conexão com o servidor";
