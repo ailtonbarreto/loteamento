@@ -325,7 +325,7 @@ path {
     padding: 0.5vw;
     color: var(--color-shadow);
     border-radius: 0.5vw;
-    gap: 0.3vw;
+    gap: 0.5vw;
     box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
 }
 
@@ -488,6 +488,17 @@ screen and (orientation: portrait) {
 
     #sidebar {
         width: 100vw;
+
+        button {
+            font-size: 4vw;
+            padding: 2vw;
+        }
+    }
+
+    .sidebar_card {
+        padding: 3vw;
+        gap: 2vw;
+
     }
 
     #container {
