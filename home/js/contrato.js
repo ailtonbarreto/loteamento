@@ -26,9 +26,52 @@ document.getElementById("popup-close").addEventListener("click", () => {
 // ----------------------------------------------------------
 // Carrega clientes
 
+// async function carregarClientes() {
+
+//     const select = document.getElementById("select-clientes");
+
+//     select.innerHTML = `
+//         <option value="">Selecione um cliente</option>
+//     `;
+
+//     try {
+
+//         // const response = await fetch("https://api-lotes.onrender.com/cliente");
+
+//         const response = await fetch(`https://api-lotes.onrender.com/cliente?corretorId=${corretor.id}`);
+
+
+//         const json = await response.json();
+
+//         json.data.forEach(cliente => {
+
+//             const option = document.createElement("option");
+
+//             option.value = cliente.id_cliente;
+
+//             option.textContent = `${cliente.nome.toUpperCase()}`;
+
+//             option.dataset.cliente = JSON.stringify(cliente);
+
+//             select.appendChild(option);
+
+//         });
+
+//     } catch (erro) {
+
+//         console.error(erro);
+
+//         alert("Erro ao carregar os clientes.");
+
+//     }
+// }
+
+
 async function carregarClientes() {
 
     const select = document.getElementById("select-clientes");
+
+    const corretor = JSON.parse(sessionStorage.getItem("usuarioId")) || null;
 
     select.innerHTML = `
         <option value="">Selecione um cliente</option>
@@ -37,29 +80,23 @@ async function carregarClientes() {
     try {
 
         const response = await fetch("https://api-lotes.onrender.com/cliente");
-
         const json = await response.json();
 
-        json.data.forEach(cliente => {
+        json.data
+            .filter(cliente => cliente.id_corretor === corretor)
+            .forEach(cliente => {
 
-            const option = document.createElement("option");
+                const option = document.createElement("option");
+                option.value = cliente.id_cliente;
+                option.textContent = cliente.nome.toUpperCase();
+                option.dataset.cliente = JSON.stringify(cliente);
 
-            option.value = cliente.id_cliente;
-
-            option.textContent = `${cliente.nome.toUpperCase()}`;
-
-            option.dataset.cliente = JSON.stringify(cliente);
-
-            select.appendChild(option);
-
-        });
+                select.appendChild(option);
+            });
 
     } catch (erro) {
-
         console.error(erro);
-
         alert("Erro ao carregar os clientes.");
-
     }
 }
 
@@ -347,7 +384,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
 
         new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
 
-        // DOS ENCARGOS TRIBUTÁRIOS
+
         new Paragraph({
             alignment: AlignmentType.LEFT,
             spacing: { after: 250 },
@@ -590,18 +627,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             alignment: AlignmentType.LEFT,
             children: [
                 new TextRun({
-                    text: cliente.nome.toUpperCase(),
-                    font: "Times New Roman",
-                    size: 24
-                })
-            ]
-        }),
-        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
-        new Paragraph({
-            alignment: AlignmentType.LEFT,
-            children: [
-                new TextRun({
-                    text: cliente.cpf,
+                    text: cliente.nome.toUpperCase() + " - CPF: " + cliente.cpf,
                     font: "Times New Roman",
                     size: 24
                 })
