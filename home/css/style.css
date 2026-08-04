@@ -14,6 +14,7 @@
     outline: 0;
     border: 0;
     box-sizing: border-box;
+    /* border: 1px solid red; */
 }
 
 body {
@@ -21,7 +22,6 @@ body {
     font-size: 0.88rem;
     background: var(--color-background);
     font-size: 14px;
-    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,7 +82,6 @@ body {
     z-index: 100;
     width: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 .analyse {
@@ -317,7 +316,7 @@ path {
     gap: 1.4rem;
     flex-direction: column;
     z-index: 200;
-    overflow-y: auto;
+    overflow-y: scroll;
 
     select,
     #valor_entrada {
@@ -465,11 +464,6 @@ screen and (orientation: portrait) {
 
     body {
         user-select: none;
-        overflow-x: hidden;
-    }
-
-    #tooltip{
-        display: none;
     }
 
     .dash_container {
@@ -540,8 +534,9 @@ screen and (orientation: portrait) {
         width: 100vw;
 
         button {
-            font-size: 4vw;
+            font-size: 5vw;
             padding: 2vw;
+            border-radius: 1vw;
         }
     }
 
@@ -552,17 +547,16 @@ screen and (orientation: portrait) {
     }
 
     #container {
-        overflow: auto;
         border: 1vw solid var(--color-background);
-
+        overflow: auto;
     }
 
-    select {
-        font-size: 4vw !important;
-        padding: 2vw !important;
+    #tooltip {
+        display: none !important;
     }
 
-    #popup-contrato, #popup-simulacao {
+    #popup-contrato,
+    #popup-simulacao {
 
         button {
             font-size: 4vw !important;
@@ -575,5 +569,9 @@ screen and (orientation: portrait) {
         display: none;
     }
 
+    select {
+        font-size: 4vw !important;
+        padding: 2vw !important;
+    }
 
 }
