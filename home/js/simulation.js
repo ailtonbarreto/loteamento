@@ -141,19 +141,17 @@ function gerarPropostaDOCX({
     const texto = [
         `Proposta de Venda de Lote`,
         ``,
-        `Prezado(a) Sr.(a) ${nomeComprador},`,
-        `Apresentamos a presente proposta para aquisição do lote ${identificacaoLote}, localizado em ${loteamento}, na cidade de ${cidadeUF}.`,
+        `Prezado(a) Sr.(a) ${nomeComprador.toUpperCase()},`,
+        `Apresentamos a presente proposta para aquisição do ${identificacaoLote}, localizado em ${loteamento}, na cidade de Franca/SP.`,
         `O valor total do lote é de ${valorTotal}. Para formalização da negociação, será paga uma entrada no valor de ${entrada}, no ato da assinatura do contrato ou conforme combinado entre as partes.`,
         `O saldo restante, no valor de ${saldoFinanciado}, será financiado em ${parcelas} parcelas mensais de ${valorParcela}, com vencimento todo dia ${diaVencimento} de cada mês.`,
-        `As parcelas poderão ser reajustadas conforme o índice previsto em contrato, caso aplicável. Eventuais taxas, despesas de escritura, registro, impostos, transferências ou demais custos relacionados à regularização do imóvel serão de responsabilidade de comprador/vendedor/conforme negociação.`,
+        `As parcelas poderão ser reajustadas conforme o índice previsto em contrato, caso aplicável. Eventuais taxas, despesas de escritura, registro, impostos, transferências ou demais custos relacionados à regularização do imóvel serão de responsabilidade de comprador conforme negociação.`,
         `A venda ficará condicionada à análise cadastral do comprador, à disponibilidade do lote e à assinatura do contrato definitivo de compra e venda.`,
         `Esta proposta terá validade até ${validade}. Após esse prazo, os valores e condições poderão ser alterados sem aviso prévio.`,
         `Estando de acordo com as condições acima, solicitamos a confirmação do aceite para darmos continuidade ao processo de venda.`,
         ``,
         `Atenciosamente,`,
-        `${vendedor}`,
-        `${telefone}`,
-        `${email}`
+        `${vendedor.toUpperCase()}`,
     ];
 
     const paragrafos = texto.map(linha => new Paragraph({
@@ -206,27 +204,29 @@ document.getElementById("gerar-reserva").addEventListener("click", () => {
 
 async function carregarClientesSimulacao() {
 
-    const comprador_select = document.getElementById("select-clientes-simulacao");
+    const select = document.getElementById("select-clientes-simulacao");
+    const corretor_id = JSON.parse(sessionStorage.getItem("usuarioId"));
+    const user_tipo = JSON.parse(sessionStorage.getItem("usuarioTipo"));
 
-    comprador_select.innerHTML = `
+    select.innerHTML = `
         <option value="">Selecione um cliente</option>
     `;
 
     try {
 
-        const response = await fetch("https://api-lotes.onrender.com/cliente");
+        const url = `https://api-lotes.onrender.com/cliente?tipo=${user_tipo}&id=${corretor_id}`;
+
+        const response = await fetch(url);
         const json = await response.json();
 
         json.data.forEach(cliente => {
 
             const option = document.createElement("option");
-
             option.value = cliente.id_cliente;
             option.textContent = cliente.nome.toUpperCase();
             option.dataset.cliente = JSON.stringify(cliente);
 
-            comprador_select.appendChild(option);
-
+            select.appendChild(option);
         });
 
     } catch (erro) {
@@ -289,7 +289,7 @@ document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
         parcelas,
         valorParcela: moeda(valorParcela),
         diaVencimento: "10",
-        validade: "30 dias",
+        validade: "3 dias",
         vendedor: "Nome do corretor",
         telefone: cliente.telefone || "Não informado",
         email: cliente.email || "Não informado"

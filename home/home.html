@@ -31,6 +31,14 @@
 
         <span class="material-symbols-outlined close-menu">close</span>
 
+        <div style="display: flex; width: 100%; justify-content: center; margin-bottom: 20px;">
+
+            <img src="../assets/logo.png" class="logo" alt="Logo">
+
+
+        </div>
+
+
         <div class="menu-item active">
             <span class="material-symbols-outlined">home</span>
             <span class="menu-label">Empreendimento 1</span>
@@ -56,7 +64,7 @@
 
     <div class="dash_container">
 
-        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div class="header_dash_container">
 
             <span class="material-symbols-outlined" id="menu-toggle">menu</span>
 
@@ -287,9 +295,14 @@
 
             <div id="sidebar">
 
-                <div id="sidebar-close">X</div>
+                <div class="sidebar-header">
 
-                <h2>Gerenciamento</h2>
+                    <h2>Gerenciamento</h2>
+
+                    <div id="sidebar-close">X</div>
+
+                </div>
+
 
                 <div style="display: flex; flex-direction: row; justify-content: space-around;">
                     <p><strong>Lote:</strong> <span id="sb-lote"></span></p>
@@ -348,10 +361,9 @@
 
                     <div class="sidebar_card">
 
-                        <h3>Parcelamento Residual</h3>
+                        <h3>QTD Parcelas</h3>
 
                         <select id="parcelas">
-
                             <option value="12">12 Vezes</option>
                             <option value="24">24 Vezes</option>
                             <option value="36">36 Vezes</option>
@@ -368,7 +380,7 @@
 
                     <div class="sidebar_card">
 
-                        <h3>Tipo Financiamento</h3>
+                        <h3>Tipo</h3>
 
                         <select id="tipo_financiamento">
 

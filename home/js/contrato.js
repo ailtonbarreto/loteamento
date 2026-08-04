@@ -26,52 +26,11 @@ document.getElementById("popup-close").addEventListener("click", () => {
 // ----------------------------------------------------------
 // Carrega clientes
 
-// async function carregarClientes() {
-
-//     const select = document.getElementById("select-clientes");
-
-//     select.innerHTML = `
-//         <option value="">Selecione um cliente</option>
-//     `;
-
-//     try {
-
-//         // const response = await fetch("https://api-lotes.onrender.com/cliente");
-
-//         const response = await fetch(`https://api-lotes.onrender.com/cliente?corretorId=${corretor.id}`);
-
-
-//         const json = await response.json();
-
-//         json.data.forEach(cliente => {
-
-//             const option = document.createElement("option");
-
-//             option.value = cliente.id_cliente;
-
-//             option.textContent = `${cliente.nome.toUpperCase()}`;
-
-//             option.dataset.cliente = JSON.stringify(cliente);
-
-//             select.appendChild(option);
-
-//         });
-
-//     } catch (erro) {
-
-//         console.error(erro);
-
-//         alert("Erro ao carregar os clientes.");
-
-//     }
-// }
-
-
 async function carregarClientes() {
 
     const select = document.getElementById("select-clientes");
-
-    const corretor = JSON.parse(sessionStorage.getItem("usuarioId")) || null;
+    const corretor_id = JSON.parse(sessionStorage.getItem("usuarioId"));
+    const user_tipo = JSON.parse(sessionStorage.getItem("usuarioTipo"));
 
     select.innerHTML = `
         <option value="">Selecione um cliente</option>
@@ -79,20 +38,20 @@ async function carregarClientes() {
 
     try {
 
-        const response = await fetch("https://api-lotes.onrender.com/cliente");
+        const url = `https://api-lotes.onrender.com/cliente?tipo=${user_tipo}&id=${corretor_id}`;
+
+        const response = await fetch(url);
         const json = await response.json();
 
-        json.data
-            .filter(cliente => cliente.id_corretor === corretor)
-            .forEach(cliente => {
+        json.data.forEach(cliente => {
 
-                const option = document.createElement("option");
-                option.value = cliente.id_cliente;
-                option.textContent = cliente.nome.toUpperCase();
-                option.dataset.cliente = JSON.stringify(cliente);
+            const option = document.createElement("option");
+            option.value = cliente.id_cliente;
+            option.textContent = cliente.nome.toUpperCase();
+            option.dataset.cliente = JSON.stringify(cliente);
 
-                select.appendChild(option);
-            });
+            select.appendChild(option);
+        });
 
     } catch (erro) {
         console.error(erro);
@@ -126,6 +85,8 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
 
     const lote = window.loteParaContrato;
     const cliente = window.clienteSelecionado;
+    const entrada = Number(document.getElementById("valor_entrada").value || 0);
+    const saldoFinanciado = lote.valor - entrada;
 
     if (!lote) {
         alert("Nenhum lote selecionado.");
@@ -289,7 +250,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: "CLÁUSULA SEGUNDA – Fica ajustado o preço líquido e certo de VALOR (VALOR POR EXTENSO) a serem pagos pelo COMPRADOR para aquisição do objeto do presente instrumento, sendo o valor de VALOR ENTRADA (VALOR ENTRADA POR EXTENSO) de entrada a ser pago no ato da assinatura com o banco, e o valor residual de VALOR RESTANTE , (VALOR RESTANTE POR EXTENSO) será obtido através de financiamento bancário a ser feito pelo comprador.",
+                    text: `CLÁUSULA SEGUNDA – Fica ajustado o preço líquido e certo de ${lote.valor} a serem pagos pelo COMPRADOR para aquisição do objeto do presente instrumento, sendo o valor de ${entrada} de entrada a ser pago no ato da assinatura com o banco, e o valor residual de ${saldoFinanciado}, será obtido através de financiamento bancário a ser feito pelo comprador.`,
                     font: "Times New Roman",
                     size: 24
                 }),

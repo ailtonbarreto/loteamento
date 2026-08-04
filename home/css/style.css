@@ -70,10 +70,26 @@ body {
     grid-template-columns: auto;
 }
 
+.header_dash_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    right: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #fff;
+    z-index: 100;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 .analyse {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 1.6rem;
+    margin-top: 60px;
 }
 
 .analyse>div {
@@ -345,7 +361,8 @@ path {
 }
 
 
-#btn-gerar-contrato-final, #btn-gerar-simulacao {
+#btn-gerar-contrato-final,
+#btn-gerar-simulacao {
     background-color: #02b1dd;
     color: #fff;
     padding: 0.4vw;
@@ -354,16 +371,21 @@ path {
     font-size: 1.3rem;
 }
 
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #sidebar-close {
-    position: fixed;
-    right: 15px;
-    top: 10px;
     font-size: 22px;
     cursor: pointer;
     font-weight: bold;
 }
 
-#popup-contrato, #popup-simulacao {
+
+#popup-contrato,
+#popup-simulacao {
     position: fixed;
     top: 0;
     left: 0;
@@ -388,7 +410,7 @@ path {
     }
 }
 
-.popup-box{
+.popup-box {
     background: #fff;
     width: 400px;
     padding: 20px;
@@ -401,7 +423,8 @@ path {
 }
 
 
-#popup-close, #popup-simulacao-close {
+#popup-close,
+#popup-simulacao-close {
     position: absolute;
     right: 15px;
     top: 10px;
@@ -523,16 +546,16 @@ screen and (orientation: portrait) {
 
     }
 
-    #popup-contrato {
+    select {
+        font-size: 4vw !important;
+        padding: 2vw !important;
+    }
 
-        select {
-            font-size: 4vw;
-            padding: 2vw;
-        }
+    #popup-contrato, #popup-simulacao {
 
         button {
-            font-size: 4vw;
-            padding: 2vw;
+            font-size: 4vw !important;
+            padding: 2vw !important;
         }
 
     }
