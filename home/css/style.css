@@ -463,6 +463,7 @@ screen and (orientation: portrait) {
 
     body {
         user-select: none;
+        overflow-x: hidden;
     }
 
     .dash_container {
