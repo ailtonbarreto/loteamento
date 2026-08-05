@@ -319,7 +319,7 @@ path {
     overflow-y: scroll;
 
     select,
-    #valor_entrada {
+    input {
         background-color: #e7fbfd;
         padding: 0.3vw;
         color: #171111;
@@ -342,7 +342,7 @@ path {
     display: none;
 }
 
-.sidebar_info{
+.sidebar_info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -366,7 +366,7 @@ path {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1vw;
+    gap: 2.5vh;
 
 
     #gerar_contrato {
@@ -482,7 +482,7 @@ screen and (orientation: portrait) {
         user-select: none;
     }
 
-    .header_dash_container{
+    .header_dash_container {
         padding: 3vw !important;
     }
 
@@ -556,14 +556,20 @@ screen and (orientation: portrait) {
         button {
             font-size: 5vw;
             padding: 2vw;
-            border-radius: 1vw;
+            border-radius: 2vw;
+        }
+
+        select,
+        input {
+            font-size: 4vw;
+            padding: 2vw;
         }
     }
 
     .sidebar_card {
         padding: 3vw;
         gap: 2vw;
-
+        border-radius: 2vw;
     }
 
     #container {
@@ -589,9 +595,5 @@ screen and (orientation: portrait) {
         display: none;
     }
 
-    select {
-        font-size: 4vw !important;
-        padding: 2vw !important;
-    }
 
 }

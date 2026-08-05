@@ -16,7 +16,16 @@
         const parcelas = Number(document.getElementById("parcelas").value);
         const tipo = document.getElementById("tipo_financiamento").value;
 
-        const entrada = Number(document.getElementById("valor_entrada").value) || 0;
+        // const entrada = Number(document.getElementById("valor_entrada").value) || 0;
+
+        const entrada = Number(
+            document.getElementById("valor_entrada").value
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+        );
+
         const saldo = valorLote - entrada;
 
         let html = `
@@ -249,7 +258,15 @@ document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
 
     const cliente = JSON.parse(option.dataset.cliente);
 
-    const entrada = Number(document.getElementById("valor_entrada").value || 0);
+    // const entrada = Number(document.getElementById("valor_entrada").value || 0);
+    const entrada = Number(
+        document.getElementById("valor_entrada").value
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+            .trim()
+    );
+
     const taxa = Number(document.getElementById("taxa_juros").value);
     const parcelas = Number(document.getElementById("parcelas").value);
     const tipo = document.getElementById("tipo_financiamento").value;

@@ -78,6 +78,25 @@ document.getElementById("select-clientes").addEventListener("change", function (
 
 });
 
+// Formata para R$ 1.234,56
+function formatarReal(valor) {
+    valor = valor.replace(/\D/g, "");
+    valor = (Number(valor) / 100).toFixed(2);
+    valor = valor.replace(".", ",");
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return "R$ " + valor;
+}
+
+// Aplica máscara ao input
+const inputEntrada = document.getElementById("valor_entrada");
+
+inputEntrada.addEventListener("input", () => {
+    const cursor = inputEntrada.selectionStart;
+    inputEntrada.value = formatarReal(inputEntrada.value);
+    inputEntrada.setSelectionRange(cursor, cursor);
+});
+
+
 // ----------------------------------------------------------
 // Gerar contrato
 
@@ -85,7 +104,14 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
 
     const lote = window.loteParaContrato;
     const cliente = window.clienteSelecionado;
-    const entrada = Number(document.getElementById("valor_entrada").value || 0);
+    const entrada = Number(
+        document.getElementById("valor_entrada").value
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+            .trim()
+    );
+
     const saldoFinanciado = lote.valor - entrada;
 
     if (!lote) {
