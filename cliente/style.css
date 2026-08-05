@@ -10,14 +10,13 @@
    font-family: Arial, sans-serif;
    display: flex;
    justify-content: center;
-   height: 110vh;
  }
 
  .container {
    width: 100vw;
-   height: 110vh;
+   height: 100%;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   padding: 10vw 5vw;
+   padding: 3vw;
  }
 
  h2 {
@@ -31,13 +30,14 @@
     display: block;
  }
 
- form input {
+ form input, select {
    width: 100%;
    padding: 8px;
    margin-top: 5px;
    border: 1px solid #ccc;
    border-radius: 4px;
  }
+
 
  button {
     width: 100%;
@@ -64,4 +64,15 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+@media (min-width: 900px) {
+
+   .container{
+      width: 30vw;
+      margin: auto;
+   }
+
+
+
 }

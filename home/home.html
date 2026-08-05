@@ -45,7 +45,7 @@
         </div>
 
         <!-- Submenu-->
-        <div class="menu-item has-submenu" onclick="window.location.href='cliente.html'">
+        <div class="menu-item has-submenu" onclick="window.location.href='../cliente/index.html'">
             <span class="material-symbols-outlined">person</span>
             <span class="menu-label">Usuários</span>
         </div>
@@ -298,10 +298,13 @@
                 </div>
 
 
-                <div style="display: flex; flex-direction: row; justify-content: space-around;">
-                    <p><strong>Lote:</strong> <span id="sb-lote"></span></p>
+                <div class="sidebar_info">
 
-                    <p><strong>Valor:</strong> <span id="sb-valor"></span></p>
+                    <p id="sb-lote"></p>
+
+                    <p id="sb-valor"></p>
+
+                    <span class="material-symbols-outlined" id="capture">capture</span>
 
                 </div>
 
@@ -374,11 +377,11 @@
 
                     <div class="sidebar_card">
 
-                        <h3>Tipo</h3>
+                        <h3>Tabela</h3>
 
                         <select id="tipo_financiamento">
 
-                            <option value="price">Tabela PRICE</option>
+                            <option value="price">PRICE</option>
 
                             <option value="sac">SAC</option>
 
@@ -391,13 +394,15 @@
 
                 <!--------------------------------------------------------------------------->
 
-                <div id="simulacao" class="sidebar_card">
+                <div id="simulacao" class="sidebar_card"></div>
+
+                <div class="btns_sidebar">
+
+                    <button id="gerar-reserva">Gerar Proposta</button>
+
+                    <button id="gerar_contrato">Gerar Contrato</button>
 
                 </div>
-
-                <button id="gerar-reserva">Gerar Proposta</button>
-
-                <button id="gerar_contrato">Gerar Contrato</button>
 
 
             </div>

@@ -9,6 +9,8 @@ function iniciarSistema() {
     const spinner = document.getElementById('spinner');
     const tipo = sessionStorage.getItem("usuarioTipo");
     const id = sessionStorage.getItem("usuarioId");
+    const btnContrato = document.getElementById("gerar_contrato");
+    const btnReserva = document.getElementById("gerar-reserva");
 
     fetch(`https://api-lotes.onrender.com/loteamentos?tipo=${tipo}&id=${id}`)
 
@@ -37,10 +39,8 @@ function iniciarSistema() {
             window.dispatchEvent(new Event("lotesCarregados"));
 
 
-
         })
         .catch(err => console.error(err));
-
 
     // ---------------- Pintar lotes ----------------
 
@@ -218,6 +218,7 @@ function iniciarSistema() {
 
         const btn_salvar = document.getElementById("btn-salvar-status");
         const select_card = document.getElementById("select_card");
+        const simulacao = document.getElementById("simulacao");
 
         if (tipoUsuario === "1") {
 
@@ -237,10 +238,6 @@ function iniciarSistema() {
         window.loteSelecionado = id;
         window.loteParaContrato = lote;
 
-        const btnContrato = document.getElementById("gerar_contrato");
-        const btnReserva = document.getElementById("gerar-reserva");
-
-        // O botão sempre terá a ação configurada
         btnContrato.onclick = () => {
             window.abrirPopupContrato({
                 id: id,
@@ -254,21 +251,25 @@ function iniciarSistema() {
 
             btnContrato.style.display = "block";
             btnReserva.style.display = "block";
+            simulacao.style.display = "flex";
 
         } else if (status === "reservado") {
 
             btnContrato.style.display = "block";
             btnReserva.style.display = "none";
+            simulacao.style.display = "flex";
 
         } else if (status === "vendido") {
 
             btnContrato.style.display = "none";
             btnReserva.style.display = "none";
+            simulacao.style.display = "none";
 
         } else {
 
             btnContrato.style.display = "none";
             btnReserva.style.display = "block";
+            simulacao.style.display = "flex";
 
         }
 
@@ -423,7 +424,7 @@ function iniciarSistema() {
 
     });
 
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
     function atualizarCorDoLote(id) {
         const lote = lotes[id];

@@ -14,7 +14,6 @@
     outline: 0;
     border: 0;
     box-sizing: border-box;
-    /* border: 1px solid red; */
 }
 
 body {
@@ -27,6 +26,7 @@ body {
     align-items: center;
     width: 100%;
     height: 100vh;
+    overflow-x: hidden;
 
 }
 
@@ -75,6 +75,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
+    padding: 0.5vw 1vw !important;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -237,7 +238,6 @@ body {
 
 
 /* --------------------------------------------------------------------- */
-
 /* CONTAINER DO MAPA */
 #container {
     position: relative;
@@ -320,9 +320,9 @@ path {
 
     select,
     #valor_entrada {
-        background-color: #9b9b9b;
+        background-color: #e7fbfd;
         padding: 0.3vw;
-        color: #fff;
+        color: #171111;
         border-radius: 0.3vw;
         font-size: 1.3rem;
     }
@@ -336,22 +336,19 @@ path {
         font-size: 1.3rem;
     }
 
-    #gerar_contrato {
-        background-color: #02b1dd;
-    }
-
-    #gerar-reserva {
-        background-color: #DEAB05;
-    }
-
-}
-
-.header_dash_container {
-    padding: 10px;
 }
 
 #sidebar::-webkit-scrollbar {
     display: none;
+}
+
+.sidebar_info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(15, 76, 208);
 }
 
 .sidebar_card {
@@ -365,6 +362,24 @@ path {
     box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
 }
 
+.btns_sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1vw;
+
+
+    #gerar_contrato {
+        background-color: #02b1dd;
+        box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    #gerar-reserva {
+        background-color: #DEAB05;
+        box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
+    }
+
+}
 
 #btn-gerar-contrato-final,
 #btn-gerar-simulacao {
@@ -383,6 +398,7 @@ path {
 }
 
 #sidebar-close {
+    color: red;
     font-size: 22px;
     cursor: pointer;
     font-weight: bold;
@@ -464,6 +480,10 @@ screen and (orientation: portrait) {
 
     body {
         user-select: none;
+    }
+
+    .header_dash_container{
+        padding: 3vw !important;
     }
 
     .dash_container {
