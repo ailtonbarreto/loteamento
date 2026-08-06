@@ -78,22 +78,48 @@ document.getElementById("select-clientes").addEventListener("change", function (
 
 });
 
-// Formata para R$ 1.234,56
-function formatarReal(valor) {
-    valor = valor.replace(/\D/g, "");
-    valor = (Number(valor) / 100).toFixed(2);
-    valor = valor.replace(".", ",");
-    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return "R$ " + valor;
+
+function formatarRealLive(input) {
+    let valor = input.value;
+
+    // Posição atual do cursor
+    let posicao = input.selectionStart;
+
+    // Remove tudo que não é número
+    let somenteNumeros = valor.replace(/\D/g, "");
+
+    // Se estiver vazio, não formata
+    if (somenteNumeros.length === 0) {
+        input.value = "";
+        return;
+    }
+
+    // Converte para centavos
+    let numero = (Number(somenteNumeros) / 100).toFixed(2);
+
+    // Formata
+    let formatado = numero
+        .replace(".", ",")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Adiciona R$
+    formatado = "R$ " + formatado;
+
+    // Calcula diferença de tamanho
+    let diferenca = formatado.length - valor.length;
+
+    // Atualiza o valor no input
+    input.value = formatado;
+
+    // Reposiciona o cursor corretamente
+    input.setSelectionRange(posicao + diferenca, posicao + diferenca);
 }
 
-// Aplica máscara ao input
+// Aplicar no input
 const inputEntrada = document.getElementById("valor_entrada");
 
 inputEntrada.addEventListener("input", () => {
-    const cursor = inputEntrada.selectionStart;
-    inputEntrada.value = formatarReal(inputEntrada.value);
-    inputEntrada.setSelectionRange(cursor, cursor);
+    formatarRealLive(inputEntrada);
 });
 
 
