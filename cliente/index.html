@@ -24,7 +24,6 @@
     body {
         background: #f5f7fa;
         color: #333;
-        height: 100vh;
     }
 
     /* ====== CONTAINER PRINCIPAL ====== */
@@ -42,21 +41,8 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
-    /* Título do formulário (vem do header) */
-    .header_dash_container {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 15px 20px;
-        background: #fff;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        margin-bottom: 25px;
-    }
 
-    .header_dash_container h2 {
-        font-size: 22px;
-        font-weight: 600;
-    }
+
 
     /* ====== GRID DE CAMPOS ====== */
     .sub {
@@ -110,6 +96,12 @@
         background: #357ABD;
     }
 
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
     /* ====== MENSAGEM ====== */
     #mensagem {
         margin-top: 20px;
@@ -137,7 +129,7 @@
 <body>
 
 
-   <div class="header_dash_container">
+    <div class="header_dash_container">
 
         <span class="material-symbols-outlined" id="menu-toggle">menu</span>
 
