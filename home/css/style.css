@@ -70,20 +70,7 @@ body {
     grid-template-columns: auto;
 }
 
-.header_dash_container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0.5vw 1vw !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #fff;
-    z-index: 100;
-    width: 100%;
-    box-sizing: border-box;
-}
+
 
 .analyse {
     display: grid;

@@ -4,104 +4,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
     <title>Cadastro de Cliente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="../home/js/menu.js" defer></script>
+    <link rel="stylesheet" href="../home/css/menu.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!--MENU--------------------------------------------->
+
+    <div class="header_dash_container">
+
+        <span class="material-symbols-outlined" id="menu-toggle">menu</span>
+
+        <h2>Cadastro de Comprador</h2>
+
+    </div>
+
+    <nav id="menu">
+
+        <span class="material-symbols-outlined close-menu">close</span>
+
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+
+            <img src="../assets/logo.png" class="logo" alt="Logo">
+
+
+        </div>
+
+
+        <div class="menu-item" onclick="window.location.href='../home/home.html'">
+            <span class="material-symbols-outlined">home</span>
+            <span class="menu-label">Empreendimento 1</span>
+        </div>
+
+        <!-- Submenu-->
+        <div class="menu-item active">
+            <span class="material-symbols-outlined">person</span>
+            <span class="menu-label">Clientes</span>
+        </div>
+
+        <div class="menu-item" onclick="window.location.href='settings.html'">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="menu-label">Configurações</span>
+        </div>
+
+        <div class="menu-item" onclick="window.location.href='../index.html'" id="sair">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="menu-label">Sair</span>
+        </div>
+
+    </nav>
+
+
     <div class="container">
-        <h2>Cadastro de Cliente</h2>
 
         <form id="formCadastro">
 
-            <!-- DADOS PESSOAIS -->
-            <label>Nome Completo:</label>
-            <input type="text" id="nome" required>
+            <div class="sub">
 
-            <label>CPF:</label>
-            <input type="number" id="cpf" required>
+                <div class="campo">
 
-            <!-- <label>Estado Civil</label>
-            <select id="estado_civil">
+                    <label>Nome Completo:</label>
+                    <input type="text" id="nome" required>
 
-                <option value="solteiro">Solteiro</option>
-                <option value="casado">Casado</option>
-                <option value="divorciado">divorciado</option>
+                </div>
 
-            </select> -->
+                <div class="campo">
 
-            <!-- DADOS DE CONTATO -->
-            <label>Email:</label>
-            <input type="email" id="email" required>
+                    <label>CPF:</label>
+                    <input type="number" id="cpf" required>
 
+                </div>
 
-            <label>WhatsApp:</label>
-            <input type="text" id="telefone" required>
+                <!-- <div class="campo">
 
-            <!-- DADOS DE ENDERECO -->
+                    <label>Estado Civil</label>
+                    <select id="estado_civil">
 
-            <label>Logradouro:</label>
-            <input type="text" id="endereco" required>
+                        <option value="solteiro">Solteiro</option>
+                        <option value="casado">Casado</option>
+                        <option value="divorciado">divorciado</option>
 
-            <label>Número:</label>
-            <input type="number" id="numero" required>
+                    </select>
 
-            <label>Complemento:</label>
-            <input type="text" id="complemento">
+                </div> -->
 
-            <label>Bairro:</label>
-            <input type="text" id="bairro" required>
-
-            <label>Cidade:</label>
-            <input type="text" id="cidade" required>
-
-            <label>Estado:</label>
-
-            <select id="estado">
-                <option value="">Selecione um estado</option>
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espírito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernambuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Roraima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-            </select>
+            </div>
 
 
-            <label>CEP:</label>
-            <input type="number" id="cep" required>
+            <div class="sub">
 
-            <!-- RENDA -->
+                <div class="campo">
 
-            <label>Profissão:</label>
-            <input type="text" id="profissao" required>
+                    <label>Email:</label>
+                    <input type="email" id="email" required>
 
-            <label>Renda:</label>
-            <input type="number" id="renda" required>
+                </div>
 
-            <button type="submit">Cadastrar</button>
+                <div class="campo">
+
+                    <label>WhatsApp:</label>
+                    <input type="text" id="telefone" required>
+
+                </div>
+
+
+            </div>
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Logradouro:</label>
+                    <input type="text" id="endereco" required>
+
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Número:</label>
+                    <input type="number" id="numero" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Complemento:</label>
+                    <input type="text" id="complemento">
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Bairro:</label>
+                    <input type="text" id="bairro" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Cidade:</label>
+                    <input type="text" id="cidade" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Estado:</label>
+
+                    <select id="estado">
+                        <option value="">Selecione um estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>CEP:</label>
+                    <input type="number" id="cep" required>
+
+                </div>
+
+            </div>
+
+ 
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Profissão:</label>
+                    <input type="text" id="profissao" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Renda:</label>
+                    <input type="number" id="renda" required>
+
+                </div>
+
+            </div>
+
+            <div class="sub">
+
+                <button type="submit">Cadastrar</button>
+
+
+            </div>
+
+
         </form>
 
         <p id="mensagem"></p>
