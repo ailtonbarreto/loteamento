@@ -469,9 +469,6 @@ screen and (orientation: portrait) {
         user-select: none;
     }
 
-    .header_dash_container {
-        padding: 3vw !important;
-    }
 
     .dash_container {
         width: 100%;
@@ -572,8 +569,14 @@ screen and (orientation: portrait) {
     #popup-simulacao {
 
         button {
-            font-size: 4vw !important;
-            padding: 2vw !important;
+            font-size: 4vw;
+            padding: 2vw;
+        }
+
+        select,
+        input {
+            font-size: 4vw;
+            padding: 2vw;
         }
 
     }
