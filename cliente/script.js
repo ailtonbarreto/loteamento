@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const close_popup = document.getElementById('close-cadastro');
     const open_popup = document.getElementById('open_popup');
     const tabelCliente = document.getElementById('tabelaCliente');
-    const popup_sucess = document.getElementById('popup_sucess');
+    const popup_sucess = document.querySelector('.popup_sucess');
     const close_sucess = document.getElementById('close_sucess');
 
     async function carregarClientes() {
@@ -30,12 +30,16 @@ window.addEventListener("DOMContentLoaded", () => {
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
-                <td>${cliente.nome}</td>
-                <td>${cliente.cpf}</td>
-                <td>${cliente.telefone}</td>
-                <td>${cliente.cidade} - ${cliente.uf}</td>
-                <td>${cliente.renda}</td>
-            `;
+                    <td>${cliente.nome}</td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.telefone}</td>
+                    <td>${cliente.cidade} - ${cliente.uf}</td>
+                    <td>${cliente.renda}</td>
+                    <td>
+                        <span class="material-symbols-outlined btn-editar" data-id="${cliente.id_cliente}">edit</span>
+                    </td>
+                `;
+
 
                 tbody.appendChild(tr);
             });
@@ -52,10 +56,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     close_popup.addEventListener('click', () => {
         popup_cad_comprador.style.display = 'none';
+        document.getElementById("formCadastro").reset();
     });
 
     close_sucess.addEventListener('click', () => {
         popup_sucess.style.display = 'none';
+        popup_cad_comprador.style.display = 'none';
     });
 
 
@@ -65,6 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const dados = {
             nome: document.getElementById("nome").value,
             cpf: document.getElementById("cpf").value,
+            sexo : document.getElementById("sexo").value,
             estado_civil: document.getElementById("estado_civil").value,
             email: document.getElementById("email").value,
             telefone: document.getElementById("telefone").value,
@@ -91,7 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (resposta.ok) {
                 popup_sucess.style.display = 'flex';
-                popup_cad_comprador.style.display = 'none';
+                document.getElementById("formCadastro").reset();
                 carregarClientes();
             } else {
                 alert(`Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`);
