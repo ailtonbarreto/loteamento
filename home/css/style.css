@@ -475,7 +475,6 @@ screen and (orientation: portrait) {
         height: 100vh;
         grid-template-columns: 1fr;
         padding: 3vw;
-
     }
 
     .analyse {
@@ -535,7 +534,8 @@ screen and (orientation: portrait) {
     }
 
     #sidebar {
-        width: 100vw;
+        width: 100%;
+        
 
         button {
             font-size: 5vw;
@@ -584,6 +584,5 @@ screen and (orientation: portrait) {
     .card-table {
         display: none;
     }
-
 
 }

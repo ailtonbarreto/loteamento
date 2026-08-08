@@ -27,11 +27,6 @@
     z-index: 100;
     width: 100%;
     box-sizing: border-box;
-
-    h2 {
-        font-size: 1.5vw;
-
-    }
 }
 
 #menu.open {
@@ -47,7 +42,7 @@
 
 .close-menu {
     font-size: 2.4rem;
-    color: #000;
+    color: red;
     cursor: pointer;
     margin-bottom: 1.5rem;
     align-self: flex-end;
@@ -104,10 +99,6 @@ screen and (orientation: portrait) {
 
         padding: 0.5vw 3vw 1vw 1vw;
 
-        h2 {
-            font-size: 4vw;
-
-        }
 
     }
 }

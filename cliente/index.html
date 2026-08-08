@@ -9,122 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="../home/js/menu.js" defer></script>
     <link rel="stylesheet" href="../home/css/menu.css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="cliente.css">
+    <script src="script.js" defer></script>
 </head>
 
-<style>
-    /* ====== RESET ====== */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
-    }
-
-    body {
-        background: #f5f7fa;
-        color: #333;
-    }
-
-    /* ====== CONTAINER PRINCIPAL ====== */
-    .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 20px;
-    }
-
-    /* ====== FORM ====== */
-    #formCadastro {
-        background: #fff;
-        padding: 30px;
-        border-radius: 14px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-
-
-
-    /* ====== GRID DE CAMPOS ====== */
-    .sub {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin-bottom: 25px;
-    }
-
-    /* ====== CAMPOS ====== */
-    .campo label {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 6px;
-        display: block;
-    }
-
-    .campo input,
-    .campo select {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 15px;
-        transition: 0.2s;
-        background: #fafafa;
-    }
-
-    .campo input:focus,
-    .campo select:focus {
-        border-color: #4a90e2;
-        box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
-        outline: none;
-    }
-
-    /* ====== BOTÃO ====== */
-    button[type="submit"] {
-        width: 100%;
-        padding: 14px;
-        background: #4a90e2;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-size: 17px;
-        cursor: pointer;
-        transition: 0.2s;
-        font-weight: 600;
-    }
-
-    button[type="submit"]:hover {
-        background: #357ABD;
-    }
-
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* ====== MENSAGEM ====== */
-    #mensagem {
-        margin-top: 20px;
-        font-size: 16px;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    /* ====== RESPONSIVIDADE ====== */
-    @media (max-width: 768px) {
-        .header_dash_container h2 {
-            font-size: 18px;
-        }
-
-        #formCadastro {
-            padding: 20px;
-        }
-
-        .sub {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
 
 <body>
 
@@ -133,7 +21,7 @@
 
         <span class="material-symbols-outlined" id="menu-toggle">menu</span>
 
-        <h2>Cadastro Comprador</h2>
+        <h3>Cadastro Comprador</h3>
 
     </div>
 
@@ -145,19 +33,18 @@
 
             <img src="../assets/logo.png" class="logo" alt="Logo">
 
-
         </div>
-
 
         <div class="menu-item" onclick="window.location.href='../home/home.html'">
             <span class="material-symbols-outlined">home</span>
             <span class="menu-label">Empreendimento 1</span>
         </div>
 
-        <div class="menu-item active">
+        <div class="menu-item active has-submenu">
             <span class="material-symbols-outlined">person</span>
             <span class="menu-label">Clientes</span>
         </div>
+
 
         <div class="menu-item" onclick="window.location.href='settings.html'">
             <span class="material-symbols-outlined">settings</span>
@@ -171,10 +58,17 @@
 
     </nav>
 
-
-    <div class="container">
+    <div id="popup" style="display: none;">
 
         <form id="formCadastro">
+
+            <div class="header_popup">
+
+                <h3>Cadastro de Comprador</h3>
+
+                <span class="material-symbols-outlined" id="close-cadastro">cancel</span>
+
+            </div>
 
             <div class="sub">
 
@@ -250,7 +144,6 @@
                     <input type="text" id="complemento">
 
                 </div>
-
 
 
             </div>
@@ -345,55 +238,56 @@
 
             </div>
 
+            <p id="mensagem"></p>
+
 
         </form>
 
-        <p id="mensagem"></p>
+
     </div>
 
-    <script>
+    <div class="container">
 
-        document.getElementById("formCadastro").addEventListener("submit", async function (e) {
-            e.preventDefault();
+        <div class="cad">
 
-            const dados = {
-                nome: document.getElementById("nome").value,
-                cpf: document.getElementById("cpf").value,
-                email: document.getElementById("email").value,
-                telefone: document.getElementById("telefone").value,
-                logradouro: document.getElementById("endereco").value,
-                numero: document.getElementById("numero").value,
-                complemento: document.getElementById("complemento").value,
-                bairro: document.getElementById("bairro").value,
-                cidade: document.getElementById("cidade").value,
-                uf: document.getElementById("estado").value,
-                cep: document.getElementById("cep").value,
-                profissao: document.getElementById("profissao").value,
-                renda: document.getElementById("renda").value,
-                id_corretor: 1
-            };
+            <h3>Compradores</h3>
 
-            try {
-                const resposta = await fetch("https://api-lotes.onrender.com/insert_cliente", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(dados)
-                });
+            <span class="material-symbols-outlined" id="open_popup">add</span>
 
-                const resultado = await resposta.json();
+        </div>
 
-                document.getElementById("mensagem").innerText =
-                    resposta.ok
-                        ? "Cliente cadastrado com sucesso!"
-                        : `Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`;
+        <div class="card-table">
 
-            } catch (erro) {
-                document.getElementById("mensagem").innerText = "Erro de conexão com o servidor";
-                console.error(erro);
-            }
-        });
 
-    </script>
+            <table id="tabelaCliente">
+
+                <thead>
+
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Cidade</th>
+                        <th>Renda</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+
+
 </body>
 
 </html>
