@@ -4,6 +4,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const close_popup = document.getElementById('close-cadastro');
     const open_popup = document.getElementById('open_popup');
     const tabelCliente = document.getElementById('tabelaCliente');
+    const popup_sucess = document.getElementById('popup_sucess');
+    const close_sucess = document.getElementById('close_sucess');
 
     async function carregarClientes() {
         const user_tipo = sessionStorage.getItem("usuarioTipo");
@@ -43,24 +45,27 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-    // Abre popup
     open_popup.addEventListener('click', () => {
         popup_cad_comprador.style.display = 'flex';
     });
 
-    // Fecha popup
+
     close_popup.addEventListener('click', () => {
         popup_cad_comprador.style.display = 'none';
     });
 
-    // Cadastro
+    close_sucess.addEventListener('click', () => {
+        popup_sucess.style.display = 'none';
+    });
+
+
     document.getElementById("formCadastro").addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const dados = {
             nome: document.getElementById("nome").value,
             cpf: document.getElementById("cpf").value,
+            estado_civil: document.getElementById("estado_civil").value,
             email: document.getElementById("email").value,
             telefone: document.getElementById("telefone").value,
             logradouro: document.getElementById("endereco").value,
@@ -85,15 +90,15 @@ window.addEventListener("DOMContentLoaded", () => {
             const resultado = await resposta.json();
 
             if (resposta.ok) {
+                popup_sucess.style.display = 'flex';
                 popup_cad_comprador.style.display = 'none';
                 carregarClientes();
             } else {
-                document.getElementById("mensagem").innerText =
-                    `Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`;
+                alert(`Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`);
             }
 
         } catch (erro) {
-            document.getElementById("mensagem").innerText = "Erro de conexão com o servidor";
+            alert('Erro no servidor!');
             console.error(erro);
         }
     });

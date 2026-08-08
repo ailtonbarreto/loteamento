@@ -13,9 +13,18 @@
     <script src="script.js" defer></script>
 </head>
 
-
 <body>
 
+
+    <div id="popup_sucess">
+
+        <h3>Cliente Cadastrado com Sucesso!</h3>
+        
+        <span class="material-symbols-outlined">check</span>
+
+        <button id="close_sucess">Ok</button>
+
+    </div>
 
     <div class="header_dash_container">
 
@@ -89,7 +98,7 @@
                 <div class="campo">
 
                     <label>Estado Civil</label>
-                    <select id="estado_civil">
+                    <select id="estado_civil" required>
                         <option value="">Selecione</option>
                         <option value="solteiro">Solteiro</option>
                         <option value="casado">Casado</option>
