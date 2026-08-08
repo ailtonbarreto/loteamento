@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
 
-    const popup_cad_comprador = document.getElementById('popup');
+    const popup_cad_comprador = document.getElementById('popup_cadastro');
     const close_popup = document.getElementById('close-cadastro');
     const open_popup = document.getElementById('open_popup');
     const tabelCliente = document.getElementById('tabelaCliente');
@@ -37,6 +37,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td>${cliente.renda}</td>
                     <td>
                         <span class="material-symbols-outlined btn-editar" data-id="${cliente.id_cliente}">edit</span>
+                        <span class="material-symbols-outlined btn-delete" data-id="${cliente.id_cliente}">delete</span>
+
                     </td>
                 `;
 

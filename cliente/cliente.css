@@ -56,10 +56,16 @@ body {
     color: orange;
 }
 
+.btn-delete{
+    cursor: pointer;
+    color: red;
+}
+
 /* ------------------------------------------- */
 
-#popup {
+#popup_cadastro {
     position: fixed;
+    display: none;
     top: 0;
     left: 0;
     width: 100vw;
