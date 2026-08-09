@@ -439,6 +439,7 @@ path {
     font-size: 22px;
     cursor: pointer;
     font-weight: bold;
+    color: red;
 }
 
 #popup-box input {
