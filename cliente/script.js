@@ -178,7 +178,6 @@ window.addEventListener("DOMContentLoaded", () => {
             email: document.getElementById("email_edit").value,
             cidade: document.getElementById("cidade_edit").value,
             uf: document.getElementById("estado_edit").value,
-            renda: document.getElementById("renda_edit").value,
             bairro: document.getElementById("bairro_edit").value,
             logradouro: document.getElementById("endereco_edit").value,
             numero: document.getElementById("numero_edit").value,
@@ -186,7 +185,8 @@ window.addEventListener("DOMContentLoaded", () => {
             cep: document.getElementById("cep_edit").value,
             estado_civil: document.getElementById("estado_civil_edit").value,
             sexo: document.getElementById("sexo_edit").value,
-            profissao: document.getElementById("profissao_edit").value
+            profissao: document.getElementById("profissao_edit").value,
+            renda: document.getElementById("renda_edit").value
         };
 
         try {
