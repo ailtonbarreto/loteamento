@@ -97,7 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const option = {
             tooltip: {
-                show: false 
+                show: false
             },
             series: [
                 {
@@ -118,11 +118,15 @@ window.addEventListener("DOMContentLoaded", () => {
                         position: 'inside',
                         formatter: '{b}: {c}'
                     },
+                    color: [
+                        '#29DE05', // Cadastros
+                        '#DEAB05', // Propostas
+                        '#02b1dd'  // Vendas
+                    ],
                     data: [
-                        { value: 80, name: 'Cadastros'},
-                        { value: 55, name: 'Visitas'},
-                        { value: 40, name: 'Propostas'},
-                        { value: 20, name: 'Vendas'}
+                        { value: 80, name: 'Cadastros' },
+                        { value: 40, name: 'Propostas' },
+                        { value: 20, name: 'Vendas' }
                     ]
                 }
             ]
