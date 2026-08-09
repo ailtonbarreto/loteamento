@@ -8,7 +8,6 @@
 body {
     background: #ffffff;
     color: #333;
-    /* height: 100vh; */
 }
 
 .container {
@@ -63,9 +62,8 @@ body {
 
 /* ------------------------------------------- */
 
-#popup_cadastro {
+#popup_cadastro, #popup_edit_cadastro {
     position: fixed;
-    display: none;
     top: 0;
     left: 0;
     width: 100vw;
@@ -92,7 +90,7 @@ body {
     align-items: center;
 }
 
-#close-cadastro {
+#close-cadastro, #close-edit {
     color: red;
     font-size: 2vw;
     cursor: pointer;
@@ -151,7 +149,7 @@ body {
 /* ------------------------------------------ */
 
 
-#formCadastro {
+#formCadastro,#formEditCadastro {
     background: #fff;
     padding: 30px;
     border-radius: 14px;
