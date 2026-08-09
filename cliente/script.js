@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
         popup_alert.style.display = 'none';
         popup_edit_cadastro.style.display = 'none';
         popup_cad_comprador.style.display = 'none';
-        document.getElementById("formCadastro").reset();
+        // document.getElementById("formCadastro").reset();
     });
 
     close_edit_cadastro.addEventListener('click', () => {
@@ -117,6 +117,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 icon_indicator.style.color = "green";
                 popup_alert_title.innerHTML = "Cadastrado com Sucesso!";
                 popup_alert.style.display = 'flex';
+                document.getElementById("formCadastro").reset();
                 carregarClientes();
             } else {
                 icon_indicator.innerHTML = "close";
@@ -210,7 +211,7 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log("Resultado UPDATE:", resultado);
 
             if (resposta.ok) {
-                popup_alert_title.innerHTML = "Cliente atualizado com sucesso!";
+                popup_alert_title.innerHTML = "Cadastrado atualizado com sucesso!";
                 popup_alert.style.display = 'flex';
                 carregarClientes();
             } else {
