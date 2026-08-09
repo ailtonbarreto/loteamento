@@ -10,7 +10,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const tabelCliente = document.getElementById('tabelaCliente');
 
-    const popup_sucess = document.querySelector('.popup_sucess');
+    const popup_alert = document.querySelector('.popup_alert');
+    const popup_alert_title = document.getElementById('popup_title');
+    const icon_indicator = document.getElementById('icon_indicator');
     const close_sucess = document.getElementById('close_sucess');
 
     async function carregarClientes() {
@@ -66,13 +68,15 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     close_sucess.addEventListener('click', () => {
-        popup_sucess.style.display = 'none';
+        popup_alert.style.display = 'none';
+        popup_edit_cadastro.style.display = 'none';
         popup_cad_comprador.style.display = 'none';
+        document.getElementById("formCadastro").reset();
     });
 
     close_edit_cadastro.addEventListener('click', () => {
         popup_edit_cadastro.style.display = 'none';
-        document.getElementById("formEditCadastro").reset();
+        // document.getElementById("formEditCadastro").reset();
     });
 
     // ------------------------------------------------------------------------------------
@@ -109,11 +113,16 @@ window.addEventListener("DOMContentLoaded", () => {
             const resultado = await resposta.json();
 
             if (resposta.ok) {
-                popup_sucess.style.display = 'flex';
-                document.getElementById("formCadastro").reset();
+                icon_indicator.innerHTML = "check";
+                icon_indicator.style.color = "green";
+                popup_alert_title.innerHTML = "Cadastrado com Sucesso!";
+                popup_alert.style.display = 'flex';
                 carregarClientes();
             } else {
-                alert(`Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`);
+                icon_indicator.innerHTML = "close";
+                icon_indicator.style.color = "red";
+                popup_alert_title.innerHTML = `Erro ao cadastrar: ${resultado.detalhe || resultado.erro}`;
+                popup_alert.style.display = 'flex';
             }
 
         } catch (erro) {
@@ -160,6 +169,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             document.getElementById("formEditCadastro").dataset.id = id;
 
+
             popup_edit_cadastro.style.display = "flex";
         }
     });
@@ -200,8 +210,8 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log("Resultado UPDATE:", resultado);
 
             if (resposta.ok) {
-                alert("Cliente atualizado com sucesso!");
-                popup_edit_cadastro.style.display = "none";
+                popup_alert_title.innerHTML = "Cliente atualizado com sucesso!";
+                popup_alert.style.display = 'flex';
                 carregarClientes();
             } else {
                 alert("Erro ao atualizar: " + (resultado.erro || resultado.detalhe));
