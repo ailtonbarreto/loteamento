@@ -78,14 +78,21 @@ document.getElementById("select-clientes").addEventListener("change", function (
 
 });
 
+function formatarMoeda(valor) {
+    if (!valor) return "R$ 0,00";
+
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(Number(valor));
+}
+
 
 function formatarRealLive(input) {
     let valor = input.value;
 
-    // Posição atual do cursor
     let posicao = input.selectionStart;
 
-    // Remove tudo que não é número
     let somenteNumeros = valor.replace(/\D/g, "");
 
     // Se estiver vazio, não formata
@@ -97,21 +104,16 @@ function formatarRealLive(input) {
     // Converte para centavos
     let numero = (Number(somenteNumeros) / 100).toFixed(2);
 
-    // Formata
     let formatado = numero
         .replace(".", ",")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-    // Adiciona R$
     formatado = "R$ " + formatado;
 
-    // Calcula diferença de tamanho
     let diferenca = formatado.length - valor.length;
 
-    // Atualiza o valor no input
     input.value = formatado;
 
-    // Reposiciona o cursor corretamente
     input.setSelectionRange(posicao + diferenca, posicao + diferenca);
 }
 
@@ -217,7 +219,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `${cliente.nome.toUpperCase()}, brasileiro, ESTADO CIVIL, ${cliente.profissao}, portador do CPF: ${cliente.cpf}, residente e ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
+                    text: `${cliente.nome.toUpperCase()}, brasileiro, ${cliente.estado_civil}, ${cliente.profissao}, portador do CPF: ${cliente.cpf}, residente a ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
                     font: "Times New Roman",
                     size: 24
                 })
@@ -268,7 +270,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: "DESCRIÇÃO TERRENO ,  LOCALIZADO NO ENDEREÇO TAL, METRAGEM..",
+                    text: "DESCRIÇÃO TERRENO, LOCALIZAÇÃO, METRAGEM...",
                     font: "Times New Roman",
                     size: 24
                 })
@@ -302,7 +304,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `CLÁUSULA SEGUNDA – Fica ajustado o preço líquido e certo de ${lote.valor} a serem pagos pelo COMPRADOR para aquisição do objeto do presente instrumento, sendo o valor de ${entrada} de entrada a ser pago no ato da assinatura com o banco, e o valor residual de ${saldoFinanciado}, será obtido através de financiamento bancário a ser feito pelo comprador.`,
+                    text: `CLÁUSULA SEGUNDA – Fica ajustado o preço líquido e certo de ${formatarMoeda(lote.valor)} a serem pagos pelo COMPRADOR para aquisição do objeto do presente instrumento, sendo o valor de ${formatarMoeda(entrada)} de entrada a ser pago no ato da assinatura com o banco, e o valor residual de ${formatarMoeda(saldoFinanciado)}, será obtido através de financiamento bancário a ser feito pelo comprador.`,
                     font: "Times New Roman",
                     size: 24
                 }),
@@ -455,7 +457,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: "CLÁUSULA SEXTA – A comissão de corretagem a ser paga pelo COMPRADOR será de VALOR COMISSÃO (VALOR COMISSÃO POR EXTENSO) no ato da compra, a serem depositados como pagamento de comissão do negócio na conta:",
+                    text: "CLÁUSULA SEXTA – A comissão de corretagem a ser paga pelo COMPRADOR será de VALOR COMISSÃO no ato da compra, a serem depositados como pagamento de comissão do negócio na conta:",
                     font: "Times New Roman",
                     size: 24
                 })
@@ -516,6 +518,8 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
 
         // LINHA EM BRANCO
         new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+        new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+
 
         // DA RESPONSABILIDADE DAS PARTES
         new Paragraph({
