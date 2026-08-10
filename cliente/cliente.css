@@ -56,19 +56,20 @@ body {
     display: none;
 }
 
-.btn-editar{
+.btn-editar {
     cursor: pointer;
     color: orange;
 }
 
-.btn-delete{
+.btn-delete {
     cursor: pointer;
     color: red;
 }
 
 /* ------------------------------------------- */
 
-#popup_cadastro, #popup_edit_cadastro {
+#popup_cadastro,
+#popup_edit_cadastro {
     position: fixed;
     top: 0;
     left: 0;
@@ -80,7 +81,7 @@ body {
     z-index: 999;
 }
 
-#popup_title{
+#popup_title {
     text-align: center;
 }
 
@@ -89,6 +90,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 3vw;
+    align-items: center;
 }
 
 .cad {
@@ -100,7 +102,8 @@ body {
     align-items: center;
 }
 
-#close-cadastro, #close-edit {
+#close-cadastro,
+#close-edit {
     color: red;
     font-size: 2vw;
     cursor: pointer;
@@ -114,7 +117,7 @@ body {
 
 /* ------------------------------------------ */
 
-.popup_alert{
+.popup_alert {
     position: fixed;
     background: rgba(0, 0, 0, 0.45);
     top: 0;
@@ -159,7 +162,8 @@ body {
 /* ------------------------------------------ */
 
 
-#formCadastro,#formEditCadastro {
+#formCadastro,
+#formEditCadastro {
     background: #fff;
     padding: 30px;
     border-radius: 14px;
@@ -227,15 +231,18 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media (max-width: 768px) {
 
-
     .header_dash_container h2 {
         font-size: 18px;
     }
 
+    .hide_mobile{
+        display: none;
+    }
+
     #formCadastro {
         border-radius: 0;
-        margin-top: 45vh;
         width: 100vw;
+        height: 100vh;
         padding: 20px;
         overflow-y: scroll;
 
@@ -243,6 +250,11 @@ input[type=number]::-webkit-outer-spin-button {
 
     .sub {
         grid-template-columns: 1fr;
+    }
+
+    #close-cadastro,
+    #close-edit {
+        font-size: 6vw;
     }
 
     #open_popup {

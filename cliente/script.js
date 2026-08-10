@@ -65,10 +65,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 tr.innerHTML = `
                     <td>${cliente.nome}</td>
-                    <td>${cliente.cpf}</td>
-                    <td>${cliente.telefone}</td>
-                    <td>${cliente.cidade} - ${cliente.uf}</td>
-                    <td>${formatarMoeda(cliente.renda)}</td>
+                    <td class="hide_mobile">${cliente.cpf}</td>
+                    <td class="hide_mobile">${cliente.telefone}</td>
+                    <td class="hide_mobile">${cliente.cidade} - ${cliente.uf}</td>
+                    <td class="hide_mobile">${formatarMoeda(cliente.renda)}</td>
 
                     <td>
                         <span class="material-symbols-outlined btn-editar" data-id="${cliente.id_cliente}">edit</span>
