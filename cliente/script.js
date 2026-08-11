@@ -1,5 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    const spinner = document.getElementById('spinner');
+
     const popupCadastro = document.getElementById('popup_cadastro');
     const popupEdit = document.getElementById('popup_edit_cadastro');
     const popupAlert = document.querySelector('.popup_alert');
@@ -52,15 +54,19 @@ window.addEventListener("DOMContentLoaded", () => {
         const tipo = sessionStorage.getItem("usuarioTipo");
         const id = sessionStorage.getItem("usuarioId");
 
+        spinner.style.display = 'flex';
+
         try {
             const resposta = await fetch(`https://api-lotes.onrender.com/cliente?tipo=${tipo}&id=${id}`);
             const dados = await resposta.json();
 
             tabelaCliente.innerHTML = "";
 
+
             if (!Array.isArray(dados.data)) return;
 
             dados.data.forEach(cliente => {
+                spinner.style.display = 'none';
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
@@ -108,6 +114,8 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("formCadastro").addEventListener("submit", async function (e) {
         e.preventDefault();
 
+        spinner.style.display = 'flex';
+
         const dados = {
             nome: nome.value,
             cpf: cpf.value,
@@ -137,10 +145,14 @@ window.addEventListener("DOMContentLoaded", () => {
             const resultado = await resposta.json();
 
             if (resposta.ok) {
+                spinner.style.display = 'none';
                 showAlert("check", "green", "Cadastrado com Sucesso!");
                 resetForm("formCadastro");
+                hidePopup(popupCadastro);
                 carregarClientes();
+
             } else {
+                spinner.style.display = 'none';
                 showAlert("close", "red", resultado.detalhe || resultado.erro);
             }
 
@@ -155,6 +167,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("btn-editar")) return;
+
+        spinner.style.display = 'flex';
 
         const id = e.target.dataset.id;
 
@@ -183,6 +197,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("formEditCadastro").dataset.id = id;
 
+        spinner.style.display = 'none';
+
         showPopup(popupEdit);
     });
 
@@ -191,6 +207,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("formEditCadastro").addEventListener("submit", async function (e) {
         e.preventDefault();
+
+        spinner.style.display = 'flex';
 
         const id = this.dataset.id;
 
@@ -222,6 +240,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const resultado = await resposta.json();
 
             if (resposta.ok) {
+                hidePopup(popupEdit);
                 showAlert("check", "green", "Cadastro atualizado com sucesso!");
                 carregarClientes();
             } else {
@@ -237,21 +256,38 @@ window.addEventListener("DOMContentLoaded", () => {
     // -------------------------------------------------------------
     // DELETAR CLIENTE
 
-    document.addEventListener("click", async (e) => {
+    const popupConfirm = document.querySelector(".popup_confirm_delete");
+    const btnConfirmDelete = document.getElementById("confirm_delete");
+    const btnCancelDelete = document.getElementById("cancel_delete_confirm");
+
+    let idParaDeletar = null;
+
+    document.addEventListener("click", (e) => {
         if (!e.target.classList.contains("btn-delete")) return;
 
-        const id = e.target.dataset.id;
+        idParaDeletar = e.target.dataset.id;
 
-        if (!confirm("Deseja realmente excluir este cliente?")) return;
+        popupConfirm.style.display = "flex";
+    });
+
+    btnCancelDelete.addEventListener("click", () => {
+        popupConfirm.style.display = "none";
+        idParaDeletar = null;
+    });
+
+    btnConfirmDelete.addEventListener("click", async () => {
+
+        spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/delete_cliente/${id}`, {
+            const resposta = await fetch(`https://api-lotes.onrender.com/delete_cliente/${idParaDeletar}`, {
                 method: "DELETE"
             });
 
             const resultado = await resposta.json();
 
             if (resposta.ok) {
+                spinner.style.display = 'none';
                 showAlert("check", "green", "Cliente deletado com sucesso!");
                 carregarClientes();
             } else {
@@ -262,7 +298,11 @@ window.addEventListener("DOMContentLoaded", () => {
             console.error("Erro ao deletar cliente:", erro);
             alert("Erro no servidor ao deletar!");
         }
+
+        popupConfirm.style.display = "none";
+        idParaDeletar = null;
     });
+
 
     // -------------------------------------------------------------
     carregarClientes();

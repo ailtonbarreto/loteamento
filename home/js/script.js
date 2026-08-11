@@ -515,6 +515,7 @@ function iniciarSistema() {
     }
 
     function atualizarDashboard() {
+        
         const total = contarLotes();
         const { disponiveis, reservados, vendidos, bloqueados } = contarStatus();
 

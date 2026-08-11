@@ -10,6 +10,46 @@ body {
     color: #333;
 }
 
+button{
+    cursor: pointer;
+}
+
+/* ---------------------------------------------------------- */
+/* SPINNER */
+
+#spinner {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #02010160;
+    z-index: 3000;
+}
+
+#loading {
+    height: 60px;
+    width: 60px;
+    border: 8px solid #ffffff;
+    border-top: 8px solid #0239A3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------------------------------------------------------- */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -69,7 +109,8 @@ body {
 /* ------------------------------------------- */
 
 #popup_cadastro,
-#popup_edit_cadastro {
+#popup_edit_cadastro,
+.popup_confirm_delete {
     position: fixed;
     top: 0;
     left: 0;
@@ -127,6 +168,47 @@ body {
     z-index: 1000;
 }
 
+#popup_confirm_delete {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 30vh;
+    width: 25vw;
+    background-color: #fff;
+    padding: 3vw 0;
+    text-align: center;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0.2rem 0.2rem 1rem #363949;
+
+    .btns_delete {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 70%;
+    }
+
+    button{
+        border: none;
+        width: 40%;
+        padding: 0.3vw;
+        border-radius: 0.5vw;
+        color: #fff;
+    }
+
+    #cancel_delete_confirm{
+        background-color: #e9d204;
+    }
+
+    #confirm_delete{
+        background-color: red;
+    }
+}
+
 #popup_alert {
     position: fixed;
     display: flex;
@@ -155,7 +237,6 @@ body {
         color: #fff;
         border: none;
         border-radius: 0.5vw;
-        cursor: pointer;
     }
 }
 
@@ -212,7 +293,6 @@ button[type="submit"] {
     border: none;
     border-radius: 8px;
     font-size: 17px;
-    cursor: pointer;
     transition: 0.2s;
     font-weight: 600;
 }
@@ -235,7 +315,16 @@ input[type=number]::-webkit-outer-spin-button {
         font-size: 18px;
     }
 
-    .hide_mobile{
+    .header_popup {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        padding-top: 3vw;  
+        margin-bottom: 6vw;
+        background-color: #fff;;
+    }
+
+    .hide_mobile {
         display: none;
     }
 
@@ -243,7 +332,7 @@ input[type=number]::-webkit-outer-spin-button {
         border-radius: 0;
         width: 100vw;
         height: 100vh;
-        padding: 20px;
+        padding: 0 20px;
         overflow-y: scroll;
 
     }
