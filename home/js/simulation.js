@@ -16,7 +16,6 @@
         const parcelas = Number(document.getElementById("parcelas").value);
         const tipo = document.getElementById("tipo_financiamento").value;
 
-        // const entrada = Number(document.getElementById("valor_entrada").value) || 0;
 
         const entrada = Number(
             document.getElementById("valor_entrada").value

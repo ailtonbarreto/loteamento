@@ -63,7 +63,7 @@ button {
 
 /* ------------------------------------------- */
 
-#popup_cadastro{
+#popup_cadastro {
     position: fixed;
     top: 0;
     left: 0;
@@ -96,7 +96,7 @@ button {
     align-items: center;
 }
 
-#close-cadastro{
+#close-cadastro {
     color: red;
     font-size: 2vw;
     cursor: pointer;
@@ -155,7 +155,7 @@ button {
 /* ------------------------------------------ */
 
 
-#formCadastro{
+#formCadastro {
     background: #fff;
     padding: 30px;
     border-radius: 14px;
@@ -218,6 +218,34 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+#sucess_img {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    z-index: 1000;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+
+        h1{
+            display: none;
+            margin-top: 3vw;
+            color: #039edb;
+            text-align: center;
+        }
+
+        img{
+            width: 30vw;
+        }
+    }
+
+}
+
 /* --------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -239,13 +267,19 @@ input[type=number]::-webkit-outer-spin-button {
         display: none;
     }
 
-    #formCadastro{
+    #formCadastro {
         border-radius: 0;
         width: 100vw;
         height: 100vh;
         padding: 0 20px;
         overflow-y: scroll;
 
+    }
+
+    #sucess_img{
+        img{
+            width: 100vw !important;
+        }
     }
 
     #popup_alert {

@@ -5,6 +5,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const popupCadastro = document.getElementById('popup_cadastro');
     const popupAlert = document.querySelector('.popup_alert');
 
+    const sucess_img = document.getElementById('sucess_img');
+
     const closePopup = document.getElementById('close-cadastro');
 
     const closeAlert = document.getElementById('close_sucess');
@@ -89,8 +91,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (resposta.ok) {
                 spinner.style.display = 'none';
-                showAlert("check", "#04f755", "Cadastrado com Sucesso!");
-                resetForm("formCadastro");
+                sucess_img.style.display = 'flex';
+                popupCadastro.style.display = 'none';
 
             } else {
                 spinner.style.display = 'none';

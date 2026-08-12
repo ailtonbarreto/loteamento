@@ -35,7 +35,7 @@
 
 #menu-toggle {
     font-size: 1.9rem;
-    color: #000;
+    color: #0239A3;
     cursor: pointer;
     align-self: flex-start;
 }
@@ -53,14 +53,14 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #000;
+    color: #0239A3;
     cursor: pointer;
     padding: 0.9rem;
     font-size: 1.25rem;
 }
 
 .active {
-    background-color: #0c1114;
+    background-color: #0239A3;
     color: #fff;
 }
 

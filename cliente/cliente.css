@@ -15,6 +15,10 @@ button {
     cursor: pointer;
 }
 
+h3{
+    color: #0239A3;
+}
+
 /* ---------------------------------------------------------- */
 /* SPINNER */
 
@@ -81,6 +85,7 @@ button {
     padding: 0 0.5rem;
     height: 80vh;
     overflow: scroll;
+    color: #0239A3;
 }
 
 #tabelaCliente thead th {

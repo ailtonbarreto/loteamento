@@ -1,7 +1,7 @@
 :root {
     --color-text: #000000;
     --color-shadow: #363949;
-    --color-background: #fdfdfd;
+    --color-background: #fff;
     --card-border-radius: 1rem;
     --card-padding: 1.1rem 1rem;
     --box-shadow: 0.2rem 0.2rem 1rem #363949;
@@ -30,6 +30,14 @@ body {
 
 }
 
+.header_dash_container {
+
+    h3 {
+        color: #0239A3;
+    }
+
+}
+
 /* ---------------------------------------------------------- */
 /* SPINNER */
 
@@ -48,7 +56,7 @@ body {
     height: 60px;
     width: 60px;
     border: 8px solid #ffffff;
-    border-top: 8px solid #111827;
+    border-top: 8px solid #0239A3;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -69,8 +77,6 @@ body {
     gap: 1.6rem;
     grid-template-columns: auto;
 }
-
-
 
 .analyse {
     display: grid;
@@ -134,12 +140,11 @@ body {
 
 .chart_card {
     background-color: #fff;
-    color: var(--color-text);
     backdrop-filter: blur(10px);
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
     padding: 0.5vw;
-
+    color: #0239A3;
 }
 
 #bar_chart,
@@ -196,6 +201,7 @@ body {
     z-index: 10;
     padding: 8px;
     text-align: center;
+    color: #0239A3;
 
 }
 
@@ -536,7 +542,7 @@ screen and (orientation: portrait) {
 
     #sidebar {
         width: 100%;
-        
+
 
         button {
             font-size: 5vw;
