@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
+    <title>Cadastro de Cliente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="cliente.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div id="spinner">
+
+        <div id="loading"></div>
+
+    </div>
+
+    <div class="popup_alert">
+
+        <div id="popup_alert">
+
+            <h3 id="popup_title">Cliente Cadastrado com Sucesso!</h3>
+
+            <span class="material-symbols-outlined" id="icon_indicator">check</span>
+
+            <button id="close_sucess">Ok</button>
+
+        </div>
+
+    </div>
+
+
+    <div id="popup_cadastro" style="display: flex;">
+
+        <form id="formCadastro">
+
+            <div class="header_popup">
+
+                <h3>Cadastro de Comprador</h3>
+
+            </div>
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Nome Completo:</label>
+                    <input type="text" id="nome" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>CPF:</label>
+                    <input type="number" id="cpf" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Sexo</label>
+                    <select id="sexo" required>
+
+                        <option value="">Selecione</option>
+                        <option value="m">Masculino</option>
+                        <option value="f">Feminino</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Estado Civil</label>
+                    <select id="estado_civil" required>
+                        <option value="">Selecione</option>
+                        <option value="solteiro">Solteiro</option>
+                        <option value="casado">Casado</option>
+                        <option value="divorciado">Divorciado</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Email:</label>
+                    <input type="email" id="email" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>WhatsApp:</label>
+                    <input type="text" id="telefone" required>
+
+                </div>
+
+
+            </div>
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Logradouro:</label>
+                    <input type="text" id="endereco" required>
+
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Número:</label>
+                    <input type="number" id="numero">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Complemento:</label>
+                    <input type="text" id="complemento">
+
+                </div>
+
+
+            </div>
+
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Bairro:</label>
+                    <input type="text" id="bairro" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Cidade:</label>
+                    <input type="text" id="cidade" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Estado:</label>
+
+                    <select id="estado">
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+
+
+                </div>
+
+                <div class="campo">
+
+                    <label>CEP:</label>
+                    <input type="number" id="cep" required>
+
+                </div>
+
+            </div>
+
+
+            <div class="sub">
+
+                <div class="campo">
+
+                    <label>Profissão:</label>
+                    <input type="text" id="profissao" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Renda:</label>
+                    <input type="number" id="renda" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Corretor:</label>
+                    <select id="id_corretor" required>
+                        <option value="">Selecione</option>
+                        <option value="1">Corretor 1</option>
+                        <option value="2">Corretor 2</option>
+                        <option value="3">Corretor 3</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="sub">
+
+                <button type="submit">Cadastrar</button>
+
+
+            </div>
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+</html>

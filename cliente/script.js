@@ -16,6 +16,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const tabelaCliente = document.querySelector("#tabelaCliente tbody");
 
+    const searchInput = document.getElementById("search_name");
+
     // -------------------------------------------------------------
     // FUNCOES AUXILIARES
 
@@ -65,8 +67,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (!Array.isArray(dados.data)) return;
 
+            dados.data.sort((a, b) => a.nome.localeCompare(b.nome));
+
             dados.data.forEach(cliente => {
-                
+
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
@@ -90,6 +94,24 @@ window.addEventListener("DOMContentLoaded", () => {
             console.error("Erro ao carregar clientes:", erro);
         }
     }
+
+    // -------------------------------------------------------------
+    // FILTRAR TABELA PELO SEARCH
+
+    searchInput.addEventListener("keyup", () => {
+        const filtro = searchInput.value.toLowerCase();
+        const linhas = tabelaCliente.querySelectorAll("tr");
+
+        linhas.forEach(linha => {
+            const nome = linha.querySelector("td").innerText.toLowerCase();
+
+            if (nome.includes(filtro)) {
+                linha.style.display = "";
+            } else {
+                linha.style.display = "none";
+            }
+        });
+    });
 
     // -------------------------------------------------------------
     // ABRIR / FECHAR POPUPS
@@ -118,7 +140,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         spinner.style.display = 'flex';
 
-        
+
 
         const dados = {
             nome: nome.value,
@@ -150,11 +172,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (resposta.ok) {
                 spinner.style.display = 'none';
-                showAlert("check", "green", "Cadastrado com Sucesso!");
+                showAlert("check", "#04f755", "Cadastrado com Sucesso!");
                 resetForm("formCadastro");
                 hidePopup(popupCadastro);
 
             } else {
+                spinner.style.display = 'none';
                 showAlert("close", "red", resultado.detalhe || resultado.erro);
             }
 
@@ -212,7 +235,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         spinner.style.display = 'flex';
 
-        
+
 
         const id = this.dataset.id;
 
@@ -246,9 +269,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (resposta.ok) {
                 hidePopup(popupEdit);
-                showAlert("check", "green", "Cadastro atualizado com sucesso!");
+                showAlert("check", "#04f755", "Cadastro atualizado com sucesso!");
                 spinner.style.display = 'none';
             } else {
+                spinner.style.display = 'none';
                 showAlert("close", "red", resultado.erro || resultado.detalhe);
             }
 
@@ -282,6 +306,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     btnConfirmDelete.addEventListener("click", async () => {
 
+        spinner.style.display = "flex";
+
+
         try {
             const resposta = await fetch(`https://api-lotes.onrender.com/delete_cliente/${idParaDeletar}`, {
                 method: "DELETE"
@@ -290,9 +317,10 @@ window.addEventListener("DOMContentLoaded", () => {
             const resultado = await resposta.json();
 
             if (resposta.ok) {
-                showAlert("check", "green", "Cliente deletado com sucesso!");
-                carregarClientes();
+                spinner.style.display = "none";
+                showAlert("check", "#04f755", "Cliente deletado com sucesso!");
             } else {
+                spinner.style.display = "none";
                 showAlert("close", "red", resultado.erro || resultado.detalhe);
             }
 
