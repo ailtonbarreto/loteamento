@@ -124,6 +124,14 @@ inputEntrada.addEventListener("input", () => {
     formatarRealLive(inputEntrada);
 });
 
+const date = new Date().toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+});
+
+const cidadeData = `Franca, ${date}`;
+
 
 // ----------------------------------------------------------
 // Gerar contrato
@@ -219,7 +227,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `${cliente.nome.toUpperCase()}, brasileiro, ${cliente.estado_civil}, ${cliente.profissao}, portador do CPF: ${cliente.cpf}, residente a ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
+                    text: `${cliente.nome.toUpperCase()}, BRASILEIRO, ${cliente.estado_civil.toUpperCase()}, ${cliente.profissao.toUpperCase()}, portador do CPF: ${cliente.cpf}, residente a ${cliente.logradouro}, ${cliente.numero}, ${cliente.bairro}, ${cliente.cidade}/${cliente.uf}, neste ato denominado de “COMPROMISSÁRIO COMPRADOR” ou, simplesmente, "COMPRADOR", têm entre si justo e firmado o que a seguir avençam e põe em termo.`,
                     font: "Times New Roman",
                     size: 24
                 })
@@ -479,7 +487,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
                 })
             ]
         }),
-        // new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+
         new Paragraph({
             alignment: AlignmentType.LEFT,
             indent: { firstLine: 720 },
@@ -491,7 +499,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
                 })
             ]
         }),
-        // new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+
         new Paragraph({
             alignment: AlignmentType.LEFT,
             indent: { firstLine: 720 },
@@ -607,12 +615,13 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             alignment: AlignmentType.LEFT,
             children: [
                 new TextRun({
-                    text: "CIDADE, DATA.",
+                    text: cidadeData,
                     font: "Times New Roman",
                     size: 24
                 })
             ]
         }),
+
 
         // LINHA EM BRANCO
         new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
