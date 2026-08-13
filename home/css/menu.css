@@ -41,7 +41,7 @@
 }
 
 .close-menu {
-    font-size: 2.4rem;
+    font-size: 2.4rem !important;
     color: red;
     cursor: pointer;
     margin-bottom: 1.5rem;
