@@ -413,10 +413,11 @@ path {
 
     select {
         font-size: 1vw;
-        background-color: #b0b0b1;
-        color: var(--color-background);
+        background-color: #e7fbfd;
+        color: #0239A3;
         border-radius: 0.5vw;
         padding: 0.5vw;
+
     }
 
     button {
@@ -424,8 +425,14 @@ path {
     }
 }
 
+
+select::-webkit-scrollbar {
+    display: none;
+}
+
 .popup-box {
     background: #fff;
+    top: -10vh;
     width: 400px;
     padding: 20px;
     border-radius: 12px;
@@ -436,24 +443,20 @@ path {
     gap: 15px;
 }
 
+#busca-clientes {
+    background-color: #e7fbfd;
+    font-size: 1.5rem;
+}
 
 #popup-close,
 #popup-simulacao-close {
     position: absolute;
     right: 15px;
     top: 10px;
-    font-size: 22px;
+    font-size: 2rem;
     cursor: pointer;
     font-weight: bold;
     color: red;
-}
-
-#popup-box input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
 }
 
 button {

@@ -32,9 +32,8 @@ async function carregarClientes() {
     const corretor_id = JSON.parse(sessionStorage.getItem("usuarioId"));
     const user_tipo = JSON.parse(sessionStorage.getItem("usuarioTipo"));
 
-    select.innerHTML = `
-        <option value="">Selecione um cliente</option>
-    `;
+    select.innerHTML = "";
+
 
     try {
 
@@ -131,6 +130,25 @@ const date = new Date().toLocaleDateString("pt-BR", {
 });
 
 const cidadeData = `Franca, ${date}`;
+
+const inputBusca = document.getElementById("busca-clientes");
+const selectClientes = document.getElementById("select-clientes");
+
+inputBusca.addEventListener("input", function () {
+    const termo = this.value.toLowerCase();
+
+    for (let option of selectClientes.options) {
+        const texto = option.textContent.toLowerCase();
+
+        // Não esconder o "Selecione um cliente"
+        if (option.value === "") {
+            option.style.display = "none";
+            continue;
+        }
+
+        option.style.display = texto.includes(termo) ? "" : "none";
+    }
+});
 
 
 // ----------------------------------------------------------
