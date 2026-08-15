@@ -12,7 +12,14 @@
 
         if (!valorLote) return;
 
-        const taxa = Number(document.getElementById("taxa_juros").value);
+        const taxaTexto = document.getElementById("taxa_juros").value;
+
+        const taxaNumero = Number(
+            taxaTexto.replace("%", "").replace(",", ".").trim()
+        );
+
+        const taxa = taxaNumero / 100;
+
         const parcelas = Number(document.getElementById("parcelas").value);
         const tipo = document.getElementById("tipo_financiamento").value;
 
@@ -110,6 +117,23 @@
 
     });
 
+    // -----------------------------------------------
+
+    const valorObserver = new MutationObserver(() => {
+        descobrirValorLote();
+    });
+
+    valorObserver.observe(
+        document.getElementById("sb-valor"),
+        {
+            childList: true,
+            characterData: true,
+            subtree: true
+        }
+    );
+
+    // -----------------------------------------------
+
     window.addEventListener("DOMContentLoaded", () => {
 
         iniciarEventos();
@@ -126,6 +150,22 @@
 
 
 })();
+
+// -----------------------------------------------
+
+function formatarPercentual(campo) {
+    let valor = campo.value.replace("%", "").replace(",", ".").trim();
+
+    if (valor === "") return;
+
+    valor = Number(valor);
+
+    campo.value = valor.toLocaleString("pt-BR", {
+        minimumFractionDigits: 1
+    }) + "%";
+}
+
+// -----------------------------------------------
 
 function gerarPropostaDOCX({
     nomeComprador,
@@ -257,7 +297,6 @@ document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
 
     const cliente = JSON.parse(option.dataset.cliente);
 
-    // const entrada = Number(document.getElementById("valor_entrada").value || 0);
     const entrada = Number(
         document.getElementById("valor_entrada").value
             .replace("R$", "")
@@ -266,7 +305,14 @@ document.getElementById("btn-gerar-simulacao").addEventListener("click", () => {
             .trim()
     );
 
-    const taxa = Number(document.getElementById("taxa_juros").value);
+    // -------------------------------------------------------
+    const taxaTexto = document.getElementById("taxa_juros").value;
+
+    const taxaNumero = Number(taxaTexto.replace("%", "").replace(",", ".").trim());
+
+    const taxa = taxaNumero / 100;
+
+    // ---------------------------------------------------
     const parcelas = Number(document.getElementById("parcelas").value);
     const tipo = document.getElementById("tipo_financiamento").value;
 

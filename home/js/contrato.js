@@ -195,7 +195,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
 
     const paragrafos = [
 
-        // TÍTULO
+        // TITULO
         new Paragraph({
             alignment: AlignmentType.CENTER,
             spacing: { after: 500 },
@@ -330,7 +330,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: `CLÁUSULA SEGUNDA – Fica ajustado o preço líquido e certo de ${formatarMoeda(lote.valor)} a serem pagos pelo COMPRADOR para aquisição do objeto do presente instrumento, sendo o valor de ${formatarMoeda(entrada)} de entrada a ser pago no ato da assinatura com o banco, e o valor residual de ${formatarMoeda(saldoFinanciado)}, será obtido através de financiamento bancário a ser feito pelo comprador.`,
+                    text: `CLÁUSULA SEGUNDA – Fica ajustado o preço líquido e certo de ${formatarMoeda(lote.valor)} a serem pagos pelo COMPRADOR para aquisição do objeto do presente instrumento, sendo o valor de ${formatarMoeda(entrada)} de entrada a ser pago no ato da assinatura com o banco, e o valor residual de ${formatarMoeda(saldoFinanciado)} será obtido através de financiamento bancário a ser feito pelo comprador.`,
                     font: "Times New Roman",
                     size: 24
                 }),
