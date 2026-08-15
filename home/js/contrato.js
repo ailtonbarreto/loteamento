@@ -31,11 +31,14 @@ async function carregarClientes() {
     const select = document.getElementById("select-clientes");
     const corretor_id = JSON.parse(sessionStorage.getItem("usuarioId"));
     const user_tipo = JSON.parse(sessionStorage.getItem("usuarioTipo"));
+    const spinner = document.getElementById('spinner');
 
     select.innerHTML = "";
 
 
     try {
+
+        spinner.style.display = 'flex';
 
         const url = `https://api-lotes.onrender.com/cliente?tipo=${user_tipo}&id=${corretor_id}`;
 
@@ -50,6 +53,8 @@ async function carregarClientes() {
             option.dataset.cliente = JSON.stringify(cliente);
 
             select.appendChild(option);
+
+            spinner.style.display = 'none';
         });
 
     } catch (erro) {

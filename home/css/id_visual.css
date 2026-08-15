@@ -5,7 +5,9 @@
     --color-disponivel: #29DE05;
     --color-reservado: #DEAB05;
     --color-bloqueado: #de0505;
+    --color-vendido: #02b1dd;
+    --bg-select: #e7fbfd;
     --card-border-radius: 1rem;
     --card-padding: 1.1rem 1rem;
-    --box-shadow: 0.2rem 0.2rem 1rem #363949;
+    --box-shadow: 0.2rem 0.2rem 1rem var(--color-shadow);
 }

@@ -95,7 +95,7 @@ body {
 }
 
 .analyse div:nth-of-type(4) {
-    background-color: #02b1dd;
+    background-color: var(--color-vendido);
 }
 
 .analyse div:nth-of-type(5) {
@@ -162,8 +162,6 @@ body {
     }
 }
 
-
-
 /* ---------------------------------------------------------------------- */
 
 .card-table {
@@ -207,7 +205,7 @@ body {
 }
 
 .status-vendido {
-    color: #02b1dd;
+    color: var(--color-vendido);
 }
 
 .status-reservado {
@@ -301,7 +299,7 @@ path {
 
     select,
     input {
-        background-color: #e7fbfd;
+        background-color: var(--bg-select);
         padding: 0.3vw;
         color: #171111;
         border-radius: 0.3vw;
@@ -309,7 +307,7 @@ path {
     }
 
     button {
-        background-color: var(--color-reservado);
+        background-color: var(--color-text);
         color: #fff;
         padding: 0.4vw;
         border-radius: 0.5vw;
@@ -358,7 +356,7 @@ path {
 
 #gerar-reserva,
 #btn-gerar-simulacao {
-    background-color: var(--color-reservado);
+    background-color: var(--color-reservado) !important;
     box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
 }
 
@@ -404,11 +402,11 @@ path {
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
+    z-index: 2000;
 
     select {
         font-size: 1vw;
-        background-color: #e7fbfd;
+        background-color: var(--bg-select);
         color: var(--color-text);
         border-radius: 0.5vw;
         padding: 0.5vw;
@@ -423,7 +421,6 @@ select::-webkit-scrollbar {
 
 .popup-box {
     background: var(--color-background);
-    top: -10vh;
     width: 400px;
     padding: 20px;
     border-radius: 12px;
@@ -434,9 +431,10 @@ select::-webkit-scrollbar {
     gap: 15px;
 }
 
-#busca-clientes {
-    background-color: #e7fbfd;
+#busca-clientes, #busca-clientes-simular {
+    background-color: var(--bg-select);
     font-size: 1.5rem;
+    padding: 0.3vw;
 }
 
 #popup-close,
@@ -579,6 +577,10 @@ screen and (orientation: portrait) {
             padding: 2vw;
         }
 
+    }
+
+    .popup-box{
+        width: 90vw;
     }
 
     .card-table {

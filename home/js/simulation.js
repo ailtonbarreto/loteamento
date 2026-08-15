@@ -257,10 +257,13 @@ async function carregarClientesSimulacao() {
     const select = document.getElementById("select-clientes-simulacao");
     const corretor_id = JSON.parse(sessionStorage.getItem("usuarioId"));
     const user_tipo = JSON.parse(sessionStorage.getItem("usuarioTipo"));
+    const spinner = document.getElementById('spinner');
 
     select.innerHTML = "";
 
     try {
+
+        spinner.style.display = 'flex';
 
         const url = `https://api-lotes.onrender.com/cliente?tipo=${user_tipo}&id=${corretor_id}`;
 
@@ -275,6 +278,8 @@ async function carregarClientesSimulacao() {
             option.dataset.cliente = JSON.stringify(cliente);
 
             select.appendChild(option);
+
+            spinner.style.display = 'none';
         });
 
     } catch (erro) {
