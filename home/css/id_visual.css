@@ -2,6 +2,9 @@
     --color-text: #0239A3;
     --color-shadow: #363949;
     --color-background: #fff;
+    --color-disponivel: #29DE05;
+    --color-reservado: #DEAB05;
+    --color-bloqueado: #de0505;
     --card-border-radius: 1rem;
     --card-padding: 1.1rem 1rem;
     --box-shadow: 0.2rem 0.2rem 1rem #363949;

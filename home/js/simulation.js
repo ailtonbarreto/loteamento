@@ -248,6 +248,8 @@ document.getElementById("gerar-reserva").addEventListener("click", () => {
 
 });
 
+
+
 // ------------------------------------------------------------------------------------
 
 async function carregarClientesSimulacao() {
@@ -256,9 +258,7 @@ async function carregarClientesSimulacao() {
     const corretor_id = JSON.parse(sessionStorage.getItem("usuarioId"));
     const user_tipo = JSON.parse(sessionStorage.getItem("usuarioTipo"));
 
-    select.innerHTML = `
-        <option value="">Selecione um cliente</option>
-    `;
+    select.innerHTML = "";
 
     try {
 
@@ -282,6 +282,24 @@ async function carregarClientesSimulacao() {
         alert("Erro ao carregar os clientes.");
     }
 }
+
+const inputBuscaSimular = document.getElementById("busca-clientes-simular");
+const selectClientesSimular = document.getElementById("select-clientes-simulacao");
+
+inputBuscaSimular.addEventListener("input", function () {
+    const termo = this.value.toLowerCase();
+
+    for (let option of selectClientesSimular.options) {
+        const texto = option.textContent.toLowerCase();
+
+        if (option.value === "") {
+            option.style.display = "";
+            continue;
+        }
+
+        option.style.display = texto.includes(termo) ? "" : "none";
+    }
+});
 
 // ----------------------------------------------------------
 

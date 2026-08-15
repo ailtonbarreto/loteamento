@@ -91,7 +91,7 @@ body {
 }
 
 .analyse div:nth-of-type(3) {
-    background-color: #29DE05;
+    background-color: var(--color-disponivel);
 }
 
 .analyse div:nth-of-type(4) {
@@ -99,11 +99,11 @@ body {
 }
 
 .analyse div:nth-of-type(5) {
-    background-color: #DEAB05;
+    background-color: var(--color-reservado);
 }
 
 .analyse div:nth-of-type(6) {
-    background-color: #de0505;
+    background-color: var(--color-bloqueado);
 }
 
 .charts-container {
@@ -203,7 +203,7 @@ body {
 }
 
 .status-disponivel {
-    color: #29DE05;
+    color: var(--color-disponivel);
 }
 
 .status-vendido {
@@ -211,11 +211,11 @@ body {
 }
 
 .status-reservado {
-    color: #DEAB05;
+    color: var(--color-reservado);
 }
 
 .status-bloqueado {
-    color: #de0505;
+    color: var(--color-bloqueado);
 }
 
 
@@ -309,7 +309,7 @@ path {
     }
 
     button {
-        background-color: #03a77e;
+        background-color: var(--color-reservado);
         color: #fff;
         padding: 0.4vw;
         border-radius: 0.5vw;
@@ -349,27 +349,34 @@ path {
     justify-content: space-between;
     gap: 2.5vh;
 
-
     #gerar_contrato {
-        background-color: #02b1dd;
-        box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    #gerar-reserva {
-        background-color: #DEAB05;
+        background-color: var(--color-disponivel);
         box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
     }
 
 }
 
-#btn-gerar-contrato-final,
+#gerar-reserva,
 #btn-gerar-simulacao {
-    background-color: #02b1dd;
+    background-color: var(--color-reservado);
+    box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+#btn-gerar-simulacao {
     color: #fff;
     padding: 0.4vw;
     border-radius: 0.5vw;
     width: 100%;
     font-size: 1.3rem;
+}
+
+#btn-gerar-contrato-final {
+    color: #fff;
+    padding: 0.4vw;
+    border-radius: 0.5vw;
+    width: 100%;
+    font-size: 1.3rem;
+    background-color: var(--color-disponivel);
 }
 
 .sidebar-header {
@@ -407,9 +414,6 @@ path {
         padding: 0.5vw;
     }
 
-    button {
-        background-color: rgb(5, 123, 202);
-    }
 }
 
 
