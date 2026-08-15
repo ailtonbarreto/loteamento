@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
-    <title>Cadastro de Cliente</title>
+    <title>Cadastro de Corretor</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="../home/js/menu.js" defer></script>
     <link rel="stylesheet" href="../home/css/menu.css">
     <link rel="stylesheet" href="../home/css/id_visual.css">
-    <link rel="stylesheet" href="cliente.css">
+    <link rel="stylesheet" href="corretor.css">
     <script src="script.js" defer></script>
 </head>
 
@@ -59,7 +59,7 @@
 
         <span class="material-symbols-outlined" id="menu-toggle">menu</span>
 
-        <h3>Cadastro Comprador</h3>
+        <h3>Cadastro Corretor</h3>
 
     </div>
 
@@ -78,12 +78,12 @@
             <span class="menu-label">Empreendimento 1</span>
         </div>
 
-        <div class="menu-item active has-submenu">
+        <div class="menu-item has-submenu" onclick="window.location.href='../cliente/index.html'">
             <span class="material-symbols-outlined">person</span>
             <span class="menu-label">Clientes</span>
         </div>
 
-        <div class="menu-item" onclick="window.location.href='../corretor/index.html'">
+        <div class="menu-item" active onclick="window.location.href='corretores.html'" style="background-color: #0239A3; color:#fff">
             <span class="material-symbols-outlined">badge</span>
             <span class="menu-label">Corretores</span>
         </div>

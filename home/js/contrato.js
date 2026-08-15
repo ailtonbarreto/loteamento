@@ -689,7 +689,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             alignment: AlignmentType.LEFT,
             children: [
                 new TextRun({
-                    text: "CORRETOR:",
+                    text: `${cliente.id_corretor}`,
                     font: "Times New Roman",
                     size: 24
                 })

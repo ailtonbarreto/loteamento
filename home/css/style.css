@@ -45,7 +45,7 @@ body {
 #loading {
     height: 60px;
     width: 60px;
-    border: 8px solid #ffffff;
+    border: 8px solid var(--color-background);
     border-top: 8px solid var(--color-text);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -129,7 +129,7 @@ body {
 }
 
 .chart_card {
-    background-color: #fff;
+    background-color: var(--color-background);
     backdrop-filter: blur(10px);
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
@@ -267,7 +267,7 @@ body {
 #tooltip {
     position: absolute;
     padding: 8px 12px;
-    background: #fff;
+    background: var(--color-background);
     border: 1px solid #ccc;
     border-radius: 6px;
     font-family: Arial;
@@ -288,7 +288,7 @@ path {
     top: 0;
     width: 500px;
     height: 100vh;
-    background: #fff;
+    background: var(--color-background);
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
     padding: 20px;
     display: none;
@@ -308,7 +308,7 @@ path {
 
     button {
         background-color: var(--color-text);
-        color: #fff;
+        color: var(--color-background);
         padding: 0.4vw;
         border-radius: 0.5vw;
         width: 100%;
@@ -333,7 +333,7 @@ path {
 .sidebar_card {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--color-background);
     padding: 0.5vw;
     color: var(--color-shadow);
     border-radius: 0.5vw;
@@ -348,7 +348,7 @@ path {
     gap: 2.5vh;
 
     #gerar_contrato {
-        background-color: var(--color-disponivel);
+        background-color: var(--color-vendido);
         box-shadow: 4px 3px 12px rgba(0, 0, 0, 0.5);
     }
 
@@ -361,7 +361,7 @@ path {
 }
 
 #btn-gerar-simulacao {
-    color: #fff;
+    color: var(--color-background);
     padding: 0.4vw;
     border-radius: 0.5vw;
     width: 100%;
@@ -369,12 +369,12 @@ path {
 }
 
 #btn-gerar-contrato-final {
-    color: #fff;
+    color: var(--color-background);
     padding: 0.4vw;
     border-radius: 0.5vw;
     width: 100%;
     font-size: 1.3rem;
-    background-color: var(--color-disponivel);
+    background-color: var(--color-vendido);
 }
 
 .sidebar-header {

@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #ffffff;
+    background: var(--color-background);
     color: #333;
 }
 
