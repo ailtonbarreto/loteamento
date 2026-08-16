@@ -64,6 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const dados = {
             nome: nome.value,
             cpf: cpf.value,
+            data_nasc: data_nasc.value,
             sexo: sexo.value,
             estado_civil: estado_civil.value,
             email: email.value,

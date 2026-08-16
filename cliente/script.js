@@ -140,12 +140,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         spinner.style.display = 'flex';
 
-
-
         const dados = {
             nome: nome.value,
             cpf: cpf.value,
             sexo: sexo.value,
+            data_nasc: data_nasc.value,
             estado_civil: estado_civil.value,
             email: email.value,
             telefone: telefone.value,
@@ -193,6 +192,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("btn-editar")) return;
 
+
         spinner.style.display = 'flex';
 
         const id = e.target.dataset.id;
@@ -206,6 +206,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         nome_edit.value = cliente.nome;
         cpf_edit.value = cliente.cpf;
+        data_nasc_edit.value = cliente.data_nasc.split("T")[0];
         telefone_edit.value = cliente.telefone;
         email_edit.value = cliente.email;
         cidade_edit.value = cliente.cidade;
@@ -236,12 +237,12 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'flex';
 
 
-
         const id = this.dataset.id;
 
         const dadosAtualizados = {
             nome: nome_edit.value,
             cpf: cpf_edit.value,
+            data_nasc: data_nasc_edit.value,
             telefone: telefone_edit.value,
             email: email_edit.value,
             cidade: cidade_edit.value,
