@@ -78,7 +78,7 @@ h3{
     box-shadow: var(--box-shadow);
 }
 
-#tabelaCliente {
+#tabelaCorretor {
     display: block;
     border-radius: 0.5vw;
     border-collapse: collapse;
@@ -91,7 +91,7 @@ h3{
     color: var(--color-text);
 }
 
-#tabelaCliente thead th {
+#tabelaCorretor thead th {
     background-color: #fff;
     position: sticky;
     top: 0;
@@ -102,14 +102,14 @@ h3{
 
 }
 
-#tabelaCliente tbody {
+#tabelaCorretor tbody {
     font-size: 0.8rem;
     padding: 8px;
     text-align: center;
     font-weight: bold;
 }
 
-#tabelaCliente::-webkit-scrollbar {
+#tabelaCorretor::-webkit-scrollbar {
     display: none;
 }
 

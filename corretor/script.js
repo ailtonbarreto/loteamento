@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const popupAlertTitle = document.getElementById('popup_title');
     const iconIndicator = document.getElementById('icon_indicator');
 
-    const tabelaCliente = document.querySelector("#tabelaCliente tbody");
+    const tabelaCorretor = document.querySelector("#tabelaCorretor tbody");
 
     const searchInput = document.getElementById("search_name");
 
@@ -52,55 +52,57 @@ window.addEventListener("DOMContentLoaded", () => {
     // -------------------------------------------------------------
     // CARREGAR CORRETORES
 
-    async function carregarClientes() {
+    async function carregarCorretores() {
         const tipo = sessionStorage.getItem("usuarioTipo");
-        const id = sessionStorage.getItem("usuarioId");
 
         spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/corretor`);
+            const resposta = await fetch(`https://api-lotes.onrender.com/corretores?tipo=${tipo}`);
             const dados = await resposta.json();
 
-            tabelaCliente.innerHTML = "";
+            tabelaCorretor.innerHTML = "";
 
+            if (!Array.isArray(dados.data)) {
+                spinner.style.display = 'none';
+                return;
+            }
 
-            if (!Array.isArray(dados.data)) return;
-
-            dados.data.sort((a, b) => a.nome.localeCompare(b.nome));
+            dados.data.sort((a, b) => a.nome_completo.localeCompare(b.nome_completo));
 
             dados.data.forEach(corretor => {
-
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
-                    <td>${corretor.nome}</td>
-                    <td class="hide_mobile">${corretor.cpf}</td>
-                    <td class="hide_mobile">${corretor.telefone}</td>
-                    <td class="hide_mobile">${corretor.cidade} - ${corretor.uf}</td>
+                <td class="hide_mobile">${corretor.nome_completo}</td>
+                <td class="hide_mobile">${corretor.cresci}</td>
+                <td class="hide_mobile">${corretor.status == 1 ? "ATIVO" : "INATIVO"}</td>
 
 
-                    <td>
-                        <span class="material-symbols-outlined btn-editar" data-id="${corretor.id_cliente}">edit</span>
-                        <span class="material-symbols-outlined btn-delete" data-id="${corretor.id_cliente}">delete</span>
-                    </td>
-                `;
+                <td>
+                    <span class="material-symbols-outlined btn-editar" data-id="${corretor.id}">edit</span>
+                    <span class="material-symbols-outlined btn-delete" data-id="${corretor.id}">delete</span>
+                </td>
+            `;
 
-                tabelaCliente.appendChild(tr);
-                spinner.style.display = 'none';
+                tabelaCorretor.appendChild(tr);
             });
 
+            spinner.style.display = 'none';
+
         } catch (erro) {
-            console.error("Erro ao carregar clientes:", erro);
+            console.error("Erro ao carregar corretores:", erro);
+            spinner.style.display = 'none';
         }
     }
+
 
     // -------------------------------------------------------------
     // FILTRAR TABELA PELO SEARCH
 
     searchInput.addEventListener("keyup", () => {
         const filtro = searchInput.value.toLowerCase();
-        const linhas = tabelaCliente.querySelectorAll("tr");
+        const linhas = tabelaCorretor.querySelectorAll("tr");
 
         linhas.forEach(linha => {
             const nome = linha.querySelector("td").innerText.toLowerCase();
@@ -129,7 +131,7 @@ window.addEventListener("DOMContentLoaded", () => {
         hidePopup(popupAlert);
         hidePopup(popupCadastro);
         hidePopup(popupEdit);
-        carregarClientes();
+        carregarCorretores();
     });
 
     // -------------------------------------------------------------
@@ -335,6 +337,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     // -------------------------------------------------------------
-    carregarClientes();
+    carregarCorretores();
 
 });
