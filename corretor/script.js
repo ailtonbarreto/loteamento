@@ -74,9 +74,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
-                <td class="hide_mobile">${corretor.nome_completo}</td>
-                <td class="hide_mobile">${corretor.cresci}</td>
-                <td class="hide_mobile">${corretor.status == 1 ? "ATIVO" : "INATIVO"}</td>
+                <td>${corretor.nome_completo}</td>
+                <td class="hide_mobile">${corretor.creci}</td>
+                <td>${corretor.status == 1 ? "ATIVO" : "INATIVO"}</td>
 
 
                 <td>
