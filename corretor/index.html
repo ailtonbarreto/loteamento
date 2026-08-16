@@ -83,7 +83,8 @@
             <span class="menu-label">Clientes</span>
         </div>
 
-        <div class="menu-item" active onclick="window.location.href='corretores.html'" style="background-color: #0239A3; color:#fff">
+        <div class="menu-item" active onclick="window.location.href='corretores.html'"
+            style="background-color: #0239A3; color:#fff">
             <span class="material-symbols-outlined">badge</span>
             <span class="menu-label">Corretores</span>
         </div>
@@ -102,7 +103,7 @@
 
             <div class="header_popup">
 
-                <h3>Cadastro de Comprador</h3>
+                <h3>Cadastro de Corretor</h3>
 
                 <span class="material-symbols-outlined" id="close-cadastro">close</span>
 
@@ -114,6 +115,13 @@
 
                     <label>Nome Completo:</label>
                     <input type="text" id="nome" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data Nascimento</label>
+                    <input type="date">
 
                 </div>
 
@@ -137,23 +145,18 @@
 
                 </div>
 
-                <div class="campo">
-
-                    <label>Estado Civil</label>
-                    <select id="estado_civil" required>
-                        <option value="">Selecione</option>
-                        <option value="solteiro">Solteiro</option>
-                        <option value="casado">Casado</option>
-                        <option value="divorciado">Divorciado</option>
-
-                    </select>
-
-                </div>
 
             </div>
 
 
             <div class="sub">
+
+                <div class="campo">
+
+                    <label>CRECI:</label>
+                    <input type="text" id="renda" required>
+
+                </div>
 
                 <div class="campo">
 
@@ -209,12 +212,6 @@
 
                 </div>
 
-                <div class="campo">
-
-                    <label>Cidade:</label>
-                    <input type="text" id="cidade" required>
-
-                </div>
 
                 <div class="campo">
 
@@ -251,6 +248,12 @@
                         <option value="TO">Tocantins</option>
                     </select>
 
+                </div>
+
+                <div class="campo">
+
+                    <label>Cidade:</label>
+                    <input type="text" id="cidade" required>
 
                 </div>
 
@@ -263,24 +266,6 @@
 
             </div>
 
-
-            <div class="sub">
-
-                <div class="campo">
-
-                    <label>Profissão:</label>
-                    <input type="text" id="profissao" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Renda:</label>
-                    <input type="number" id="renda" required>
-
-                </div>
-
-            </div>
 
             <div class="sub">
 
