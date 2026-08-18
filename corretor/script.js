@@ -142,29 +142,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
         spinner.style.display = 'flex';
 
-
-
         const dados = {
-            nome: nome.value,
+            user: user.value,
+            password: password.value,
+
+            nome_completo: nome_completo.value,
+            data_nasc: data_nasc.value,
+            creci: creci.value,
             cpf: cpf.value,
-            sexo: sexo.value,
-            estado_civil: estado_civil.value,
-            email: email.value,
-            telefone: telefone.value,
-            logradouro: endereco.value,
-            numero: numero.value,
-            complemento: complemento.value,
-            bairro: bairro.value,
-            cidade: cidade.value,
-            uf: estado.value,
-            cep: cep.value,
-            profissao: profissao.value,
-            renda: renda.value,
-            id_corretor: sessionStorage.getItem("usuarioId")
+            conta_banc: conta_banc.value,
+            bank: bank.value,
+            ag: ag.value,
+            pix: pix.value
         };
 
+        console.log(dados);
+
         try {
-            const resposta = await fetch("https://api-lotes.onrender.com/insert_cliente", {
+            const resposta = await fetch("https://api-lotes.onrender.com/insert_corretor", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)
