@@ -135,7 +135,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------------------------------------------
-    // CADASTRAR CLIENTE
+    // CADASTRAR CORRETOR
 
     document.getElementById("formCadastro").addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -145,7 +145,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const dados = {
             user: user.value,
             password: password.value,
-
             nome_completo: nome_completo.value,
             data_nasc: data_nasc.value,
             creci: creci.value,
@@ -155,8 +154,6 @@ window.addEventListener("DOMContentLoaded", () => {
             ag: ag.value,
             pix: pix.value
         };
-
-        console.log(dados);
 
         try {
             const resposta = await fetch("https://api-lotes.onrender.com/insert_corretor", {
@@ -293,6 +290,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         idParaDeletar = e.target.dataset.id;
 
+        console.log(idParaDeletar)
+
         popupConfirm.style.display = "flex";
     });
 
@@ -307,7 +306,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/delete_cliente/${idParaDeletar}`, {
+            const resposta = await fetch(`https://api-lotes.onrender.com/delete_corretor/${idParaDeletar}`, {
                 method: "DELETE"
             });
 
@@ -315,14 +314,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (resposta.ok) {
                 spinner.style.display = "none";
-                showAlert("check", "#04f755", "Cliente deletado com sucesso!");
+                showAlert("check", "#04f755", "Corretor deletado com sucesso!");
             } else {
                 spinner.style.display = "none";
                 showAlert("close", "red", resultado.erro || resultado.detalhe);
             }
 
         } catch (erro) {
-            console.error("Erro ao deletar cliente:", erro);
+            console.error("Erro ao deletar Corretor:", erro);
             alert("Erro no servidor ao deletar!");
         }
 
