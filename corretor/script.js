@@ -182,7 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------------------------------------------
-    // EDITAR CLIENTE (ABRIR POPUP)
+    // EDITAR CORRETOR (ABRIR POPUP)
 
     document.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("btn-editar")) return;
@@ -191,28 +191,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const id = e.target.dataset.id;
 
-        const resposta = await fetch(`https://api-lotes.onrender.com/cliente/${id}`);
+        const resposta = await fetch(`https://api-lotes.onrender.com/corretor/${id}`);
         const dados = await resposta.json();
 
-        const cliente = dados.data;
+        const corretor = dados.data;
 
-        document.getElementById("cliente_nome").innerText = `Cadastro - ${cliente.nome}`;
+        document.getElementById("corretor").innerText = `Cadastro - ${corretor.nome}`;
 
-        nome_edit.value = cliente.nome;
-        cpf_edit.value = cliente.cpf;
-        telefone_edit.value = cliente.telefone;
-        email_edit.value = cliente.email;
-        cidade_edit.value = cliente.cidade;
-        estado_edit.value = cliente.uf;
-        renda_edit.value = cliente.renda;
-        bairro_edit.value = cliente.bairro;
-        endereco_edit.value = cliente.logradouro;
-        numero_edit.value = cliente.numero;
-        complemento_edit.value = cliente.complemento;
-        cep_edit.value = cliente.cep;
-        estado_civil_edit.value = cliente.estado_civil;
-        sexo_edit.value = cliente.sexo;
-        profissao_edit.value = cliente.profissao;
+        nome_edit.value = corretor.nome;
+        cpf_edit.value = corretor.cpf;
+        telefone_edit.value = corretor.telefone;
+        email_edit.value = corretor.email;
+        cidade_edit.value = corretor.cidade;
+        estado_edit.value = corretor.uf;
+        renda_edit.value = corretor.renda;
+        bairro_edit.value = corretor.bairro;
+        endereco_edit.value = corretor.logradouro;
+        numero_edit.value = corretor.numero;
+
+
 
         document.getElementById("formEditCadastro").dataset.id = id;
 
