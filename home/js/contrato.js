@@ -504,7 +504,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             indent: { firstLine: 720 },
             children: [
                 new TextRun({
-                    text: "BANCO - Ag. XXX-X",
+                    text: `BANCO: ${cliente.bank.toUpperCase()}`,
                     font: "Times New Roman",
                     size: 24
                 })
@@ -516,7 +516,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             indent: { firstLine: 720 },
             children: [
                 new TextRun({
-                    text: "Conta Corrente: XXXXXX-X",
+                    text: `CONTA CORRENTE: ${cliente.conta_banc.toUpperCase()}`,
                     font: "Times New Roman",
                     size: 24
                 })
@@ -528,24 +528,25 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             indent: { firstLine: 720 },
             children: [
                 new TextRun({
-                    text: "CHAVE PIX: XXXXXXX.",
+                    text: `AGÊNCIA: ${cliente.ag.toUpperCase()}`,
                     font: "Times New Roman",
                     size: 24
                 })
             ]
         }),
-        // new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
+
         new Paragraph({
             alignment: AlignmentType.LEFT,
             indent: { firstLine: 720 },
             children: [
                 new TextRun({
-                    text: "NOME BENEFICIADO.",
+                    text: `CHAVE PIX: ${cliente.pix}`,
                     font: "Times New Roman",
                     size: 24
                 })
             ]
         }),
+
 
         // LINHA EM BRANCO
         new Paragraph({ children: [new TextRun({ text: "", font: "Times New Roman", size: 24 })] }),
@@ -623,7 +624,7 @@ document.getElementById("btn-gerar-contrato-final").addEventListener("click", ()
             spacing: { line: 360, lineRule: LineRuleType.AUTO, after: 250 },
             children: [
                 new TextRun({
-                    text: "CLÁUSULA OITAVA – As partes contratantes elegem o Foro da cidade de CIDADE/UF para dirimir quaisquer questões relativas ao presente contrato, com a exclusão de qualquer outro, por mais privilegiado que seja. E por estarem assim justos e contratados, as partes firmam o presente contrato digitalmente, na presença de duas testemunhas, para que surta seus efeitos legais e de direito.",
+                    text: "CLÁUSULA OITAVA – As partes contratantes elegem o Foro da cidade de Franca/SP para dirimir quaisquer questões relativas ao presente contrato, com a exclusão de qualquer outro, por mais privilegiado que seja. E por estarem assim justos e contratados, as partes firmam o presente contrato digitalmente, na presença de duas testemunhas, para que surta seus efeitos legais e de direito.",
                     font: "Times New Roman",
                     size: 24
                 })

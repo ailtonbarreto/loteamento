@@ -15,7 +15,7 @@ button {
     cursor: pointer;
 }
 
-h3{
+h3 {
     color: var(--color-text);
 }
 
@@ -166,6 +166,8 @@ h3{
     font-size: 2vw;
     cursor: pointer;
 }
+
+
 
 #open_popup {
     color: var(--color-text);
@@ -403,8 +405,13 @@ input[type=number]::-webkit-outer-spin-button {
 
     #close-cadastro,
     #close-edit {
-        font-size: 6vw;
+        color: red;
+        font-size: 2.4rem;
+        cursor: pointer;
+        font-weight: bold;
     }
+
+
 
     #open_popup {
         font-size: 10vw;
