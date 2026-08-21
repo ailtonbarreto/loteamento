@@ -216,7 +216,7 @@
 
             <div class="header_popup">
 
-                <h3 id="cliente_nome">Editar Cadastro</h3>
+                <h3 id="corretor_edit">Editar Cadastro</h3>
 
                 <span class="material-symbols-outlined" id="close-edit">close</span>
 
@@ -227,7 +227,22 @@
                 <div class="campo">
 
                     <label>Nome Completo:</label>
-                    <input type="text" id="nome_edit" required>
+                    <input type="text" id="nome_completo_edit" required>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Data Nascimento</label>
+                    <input type="date" id="data_nasc_edit">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>CRECI:</label>
+                    <input type="number" id="creci_edit" required>
 
                 </div>
 
@@ -238,20 +253,6 @@
 
                 </div>
 
-                <div class="campo">
-
-                    <label>Sexo</label>
-                    <select id="sexo_edit" required>
-
-                        <option value="">Selecione</option>
-                        <option value="m">Masculino</option>
-                        <option value="f">Feminino</option>
-
-                    </select>
-
-                </div>
-
-
             </div>
 
 
@@ -259,128 +260,46 @@
 
                 <div class="campo">
 
-                    <label>Email:</label>
-                    <input type="email" id="email_edit" required>
+                    <label>Conta Bancária:</label>
+                    <input type="text" id="conta_banc_edit">
 
                 </div>
 
                 <div class="campo">
 
-                    <label>WhatsApp:</label>
-                    <input type="text" id="telefone_edit" required>
-
-                </div>
-
-
-            </div>
-
-            <div class="sub">
-
-                <div class="campo">
-
-                    <label>Logradouro:</label>
-                    <input type="text" id="endereco_edit" required>
-
+                    <label>Agência:</label>
+                    <input type="text" id="ag_edit" required>
 
                 </div>
 
                 <div class="campo">
 
-                    <label>Número:</label>
-                    <input type="number" id="numero_edit">
+                    <label>Banco:</label>
+                    <input type="text" id="bank_edit">
 
                 </div>
 
                 <div class="campo">
 
-                    <label>Complemento:</label>
-                    <input type="text" id="complemento_edit">
-
-                </div>
-
-
-            </div>
-
-
-            <div class="sub">
-
-                <div class="campo">
-
-                    <label>Bairro:</label>
-                    <input type="text" id="bairro_edit" required>
+                    <label>Chave Pix:</label>
+                    <input type="text" id="pix_edit" required>
 
                 </div>
 
                 <div class="campo">
 
-                    <label>Cidade:</label>
-                    <input type="text" id="cidade_edit" required>
+                    <label>Status:</label>
 
-                </div>
+                    <select id="status_edit">
 
-                <div class="campo">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
 
-                    <label>Estado:</label>
-
-                    <select id="estado_edit">
-                        <option value="">Selecione</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
                     </select>
 
 
                 </div>
 
-                <div class="campo">
-
-                    <label>CEP:</label>
-                    <input type="number" id="cep_edit" required>
-
-                </div>
-
-            </div>
-
-
-            <div class="sub">
-
-                <div class="campo">
-
-                    <label>Profissão:</label>
-                    <input type="text" id="profissao_edit" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Renda:</label>
-                    <input type="number" id="renda_edit" required>
-
-                </div>
 
             </div>
 

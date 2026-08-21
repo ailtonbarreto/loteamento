@@ -196,20 +196,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const corretor = dados.data;
 
-        document.getElementById("corretor").innerText = `Cadastro - ${corretor.nome}`;
+        document.getElementById("corretor_edit").innerText = `Cadastro - ${corretor.nome_completo}`;
 
-        nome_edit.value = corretor.nome;
+        nome_completo_edit.value = corretor.nome_completo;
+        data_nasc_edit.value = corretor.data_nasc.split("T")[0];
+        creci_edit.value = corretor.creci;
         cpf_edit.value = corretor.cpf;
-        telefone_edit.value = corretor.telefone;
-        email_edit.value = corretor.email;
-        cidade_edit.value = corretor.cidade;
-        estado_edit.value = corretor.uf;
-        renda_edit.value = corretor.renda;
-        bairro_edit.value = corretor.bairro;
-        endereco_edit.value = corretor.logradouro;
-        numero_edit.value = corretor.numero;
-
-
+        conta_banc_edit.value = corretor.conta_banc;
+        ag_edit.value = corretor.ag;
+        bank_edit.value = corretor.bank;
+        pix_edit.value = corretor.pix;
+        status_edit.value = corretor.status;
 
         document.getElementById("formEditCadastro").dataset.id = id;
 
@@ -231,25 +228,19 @@ window.addEventListener("DOMContentLoaded", () => {
         const id = this.dataset.id;
 
         const dadosAtualizados = {
-            nome: nome_edit.value,
+            nome_completo: nome_completo_edit.value,
+            data_nasc: data_nasc_edit.value,
+            creci: creci_edit.value,
             cpf: cpf_edit.value,
-            telefone: telefone_edit.value,
-            email: email_edit.value,
-            cidade: cidade_edit.value,
-            uf: estado_edit.value,
-            bairro: bairro_edit.value,
-            logradouro: endereco_edit.value,
-            numero: numero_edit.value,
-            complemento: complemento_edit.value,
-            cep: cep_edit.value,
-            estado_civil: estado_civil_edit.value,
-            sexo: sexo_edit.value,
-            profissao: profissao_edit.value,
-            renda: renda_edit.value
+            conta_banc: conta_banc_edit.value,
+            ag: ag_edit.value,
+            bank: bank_edit.value,
+            pix: pix_edit.value,
+            status: status_edit.value
         };
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/update_cliente/${id}`, {
+            const resposta = await fetch(`https://api-lotes.onrender.com/update_corretor/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosAtualizados)
