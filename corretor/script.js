@@ -207,6 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
         bank_edit.value = corretor.bank;
         pix_edit.value = corretor.pix;
         status_edit.value = corretor.status;
+        tipo_edit.value = corretor.tipo;
 
         document.getElementById("formEditCadastro").dataset.id = id;
 
@@ -236,7 +237,8 @@ window.addEventListener("DOMContentLoaded", () => {
             ag: ag_edit.value,
             bank: bank_edit.value,
             pix: pix_edit.value,
-            status: status_edit.value
+            status: status_edit.value,
+            tipo: tipo_edit.value 
         };
 
         try {
