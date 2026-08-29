@@ -78,7 +78,7 @@ h3{
     box-shadow: var(--box-shadow);
 }
 
-#tabelaCorretor {
+#tabelotes {
     display: block;
     border-radius: 0.5vw;
     border-collapse: collapse;
@@ -89,9 +89,10 @@ h3{
     height: 80vh;
     overflow: scroll;
     color: var(--color-text);
+    text-align: center;
 }
 
-#tabelaCorretor thead th {
+#tabelotes  th {
     background-color: #fff;
     position: sticky;
     top: 0;
@@ -102,14 +103,13 @@ h3{
 
 }
 
-#tabelaCorretor tbody {
+#tabelotes tbody {
     font-size: 0.8rem;
     padding: 8px;
     text-align: center;
-    font-weight: bold;
 }
 
-#tabelaCorretor::-webkit-scrollbar {
+#tabelotes::-webkit-scrollbar {
     display: none;
 }
 

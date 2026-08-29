@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const popupAlertTitle = document.getElementById('popup_title');
     const iconIndicator = document.getElementById('icon_indicator');
 
-    const tabelaCorretor = document.querySelector("#tabelaCorretor tbody");
+    const tabelaLotes = document.querySelector("#tabelotes tbody");
 
     const searchInput = document.getElementById("search_name");
 
@@ -50,11 +50,11 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // -------------------------------------------------------------
-    // CARREGAR CORRETORES
+    // CARREGAR LOTES
 
-    async function carregarCorretores() {
+    async function carregarLotes() {
         const tipo = sessionStorage.getItem("usuarioTipo");
-       const id = sessionStorage.getItem("usuarioId");
+        const id = sessionStorage.getItem("usuarioId");
 
         spinner.style.display = 'flex';
 
@@ -62,7 +62,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const resposta = await fetch(`https://api-lotes.onrender.com/loteamentos?tipo=${tipo}&id=${id}`);
             const dados = await resposta.json();
 
-            tabelaCorretor.innerHTML = "";
+            tabelaLotes.innerHTML = "";
 
             if (!Array.isArray(dados.data)) {
                 spinner.style.display = 'none';
@@ -76,10 +76,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 tr.innerHTML = `
                 <td>${lote.lote}</td>
-                <td>${lote.valor}</td>
-                <td>${lote.status}</td>
-
-
+                <td>${lote.metragem}</td>
+                <td>R$ ${Number(lote.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
+                <td>${lote.vendedor}</td>
 
                 <td>
                     <span class="material-symbols-outlined btn-editar" data-id="${lote.id}">edit</span>
@@ -87,7 +86,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 </td>
             `;
 
-                tabelaCorretor.appendChild(tr);
+                tabelotes.appendChild(tr);
             });
 
             spinner.style.display = 'none';
@@ -133,7 +132,7 @@ window.addEventListener("DOMContentLoaded", () => {
         hidePopup(popupAlert);
         hidePopup(popupCadastro);
         hidePopup(popupEdit);
-        carregarCorretores();
+        carregarLotes();
     });
 
     // -------------------------------------------------------------
@@ -240,7 +239,7 @@ window.addEventListener("DOMContentLoaded", () => {
             bank: bank_edit.value,
             pix: pix_edit.value,
             status: status_edit.value,
-            tipo: tipo_edit.value 
+            tipo: tipo_edit.value
         };
 
         try {
@@ -323,6 +322,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     // -------------------------------------------------------------
-    carregarCorretores();
+    carregarLotes();
 
 });
