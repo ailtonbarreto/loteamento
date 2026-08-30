@@ -78,7 +78,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 <td>${lote.lote}</td>
                 <td>${lote.metragem}</td>
                 <td>R$ ${Number(lote.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
-                <td>${lote.vendedor}</td>
+                <td>${lote.nome_completo}</td>
 
                 <td>
                     <span class="material-symbols-outlined btn-editar" data-id="${lote.id}">edit</span>
@@ -86,7 +86,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 </td>
             `;
 
-                tabelotes.appendChild(tr);
+                tabelaLotes.appendChild(tr);
             });
 
             spinner.style.display = 'none';
@@ -103,7 +103,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     searchInput.addEventListener("keyup", () => {
         const filtro = searchInput.value.toLowerCase();
-        const linhas = tabelaCorretor.querySelectorAll("tr");
+        const linhas = tabelaLotes.querySelectorAll("tr");
 
         linhas.forEach(linha => {
             const nome = linha.querySelector("td").innerText.toLowerCase();

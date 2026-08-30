@@ -103,7 +103,7 @@ function iniciarSistema() {
                 <td>R$ ${Number(item.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
                 <td>${item.status}</td>
                 <td>${item.metragem}</td>
-                <td class="col-vendedor">${item.vendedor}</td>
+                <td class="col-vendedor">${item.nome_completo}</td>
             </tr>
         `;
         });
@@ -219,6 +219,7 @@ function iniciarSistema() {
         const btn_salvar = document.getElementById("btn-salvar-status");
         const select_card = document.getElementById("select_card");
         const simulacao = document.getElementById("simulacao");
+        
 
         if (tipoUsuario === "1") {
 
