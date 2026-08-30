@@ -192,7 +192,7 @@ function gerarPropostaDOCX({
         `Prezado(a) Sr.(a) ${nomeComprador.toUpperCase()},`,
         `Apresentamos a presente proposta para aquisição do ${identificacaoLote}, localizado em ${loteamento}, na cidade de Franca/SP.`,
         `O valor total do lote é de ${valorTotal}. Para formalização da negociação, será paga uma entrada no valor de ${entrada}, no ato da assinatura do contrato ou conforme combinado entre as partes.`,
-        `O saldo restante, no valor de ${saldoFinanciado}, será financiado em ${parcelas} parcelas mensais de ${valorParcela}, com vencimento todo dia ${diaVencimento} de cada mês.`,
+        `O saldo restante, no valor de ${saldoFinanciado}, será financiado em ${parcelas} parcelas mensais de ${valorParcela}.`,
         `As parcelas poderão ser reajustadas conforme o índice previsto em contrato, caso aplicável. Eventuais taxas, despesas de escritura, registro, impostos, transferências ou demais custos relacionados à regularização do imóvel serão de responsabilidade de comprador conforme negociação.`,
         `A venda ficará condicionada à análise cadastral do comprador, à disponibilidade do lote e à assinatura do contrato definitivo de compra e venda.`,
         `Esta proposta terá validade até ${validade}. Após esse prazo, os valores e condições poderão ser alterados sem aviso prévio.`,

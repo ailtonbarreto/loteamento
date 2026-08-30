@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/logo.ico" type="image/x-icon">
-    <title>Cadastro de Corretor</title>
+    <title>Cadastro de Terreno</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="../home/js/menu.js" defer></script>
     <link rel="stylesheet" href="../home/css/menu.css">
     <link rel="stylesheet" href="../home/css/id_visual.css">
-    <link rel="stylesheet" href="corretor.css">
+    <link rel="stylesheet" href="terreno.css">
     <script src="script.js" defer></script>
 </head>
 
@@ -22,29 +22,12 @@
 
     </div>
 
-    <div class="popup_confirm_delete" style="display: none;">
-
-        <div id="popup_confirm_delete">
-
-            <h3>Tem Certeza que deseja excluir o cadastro?</h3>
-
-            <div class="btns_delete">
-
-                <button id="cancel_delete_confirm">Cancel</button>
-
-                <button id="confirm_delete">Excluir</button>
-
-            </div>
-
-        </div>
-
-    </div>
 
     <div class="popup_alert">
 
         <div id="popup_alert">
 
-            <h3 id="popup_title">Cliente Cadastrado com Sucesso!</h3>
+            <h3 id="popup_title">Cadastrado Sucesso!</h3>
 
             <span class="material-symbols-outlined" id="icon_indicator">check</span>
 
@@ -101,117 +84,6 @@
 
     </nav>
 
-    <div id="popup_cadastro" style="display: none;">
-
-        <form id="formCadastro">
-
-            <div class="header_popup">
-
-                <h3>Cadastro de Corretor</h3>
-
-                <span class="material-symbols-outlined" id="close-cadastro">close</span>
-
-            </div>
-
-            <div class="sub">
-
-                <div class="campo">
-
-                    <label>Nome Completo:</label>
-                    <input type="text" id="nome_completo" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Data Nascimento</label>
-                    <input type="date" id="data_nasc">
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>CRECI:</label>
-                    <input type="number" id="creci" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>CPF:</label>
-                    <input type="number" id="cpf" required>
-
-                </div>
-
-            </div>
-
-            <div class="sub">
-
-                <div class="campo">
-
-                    <label>Email:</label>
-                    <input type="email" id="user" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Senha:</label>
-                    <input type="text" id="password" required>
-
-                </div>
-
-
-            </div>
-
-            <div class="sub">
-
-
-                <div class="campo">
-
-                    <label>Conta Bancária:</label>
-                    <input type="text" id="conta_banc">
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Agência:</label>
-                    <input type="text" id="ag" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Banco:</label>
-                    <input type="text" id="bank">
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Chave Pix:</label>
-                    <input type="text" id="pix" required>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="sub">
-
-                <button type="submit">Cadastrar</button>
-
-
-            </div>
-
-        </form>
-
-
-    </div>
-
     <!------------------------------------------------------------------------>
 
     <div id="popup_edit_cadastro" style="display: none;">
@@ -231,94 +103,11 @@
                 <div class="campo">
 
                     <label>Nome Completo:</label>
-                    <input type="text" id="nome_completo_edit" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Data Nascimento</label>
-                    <input type="date" id="data_nasc_edit">
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>CRECI:</label>
-                    <input type="number" id="creci_edit" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>CPF:</label>
-                    <input type="number" id="cpf_edit" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Conta Bancária:</label>
-                    <input type="text" id="conta_banc_edit">
 
                 </div>
 
             </div>
 
-
-            <div class="sub">
-
-
-                <div class="campo">
-
-                    <label>Agência:</label>
-                    <input type="text" id="ag_edit" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Banco:</label>
-                    <input type="text" id="bank_edit">
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Chave Pix:</label>
-                    <input type="text" id="pix_edit" required>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Status:</label>
-
-                    <select id="status_edit">
-
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
-
-                    </select>
-
-                </div>
-
-                <div class="campo">
-
-                    <label>Tipo:</label>
-
-                    <select id="tipo_edit">
-
-                        <option value="2">Corretor</option>
-                        <option value="1">Admin</option>
-
-                    </select>
-
-                </div>
-
-
-            </div>
 
             <div class="sub">
 
@@ -343,8 +132,6 @@
 
             <input type="text" id="search_name" placeholder="Pesquisar Nome">
 
-            <span class="material-symbols-outlined" id="open_popup">add</span>
-
         </div>
 
         <div class="card-table">
@@ -358,7 +145,7 @@
                         <th>Lote</th>
                         <th>Metragem</th>
                         <th>Valor</th>
-                        <th>Vendedor</th>
+                        <th class="hide_mobile">Vendedor</th>
                         <th>Ação</th>
                     </tr>
 
