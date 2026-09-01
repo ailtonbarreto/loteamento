@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const searchInput = document.getElementById("search_name");
 
+
     // -------------------------------------------------------------
     // FUNCOES AUXILIARES
 
@@ -37,14 +38,6 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById(id).reset();
     }
 
-    function formatarMoeda(valor) {
-        if (!valor) return "R$ 0,00";
-
-        return new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        }).format(Number(valor));
-    }
 
     // -------------------------------------------------------------
     // CARREGAR LOTES
@@ -124,9 +117,32 @@ window.addEventListener("DOMContentLoaded", () => {
         carregarLotes();
     });
 
+    // -------------------------------------------------------------
+
+    const inputValor = document.getElementById("valor_edit");
+
+    inputValor.addEventListener("input", () => {
+        let v = inputValor.value;
+
+        v = v.replace(/\D/g, "");
+
+        if (v === "") {
+            inputValor.value = "R$ 0,00";
+            return;
+        }
+
+        const numero = Number(v) / 100;
+
+        inputValor.value = numero.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    });
+
+
 
     // -------------------------------------------------------------
-    // EDITAR CORRETOR (ABRIR POPUP)
+    // EDITAR LOTE (ABRIR POPUP)
 
     document.addEventListener("click", async (e) => {
 
@@ -136,15 +152,23 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const id = e.target.dataset.id_lote;
 
+        const moeda = (v) => v.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
 
-        const resposta = await fetch(`https://api-lotes.onrender.com/loteamentos/${id}`);
+
+        console.log(id)
+
+        const resposta = await fetch(`https://api-lotes.onrender.com/lote/${id}`);
         const dados = await resposta.json();
 
         const lote = dados.data;
 
-        document.getElementById("corretor_edit").innerText = `Cadastro - ${lote.valor}`;
+        document.getElementById("lote_edit").innerText = `Cadastro - ${lote.lote}`;
 
-        nome_completo_edit.value = "teste";
+        valor_edit.value = moeda(Number(lote.valor));
+        // corretor_edit.value = lote.nome_completo;
 
         document.getElementById("formEditCadastro").dataset.id_lote = id;
 
@@ -162,23 +186,23 @@ window.addEventListener("DOMContentLoaded", () => {
 
         spinner.style.display = 'flex';
 
-        const id = this.dataset.id;
+        const id = this.dataset.id_lote;
+
+        const valorNumerico = parseFloat(
+            inputValor.value
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+        );
 
         const dadosAtualizados = {
-            nome_completo: nome_completo_edit.value,
-            data_nasc: data_nasc_edit.value,
-            creci: creci_edit.value,
-            cpf: cpf_edit.value,
-            conta_banc: conta_banc_edit.value,
-            ag: ag_edit.value,
-            bank: bank_edit.value,
-            pix: pix_edit.value,
-            status: status_edit.value,
-            tipo: tipo_edit.value
+            valor: valorNumerico,
         };
 
+
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/update_corretor/${id}`, {
+            const resposta = await fetch(`https://api-lotes.onrender.com/update_lote/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosAtualizados)
