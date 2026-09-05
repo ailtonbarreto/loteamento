@@ -196,7 +196,7 @@ function iniciarSistema() {
         const opcaoBloqueado = document.getElementById("opcao-bloqueado");
         const opcaoVendido = document.getElementById("opcao-vendido");
         const status = lote.status.toLowerCase();
-
+  
         if (tipoUsuario === "1") {
 
             opcaoBloqueado.hidden = false;
@@ -208,28 +208,35 @@ function iniciarSistema() {
             opcaoBloqueado.hidden = true;
             opcaoVendido.hidden = true;
 
+
             if (status === "vendido") {
                 select.disabled = true;
             } else {
                 select.disabled = false;
+
             }
 
         }
 
+
         const btn_salvar = document.getElementById("btn-salvar-status");
         const select_card = document.getElementById("select_card");
         const simulacao = document.getElementById("simulacao");
-        
+
+
+
 
         if (tipoUsuario === "1") {
 
             btn_salvar.style.display = "block";
             select_card.style.display = "flex";
 
+
         } else {
 
             btn_salvar.style.display = "none";
             select_card.style.display = "none";
+
         }
 
 
@@ -516,7 +523,7 @@ function iniciarSistema() {
     }
 
     function atualizarDashboard() {
-        
+
         const total = contarLotes();
         const { disponiveis, reservados, vendidos, bloqueados } = contarStatus();
 

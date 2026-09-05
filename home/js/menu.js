@@ -31,3 +31,21 @@ document.querySelectorAll(".has-submenu").forEach(item => {
         item.classList.toggle("open");
     });
 });
+
+const adm_menu = document.querySelectorAll(".admin_menu");
+const tipoUsuario = sessionStorage.getItem("usuarioTipo");
+
+if (tipoUsuario === "1") {
+
+    adm_menu.forEach((item) => {
+        item.style.display = "block";
+    });
+
+} else {
+
+    adm_menu.forEach((item) => {
+        item.style.display = "none";
+    });
+
+}
+
