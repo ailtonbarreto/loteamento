@@ -38,7 +38,7 @@ const tipoUsuario = sessionStorage.getItem("usuarioTipo");
 if (tipoUsuario === "1") {
 
     adm_menu.forEach((item) => {
-        item.style.display = "block";
+        item.style.display = "flex";
     });
 
 } else {
