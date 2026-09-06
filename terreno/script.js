@@ -15,6 +15,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const searchInput = document.getElementById("search_name");
 
+    const selecionarCorretor = document.getElementById("corretor_edit");
+
+    const tipo = sessionStorage.getItem("usuarioTipo");
+    const id = sessionStorage.getItem("usuarioId");
+
 
     // -------------------------------------------------------------
     // FUNCOES AUXILIARES
@@ -43,8 +48,6 @@ window.addEventListener("DOMContentLoaded", () => {
     // CARREGAR LOTES
 
     async function carregarLotes() {
-        const tipo = sessionStorage.getItem("usuarioTipo");
-        const id = sessionStorage.getItem("usuarioId");
 
         spinner.style.display = 'flex';
 
@@ -104,6 +107,41 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // -------------------------------------------------------------
+    // CARREGAR CORRETORES
+
+    async function carregarCorretores() {
+
+        selecionarCorretor.innerHTML = ""; // limpa antes de carregar
+
+
+        try {
+            const resposta = await fetch(`https://api-lotes.onrender.com/corretores?tipo=${tipo}&id=${id}`);
+            const dados = await resposta.json();
+
+            if (!Array.isArray(dados.data)) {
+                spinner.style.display = 'none';
+                return;
+            }
+
+            dados.data.sort((a, b) => a.nome_completo.localeCompare(b.nome_completo));
+
+            dados.data.forEach(corretor => {
+                const option = document.createElement("option");
+                option.value = corretor.id_usuario;
+                option.textContent = corretor.nome_completo;
+
+                selecionarCorretor.appendChild(option);
+            });
+
+
+        } catch (erro) {
+            console.error("Erro ao carregar corretores:", erro);
+   
+        }
+    }
+
 
     // -------------------------------------------------------------
     // ABRIR / FECHAR POPUPS
@@ -175,6 +213,7 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'none';
 
         showPopup(popupEdit);
+        carregarCorretores();
     });
 
 
@@ -228,5 +267,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // -------------------------------------------------------------
     carregarLotes();
+    carregarCorretores();
 
 });
