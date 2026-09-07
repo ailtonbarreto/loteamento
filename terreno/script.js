@@ -127,9 +127,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
             dados.data.sort((a, b) => a.nome_completo.localeCompare(b.nome_completo));
 
+            console.log(dados.data)
+
             dados.data.forEach(corretor => {
                 const option = document.createElement("option");
-                option.value = corretor.id_usuario;
+                option.value = corretor.id;
                 option.textContent = corretor.nome_completo;
 
                 selecionarCorretor.appendChild(option);
@@ -138,7 +140,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         } catch (erro) {
             console.error("Erro ao carregar corretores:", erro);
-   
+
         }
     }
 
@@ -204,9 +206,12 @@ window.addEventListener("DOMContentLoaded", () => {
         const lote = dados.data;
 
         document.getElementById("lote_edit").innerText = `Cadastro - ${lote.lote}`;
+        
 
         valor_edit.value = moeda(Number(lote.valor));
-        // corretor_edit.value = lote.nome_completo;
+        // corretor_edit.value = corretor.id;
+
+
 
         document.getElementById("formEditCadastro").dataset.id_lote = id;
 
