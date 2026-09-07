@@ -198,8 +198,6 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
 
-        console.log(id)
-
         const resposta = await fetch(`https://api-lotes.onrender.com/lote/${id}`);
         const dados = await resposta.json();
 
@@ -209,16 +207,14 @@ window.addEventListener("DOMContentLoaded", () => {
         
 
         valor_edit.value = moeda(Number(lote.valor));
-        // corretor_edit.value = corretor.id;
-
-
+        corretor_edit.value = lote.id_corretor;
 
         document.getElementById("formEditCadastro").dataset.id_lote = id;
 
         spinner.style.display = 'none';
 
         showPopup(popupEdit);
-        carregarCorretores();
+
     });
 
 
@@ -232,6 +228,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const id = this.dataset.id_lote;
 
+        const corretorSelecionado = document.getElementById("corretor_edit").value;
+
         const valorNumerico = parseFloat(
             inputValor.value
                 .replace("R$", "")
@@ -242,6 +240,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const dadosAtualizados = {
             valor: valorNumerico,
+            corretor_id: corretorSelecionado
         };
 
 

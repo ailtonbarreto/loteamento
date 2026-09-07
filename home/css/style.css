@@ -488,7 +488,7 @@ screen and (orientation: portrait) {
         height: auto;
         display: flex;
         justify-content: space-between;
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 1.6rem;
 
         .first-line {
