@@ -7,8 +7,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const sucess_img = document.getElementById('sucess_img');
 
-    const closePopup = document.getElementById('close-cadastro');
-
     const closeAlert = document.getElementById('close_sucess');
 
     const popupAlertTitle = document.getElementById('popup_title');

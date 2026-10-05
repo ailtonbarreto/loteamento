@@ -408,7 +408,9 @@ input[type=number]::-webkit-outer-spin-button {
         font-weight: bold;
     }
 
-
+    .btn-editar, .btn-delete  {
+        padding: 0 2vw;
+    }
 
     #open_popup {
         font-size: 10vw;
