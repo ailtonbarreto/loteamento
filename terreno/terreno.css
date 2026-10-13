@@ -15,8 +15,16 @@ button {
     cursor: pointer;
 }
 
-h3{
+h3 {
     color: var(--color-text);
+}
+
+select {
+    background-color: #e7fbfd;
+    padding: 0.3vw;
+    color: #171111;
+    border-radius: 0.3vw;
+    font-size: 1.3rem;
 }
 
 /* ---------------------------------------------------------- */
@@ -92,7 +100,7 @@ h3{
     text-align: center;
 }
 
-#tabelotes  th {
+#tabelotes th {
     background-color: #fff;
     position: sticky;
     top: 0;
@@ -273,7 +281,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media (max-width: 768px) {
 
-    .container{
+    .container {
         margin-top: 70px;
     }
 
@@ -332,7 +340,7 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     #close-edit {
-       font-size: 2.4rem;
+        font-size: 2.4rem;
     }
 
 }

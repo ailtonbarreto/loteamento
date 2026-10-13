@@ -172,161 +172,69 @@ function iniciarSistema() {
         });
     }
 
+
     function abrirSidebar(id) {
-        const lote = lotes[id];
-        if (!lote) return;
+    const lote = lotes[id];
+    if (!lote) return;
 
-        const tipoUsuario = sessionStorage.getItem("usuarioTipo");
+    const tipoUsuario = sessionStorage.getItem("usuarioTipo");
 
-        if (lote.status.toLowerCase() === "bloqueado" && tipoUsuario !== "1") {
-            return;
-        }
-
-        const formatarMoeda = (v) =>
-            new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL"
-            }).format(v);
-
-        document.getElementById("sb-lote").innerText = lote.lote || id;
-        document.getElementById("sb-valor").innerText = formatarMoeda(lote.valor);
-
-
-        const select = document.getElementById("sb-status-select");
-        const opcaoBloqueado = document.getElementById("opcao-bloqueado");
-        const opcaoVendido = document.getElementById("opcao-vendido");
-        const status = lote.status.toLowerCase();
-  
-        if (tipoUsuario === "1") {
-
-            opcaoBloqueado.hidden = false;
-            opcaoVendido.hidden = false;
-            select.disabled = false;
-
-        } else {
-
-            opcaoBloqueado.hidden = true;
-            opcaoVendido.hidden = true;
-
-
-            if (status === "vendido") {
-                select.disabled = true;
-            } else {
-                select.disabled = false;
-
-            }
-
-        }
-
-
-        const btn_salvar = document.getElementById("btn-salvar-status");
-        const select_card = document.getElementById("select_card");
-        const simulacao = document.getElementById("simulacao");
-
-
-
-
-        if (tipoUsuario === "1") {
-
-            btn_salvar.style.display = "block";
-            select_card.style.display = "flex";
-
-
-        } else {
-
-            btn_salvar.style.display = "none";
-            select_card.style.display = "none";
-
-        }
-
-
-        select.value = lote.status.toLowerCase();
-
-        document.getElementById("sidebar").style.display = "flex";
-        window.loteSelecionado = id;
-        window.loteParaContrato = lote;
-
-        btnContrato.onclick = () => {
-            window.abrirPopupContrato({
-                id: id,
-                lote: lote.lote,
-                valor: lote.valor,
-                valorFormatado: formatarMoeda(lote.valor)
-            });
-        };
-
-        if (status === "disponível") {
-
-            btnContrato.style.display = "block";
-            btnReserva.style.display = "block";
-            simulacao.style.display = "flex";
-
-        } else if (status === "reservado") {
-
-            btnContrato.style.display = "block";
-            btnReserva.style.display = "none";
-            simulacao.style.display = "flex";
-
-        } else if (status === "vendido") {
-
-            btnContrato.style.display = "none";
-            btnReserva.style.display = "none";
-            simulacao.style.display = "none";
-
-        } else {
-
-            btnContrato.style.display = "none";
-            btnReserva.style.display = "block";
-            simulacao.style.display = "flex";
-
-        }
-
+    if (lote.status.toLowerCase() === "bloqueado" && tipoUsuario !== "1") {
+        return;
     }
+
+    const formatarMoeda = (v) =>
+        new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }).format(v);
+
+    document.getElementById("sb-lote").innerText = lote.lote || id;
+    document.getElementById("sb-valor").innerText = formatarMoeda(lote.valor);
+
+    const simulacao = document.getElementById("simulacao");
+
+    document.getElementById("sidebar").style.display = "flex";
+    window.loteSelecionado = id;
+    window.loteParaContrato = lote;
+
+    btnContrato.onclick = () => {
+        window.abrirPopupContrato({
+            id: id,
+            lote: lote.lote,
+            valor: lote.valor,
+            valorFormatado: formatarMoeda(lote.valor)
+        });
+    };
+
+    const status = lote.status.toLowerCase();
+
+    if (status === "disponível") {
+        btnContrato.style.display = "block";
+        btnReserva.style.display = "block";
+        simulacao.style.display = "flex";
+    } else if (status === "reservado") {
+        btnContrato.style.display = "block";
+        btnReserva.style.display = "none";
+        simulacao.style.display = "flex";
+    } else if (status === "vendido") {
+        btnContrato.style.display = "none";
+        btnReserva.style.display = "none";
+        simulacao.style.display = "none";
+    } else {
+        btnContrato.style.display = "none";
+        btnReserva.style.display = "block";
+        simulacao.style.display = "flex";
+    }
+}
+
+
 
     // ---------------- Fechar sidebar ----------------
     document.getElementById("sidebar-close").addEventListener("click", () => {
         document.getElementById("sidebar").style.display = "none";
     });
 
-    // ---------------- Salvar status ----------------
-
-    document.getElementById("btn-salvar-status").addEventListener("click", () => {
-        const id = window.loteSelecionado;
-        const lote = lotes[id];
-        if (!lote) return;
-
-        spinner.style.display = 'flex';
-
-        const novoStatus = document.getElementById("sb-status-select").value;
-
-
-        fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ status: novoStatus })
-        })
-            .then(res => res.json())
-            .then(data => {
-
-                lote.status = novoStatus;
-                atualizarCorDoLote(id);
-                atualizarTotalVendido();
-                atualizarDashboard();
-                criarTabelaLotes();
-                gerarGraficoStatus();
-
-                spinner.style.display = 'none';
-
-                document.getElementById("sidebar").style.display = "none";
-            })
-            .catch(err => {
-                console.error("Erro ao atualizar status:", err);
-
-                alert("Erro ao atualizar o status. Tente novamente.");
-            });
-    });
 
     // ------------------------------------------------------------------------------------------
     // GERAR VENDA E ALTERAR STATUS PARA VENDIDO

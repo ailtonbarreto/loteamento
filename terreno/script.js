@@ -70,6 +70,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 tr.innerHTML = `
                 <td>${lote.lote}</td>
                 <td>${lote.metragem}</td>
+                <td>${lote.status}</td>
                 <td>R$ ${Number(lote.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
                 <td class="hide_mobile">${lote.nome_completo}</td>
 
@@ -113,7 +114,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     async function carregarCorretores() {
 
-        selecionarCorretor.innerHTML = ""; // limpa antes de carregar
+        selecionarCorretor.innerHTML = "";
 
 
         try {
@@ -203,8 +204,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const lote = dados.data;
 
+        document.getElementById("sb-status-select").value = lote.status.toLowerCase();
+
         document.getElementById("lote_edit").innerText = `Cadastro - ${lote.lote}`;
-        
 
         valor_edit.value = moeda(Number(lote.valor));
         corretor_edit.value = lote.id_corretor;
@@ -229,6 +231,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const id = this.dataset.id_lote;
 
         const corretorSelecionado = document.getElementById("corretor_edit").value;
+        const statusSelecionado = document.getElementById("sb-status-select").value;
 
         const valorNumerico = parseFloat(
             inputValor.value
@@ -240,9 +243,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const dadosAtualizados = {
             valor: valorNumerico,
-            corretor_id: corretorSelecionado
+            corretor_id: corretorSelecionado,
+            status: statusSelecionado
         };
-
 
         try {
             const resposta = await fetch(`https://api-lotes.onrender.com/update_lote/${id}`, {
@@ -250,7 +253,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosAtualizados)
             });
-
 
             const resultado = await resposta.json();
 
@@ -268,6 +270,7 @@ window.addEventListener("DOMContentLoaded", () => {
             alert("Erro no servidor ao atualizar!");
         }
     });
+
 
     // -------------------------------------------------------------
     carregarLotes();
