@@ -4,9 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function iniciarSistema() {
     const svg = document.getElementById("overlay");
-    const wrapper = document.getElementById("mapa");
     const tooltip = document.getElementById("tooltip");
-    const spinner = document.getElementById('spinner');
     const tipo = sessionStorage.getItem("usuarioTipo");
     const id = sessionStorage.getItem("usuarioId");
     const btnContrato = document.getElementById("gerar_contrato");
@@ -103,7 +101,6 @@ function iniciarSistema() {
                 <td>R$ ${Number(item.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
                 <td>${item.status}</td>
                 <td>${item.metragem}</td>
-                <td class="col-vendedor">${item.nome_completo}</td>
             </tr>
         `;
         });
@@ -373,9 +370,6 @@ function iniciarSistema() {
     function parseValor(valorStr) {
         return Number(valorStr);
 
-        valorStr = valorStr.replace(",", ".");
-
-        return Number(valorStr);
     }
 
     function calcularTotalVendido() {

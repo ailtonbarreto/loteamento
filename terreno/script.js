@@ -72,8 +72,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 <td>${lote.metragem}</td>
                 <td>${lote.status}</td>
                 <td>R$ ${Number(lote.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
-                <td class="hide_mobile">${lote.nome_completo}</td>
-
+ 
                 <td>
                     <span class="material-symbols-outlined btn-editar" data-id_lote="${lote.id_lote}">edit</span>
                 </td>
