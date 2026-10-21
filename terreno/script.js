@@ -15,9 +15,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const searchInput = document.getElementById("search_name");
 
-    const selecionarCorretor = document.getElementById("corretor_edit");
-
-    const tipo = sessionStorage.getItem("usuarioTipo");
     const id = sessionStorage.getItem("usuarioId");
 
 
@@ -52,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/loteamentos?tipo=${tipo}&id=${id}`);
+            const resposta = await fetch(`https://api-lotes.onrender.com/loteamentos?id=${id}`);
             const dados = await resposta.json();
 
             tabelaLotes.innerHTML = "";
@@ -84,7 +81,7 @@ window.addEventListener("DOMContentLoaded", () => {
             spinner.style.display = 'none';
 
         } catch (erro) {
-            console.error("Erro ao carregar corretores:", erro);
+            console.error("Erro ao carregar", erro);
             spinner.style.display = 'none';
         }
     }
@@ -108,43 +105,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // -------------------------------------------------------------
-    // CARREGAR CORRETORES
-
-    async function carregarCorretores() {
-
-        selecionarCorretor.innerHTML = "";
-
-
-        try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/corretores?tipo=${tipo}&id=${id}`);
-            const dados = await resposta.json();
-
-            if (!Array.isArray(dados.data)) {
-                spinner.style.display = 'none';
-                return;
-            }
-
-            dados.data.sort((a, b) => a.nome_completo.localeCompare(b.nome_completo));
-
-            console.log(dados.data)
-
-            dados.data.forEach(corretor => {
-                const option = document.createElement("option");
-                option.value = corretor.id;
-                option.textContent = corretor.nome_completo;
-
-                selecionarCorretor.appendChild(option);
-            });
-
-
-        } catch (erro) {
-            console.error("Erro ao carregar corretores:", erro);
-
-        }
-    }
-
-
+ 
     // -------------------------------------------------------------
     // ABRIR / FECHAR POPUPS
 
@@ -208,7 +169,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("lote_edit").innerText = `Cadastro - ${lote.lote}`;
 
         valor_edit.value = moeda(Number(lote.valor));
-        corretor_edit.value = lote.id_corretor;
+
 
         document.getElementById("formEditCadastro").dataset.id_lote = id;
 
@@ -229,7 +190,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const id = this.dataset.id_lote;
 
-        const corretorSelecionado = document.getElementById("corretor_edit").value;
         const statusSelecionado = document.getElementById("sb-status-select").value;
 
         const valorNumerico = parseFloat(
@@ -242,7 +202,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const dadosAtualizados = {
             valor: valorNumerico,
-            corretor_id: corretorSelecionado,
             status: statusSelecionado
         };
 
@@ -273,6 +232,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // -------------------------------------------------------------
     carregarLotes();
-    carregarCorretores();
 
 });
