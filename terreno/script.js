@@ -66,7 +66,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 tr.innerHTML = `
                 <td>${lote.lote}</td>
-                <td>${lote.metragem}</td>
+                <td class="hide_mobile">${lote.metragem}</td>
                 <td>${lote.status}</td>
                 <td>R$ ${Number(lote.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
  
