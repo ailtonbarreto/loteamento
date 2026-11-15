@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const searchInput = document.getElementById("search_name");
 
+    const tipo = sessionStorage.getItem("usuarioTipo");
     const id = sessionStorage.getItem("usuarioId");
 
 
@@ -49,19 +50,29 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos?id=${id}`);
+            if (!tipo || !id) {
+                throw new Error("Dados da sessão do usuário não encontrados.");
+            }
+
+            const parametros = new URLSearchParams({ tipo, id });
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos?${parametros}`);
+
+            if (!resposta.ok) {
+                throw new Error(`Erro ao buscar lotes: HTTP ${resposta.status}`);
+            }
+
             const dados = await resposta.json();
+            const lotes = Array.isArray(dados) ? dados : dados && dados.data;
 
             tabelaLotes.innerHTML = "";
 
-            if (!Array.isArray(dados.data)) {
-                spinner.style.display = 'none';
-                return;
+            if (!Array.isArray(lotes)) {
+                throw new Error("Formato inesperado na resposta da API de lotes.");
             }
 
-            dados.data.sort((a, b) => a.lote.localeCompare(b.lote));
+            lotes.sort((a, b) => String(a.lote ?? "").localeCompare(String(b.lote ?? ""), "pt-BR", { numeric: true }));
 
-            dados.data.forEach(lote => {
+            lotes.forEach(lote => {
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
@@ -82,6 +93,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         } catch (erro) {
             console.error("Erro ao carregar", erro);
+            tabelaLotes.innerHTML = '<tr><td colspan="5">Não foi possível carregar os lotes.</td></tr>';
+        } finally {
             spinner.style.display = 'none';
         }
     }
