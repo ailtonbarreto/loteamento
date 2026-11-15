@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const resposta = await fetch("https://api-lotes.onrender.com/insert_cliente", {
+            const resposta = await fetch("https://api-lotes-138245954466.southamerica-east1.run.app/insert_cliente", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)

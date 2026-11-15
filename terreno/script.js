@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/loteamentos?id=${id}`);
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos?id=${id}`);
             const dados = await resposta.json();
 
             tabelaLotes.innerHTML = "";
@@ -159,7 +159,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
 
-        const resposta = await fetch(`https://api-lotes.onrender.com/lote/${id}`);
+        const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/lote/${id}`);
         const dados = await resposta.json();
 
         const lote = dados.data;
@@ -206,7 +206,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/update_lote/${id}`, {
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/update_lote/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosAtualizados)

@@ -58,7 +58,7 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/corretores?tipo=${tipo}`);
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/corretores?tipo=${tipo}`);
             const dados = await resposta.json();
 
             tabelaCorretor.innerHTML = "";
@@ -156,7 +156,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const resposta = await fetch("https://api-lotes.onrender.com/insert_corretor", {
+            const resposta = await fetch("https://api-lotes-138245954466.southamerica-east1.run.app/insert_corretor", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)
@@ -191,7 +191,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const id = e.target.dataset.id;
 
-        const resposta = await fetch(`https://api-lotes.onrender.com/corretor/${id}`);
+        const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/corretor/${id}`);
         const dados = await resposta.json();
 
         const corretor = dados.data;
@@ -242,7 +242,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/update_corretor/${id}`, {
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/update_corretor/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosAtualizados)
@@ -296,7 +296,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/delete_corretor/${idParaDeletar}`, {
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/delete_corretor/${idParaDeletar}`, {
                 method: "DELETE"
             });
 

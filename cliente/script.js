@@ -59,7 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
         spinner.style.display = 'flex';
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/cliente?tipo=${tipo}&id=${id}`);
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/cliente?tipo=${tipo}&id=${id}`);
             const dados = await resposta.json();
 
             tabelaCliente.innerHTML = "";
@@ -161,7 +161,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const resposta = await fetch("https://api-lotes.onrender.com/insert_cliente", {
+            const resposta = await fetch("https://api-lotes-138245954466.southamerica-east1.run.app/insert_cliente", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)
@@ -197,7 +197,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const id = e.target.dataset.id;
 
-        const resposta = await fetch(`https://api-lotes.onrender.com/cliente/${id}`);
+        const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/cliente/${id}`);
         const dados = await resposta.json();
 
         const cliente = dados.data;
@@ -259,7 +259,7 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/update_cliente/${id}`, {
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/update_cliente/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosAtualizados)
@@ -311,7 +311,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         try {
-            const resposta = await fetch(`https://api-lotes.onrender.com/delete_cliente/${idParaDeletar}`, {
+            const resposta = await fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/delete_cliente/${idParaDeletar}`, {
                 method: "DELETE"
             });
 

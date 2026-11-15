@@ -40,7 +40,7 @@ async function carregarClientes() {
 
         spinner.style.display = 'flex';
 
-        const url = `https://api-lotes.onrender.com/cliente?tipo=${user_tipo}&id=${corretor_id}`;
+        const url = `https://api-lotes-138245954466.southamerica-east1.run.app/cliente?tipo=${user_tipo}&id=${corretor_id}`;
 
         const response = await fetch(url);
         const json = await response.json();

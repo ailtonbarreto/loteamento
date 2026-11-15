@@ -10,7 +10,7 @@ function iniciarSistema() {
     const btnContrato = document.getElementById("gerar_contrato");
     const btnReserva = document.getElementById("gerar-reserva");
 
-    fetch(`https://api-lotes.onrender.com/loteamentos?tipo=${tipo}&id=${id}`)
+    fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos?tipo=${tipo}&id=${id}`)
 
         .then(response => {
             if (!response.ok) {
@@ -243,7 +243,7 @@ function iniciarSistema() {
 
         spinner.style.display = "flex";
 
-        fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
+        fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos/${id}/status`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -301,7 +301,7 @@ function iniciarSistema() {
 
         spinner.style.display = "flex";
 
-        fetch(`https://api-lotes.onrender.com/loteamentos/${id}/status`, {
+        fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos/${id}/status`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

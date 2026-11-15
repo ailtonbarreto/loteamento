@@ -14,7 +14,7 @@ btnEntrar.onclick = async (event) => {
   spinner.style.display = 'flex';
 
   try {
-    const response = await fetch('https://api-lotes.onrender.com/login', {
+    const response = await fetch('https://api-lotes-138245954466.southamerica-east1.run.app/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user, password })
