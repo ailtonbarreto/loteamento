@@ -9,6 +9,7 @@ function iniciarSistema() {
     const id = sessionStorage.getItem("usuarioId");
     const btnContrato = document.getElementById("gerar_contrato");
     const btnReserva = document.getElementById("gerar-reserva");
+    let lotes = {};
 
     fetch(`https://api-lotes-138245954466.southamerica-east1.run.app/loteamentos?tipo=${tipo}&id=${id}`)
 
@@ -20,9 +21,14 @@ function iniciarSistema() {
         })
         .then(data => {
 
+            const listaLotes = Array.isArray(data) ? data : data && data.data;
+            if (!Array.isArray(listaLotes)) {
+                throw new Error("Formato inesperado na resposta da API de lotes.");
+            }
+
             lotes = {};
 
-            data.data.forEach(item => {
+            listaLotes.forEach(item => {
                 lotes[item.id_lote] = item;
             });
 
