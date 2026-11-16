@@ -135,7 +135,7 @@ button {
     padding: 3vw 0;
     align-items: center;
     border-radius: 12px;
-    box-shadow: 0.2rem 0.2rem 1rem #363949;
+    box-shadow: var(--box-shadow);
 
     .material-symbols-outlined {
         color: rgb(4, 235, 81);

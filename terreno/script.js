@@ -72,8 +72,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
             lotes.sort((a, b) => String(a.lote ?? "").localeCompare(String(b.lote ?? ""), "pt-BR", { numeric: true }));
 
+            const classesPorStatus = {
+                "disponível": "status-disponivel",
+                "reservado": "status-reservado",
+                "vendido": "status-vendido",
+                "bloqueado": "status-bloqueado"
+            };
+
             lotes.forEach(lote => {
                 const tr = document.createElement("tr");
+                const classeStatus = classesPorStatus[String(lote.status).trim().toLowerCase()];
+
+                if (classeStatus) {
+                    tr.classList.add(classeStatus);
+                }
 
                 tr.innerHTML = `
                 <td>${lote.lote}</td>

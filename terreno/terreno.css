@@ -90,13 +90,14 @@ select {
     display: block;
     border-radius: 0.5vw;
     border-collapse: collapse;
-    box-shadow: 0.2rem 0.2rem 1rem #363949;
+    box-shadow: var(--box-shadow);
     width: 90vw;
     text-transform: uppercase;
     padding: 0 0.5rem;
     height: 80vh;
     overflow: scroll;
     color: var(--color-text);
+    font-weight: bold;
     text-align: center;
 }
 
@@ -108,7 +109,6 @@ select {
     z-index: 10;
     padding: 8px;
     text-align: center;
-
 }
 
 #tabelotes tbody {
@@ -195,7 +195,7 @@ select {
     padding: 3vw 0;
     align-items: center;
     border-radius: 12px;
-    box-shadow: 0.2rem 0.2rem 1rem #363949;
+    box-shadow: var(--box-shadow);
 
     .material-symbols-outlined {
         color: rgb(4, 235, 81);

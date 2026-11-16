@@ -5,12 +5,13 @@
     width: 270px;
     height: 100%;
     background-color: #fff;
-    padding: 1rem 0;
+    padding: 1.25rem 0;
     display: flex;
     flex-direction: column;
     transition: left 0.3s ease;
     z-index: 999;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0.2rem 0.2rem 1rem #00000060;
+    border-right: 1px solid #e8edf5;
 }
 
 .header_dash_container {
@@ -18,12 +19,13 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 0.5vw 1vw;
+    padding: 0.75rem 1.25rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid #e8edf5;
     z-index: 100;
     width: 100%;
     box-sizing: border-box;
@@ -34,7 +36,7 @@
 }
 
 #menu-toggle {
-    font-size: 1.9rem;
+    font-size: 1.75rem;
     color: #0239A3;
     cursor: pointer;
     align-self: flex-start;
@@ -42,7 +44,7 @@
 
 .close-menu {
     font-size: 2.4rem !important;
-    color: red;
+    color: #64748b;
     cursor: pointer;
     margin-bottom: 1.5rem;
     align-self: flex-end;
@@ -53,19 +55,28 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #0239A3;
+    color: #334155;
     cursor: pointer;
-    padding: 0.9rem;
-    font-size: 1.25rem;
+    padding: 0.8rem 1.1rem;
+    margin: 0.15rem 0.75rem;
+    border-radius: 0.65rem;
+    font-size: 1rem;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.menu-item:hover {
+    background-color: #f1f5fb;
+    color: #0239A3;
 }
 
 .active {
-    background-color: #0239A3;
-    color: #fff;
+    background-color: #eaf1fc;
+    color: #0239A3;
+    font-weight: 600;
 }
 
 .menu-item span.material-symbols-outlined {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
 }
 
 .logo {
@@ -82,11 +93,10 @@
 #sair {
     position: absolute;
     bottom: 20px;
-    left: 20px;
-    padding: 0.4vw;
-    border-radius: 0.5vw;
-    width: 250px;
-    font-size: 1.3rem;
+    left: 0;
+    right: 0;
+    width: auto;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 768px),
@@ -97,7 +107,7 @@ screen and (orientation: portrait) {
 
     .header_dash_container {
 
-        padding: 3vw;
+        padding: 1rem;
 
 
     }

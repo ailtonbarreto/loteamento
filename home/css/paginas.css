@@ -1,0 +1,355 @@
+:root {
+    --color-shadow: #363949;
+    --bg-select: #f5f8fc;
+    --card-border-radius: 0.85rem;
+    --box-shadow: 0.2rem 0.2rem 1rem var(--color-shadow);
+}
+
+body {
+    background: #f7f9fc;
+    color: #263248;
+}
+
+.header_dash_container {
+    min-height: 3.75rem;
+}
+
+.header_dash_container h3 {
+    color: #173b79;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.container {
+    width: 80vw;
+    margin: 5.75rem auto 2rem;
+    align-items: stretch;
+}
+
+.cad {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+#search_name {
+    width: min(22rem, 100%);
+    padding: 0.8rem 1rem;
+    border: 1px solid #dce4ef;
+    border-radius: 0.65rem;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    color: #263248;
+    font-size: 0.95rem;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card-table::-webkit-scrollbar {
+    display: none;
+}
+
+#search_name:focus,
+.campo input:focus,
+.campo select:focus {
+    border-color: #7396cf;
+    box-shadow: 0 0 0 3px rgba(2, 57, 163, 0.1);
+}
+
+.card-table {
+    width: 100%;
+    max-height: 72vh;
+    padding: 0;
+    overflow: auto;
+    border: 1px solid #e5eaf2;
+    border-radius: 0.85rem;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+}
+
+#tabelotes,
+#tabelaCliente,
+#tabelaCorretor {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 0.85rem;
+    box-shadow: none;
+    table-layout: auto;
+    overflow: visible;
+    color: #334155;
+    text-transform: none;
+}
+
+#tabelotes th,
+#tabelaCliente thead th,
+#tabelaCorretor thead th {
+    width: auto;
+    padding: 0.9rem 1rem;
+    background: #f7f9fc;
+    color: #52627a;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e8edf5;
+}
+
+#tabelotes td,
+#tabelaCliente td,
+#tabelaCorretor td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #edf1f6;
+    text-align: center;
+}
+
+#tabelotes tbody,
+#tabelaCliente tbody,
+#tabelaCorretor tbody {
+    color: #334155;
+    font-size: 0.875rem;
+}
+
+#tabelotes tbody tr:hover,
+#tabelaCliente tbody tr:hover,
+#tabelaCorretor tbody tr:hover {
+    background: #f8faff;
+}
+
+#tabelotes tbody tr:last-child td,
+#tabelaCliente tbody tr:last-child td,
+#tabelaCorretor tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+#tabelotes tbody tr.status-disponivel td:not(:last-child) {
+    color: var(--color-disponivel);
+}
+
+#tabelotes tbody tr.status-reservado td:not(:last-child) {
+    color: var(--color-reservado);
+}
+
+#tabelotes tbody tr.status-vendido td:not(:last-child) {
+    color: var(--color-vendido);
+}
+
+#tabelotes tbody tr.status-bloqueado td:not(:last-child) {
+    color: var(--color-bloqueado);
+}
+
+.btn-editar,
+.btn-delete {
+    padding: 0.35rem;
+    border-radius: 0.45rem;
+    transition: background-color 0.18s ease;
+}
+
+.btn-editar {
+    color: #0239a3;
+}
+
+.btn-delete {
+    color: #c2413b;
+}
+
+.btn-editar:hover {
+    background: #eaf1fc;
+}
+
+.btn-delete:hover {
+    background: #fff0ef;
+}
+
+#open_popup {
+    color: #0239a3;
+}
+
+#popup_cadastro,
+#popup_edit_cadastro,
+.popup_confirm_delete,
+.popup_alert {
+    background: rgba(15, 23, 42, 0.42);
+    backdrop-filter: blur(3px);
+}
+
+#formCadastro,
+#formEditCadastro,
+#popup_confirm_delete,
+#popup_alert {
+    border: 1px solid #e5eaf2;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+#formCadastro,
+#formEditCadastro {
+    width: min(860px, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.header_popup {
+    margin-bottom: 1.5rem;
+}
+
+.header_popup h3,
+#popup_title {
+    color: #173b79;
+}
+
+.campo label {
+    color: #475569;
+}
+
+.campo input,
+.campo select {
+    border: 1px solid #dce4ef;
+    border-radius: 0.6rem;
+    background: #fff;
+    color: #263248;
+}
+
+select {
+    border: 1px solid #dce4ef;
+    border-radius: 0.6rem;
+    background-color: #fff;
+}
+
+button[type="submit"],
+#popup_alert button {
+    border-radius: 0.6rem;
+    background: #0239a3;
+    transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+button[type="submit"]:hover,
+#popup_alert button:hover {
+    background: #032f83;
+}
+
+button[type="submit"]:active,
+#popup_alert button:active {
+    transform: translateY(1px);
+}
+
+#close-cadastro,
+#close-edit {
+    color: #64748b;
+}
+
+#popup_confirm_delete {
+    width: min(440px, calc(100vw - 2rem));
+    height: auto;
+    min-height: 10rem;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+#popup_confirm_delete h3 {
+    color: #334155;
+    text-align: center;
+}
+
+#popup_confirm_delete .btns_delete {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+#popup_confirm_delete button {
+    width: auto;
+    padding: 0.65rem 1rem;
+    border: 0;
+    border-radius: 0.55rem;
+    color: #fff;
+}
+
+#cancel_delete_confirm {
+    background: #64748b;
+}
+
+#confirm_delete {
+    background: #c2413b;
+}
+
+#popup_alert {
+    width: min(420px, calc(100vw - 2rem));
+    height: auto;
+    min-height: 17rem;
+    padding: 2rem;
+    gap: 1rem;
+    justify-content: center;
+}
+
+#popup_alert .material-symbols-outlined {
+    color: #25835b;
+}
+
+#popup_alert button {
+    width: auto;
+    min-width: 7rem;
+    padding: 0.7rem 1.2rem;
+}
+
+#close-cadastro,
+#close-edit {
+    font-size: 1.75rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: calc(100% - 1.5rem);
+        margin-top: 5.25rem;
+    }
+
+    .cad {
+        margin-bottom: 0.75rem;
+    }
+
+    #search_name {
+        width: 100%;
+    }
+
+    .card-table {
+        max-height: 72vh;
+    }
+
+    #tabelotes th,
+    #tabelaCliente thead th,
+    #tabelaCorretor thead th,
+    #tabelotes td,
+    #tabelaCliente td,
+    #tabelaCorretor td {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    #formCadastro,
+    #formEditCadastro {
+        width: 100vw;
+        max-height: 100vh;
+        height: 100vh;
+        padding: 1.25rem;
+        border-radius: 0;
+    }
+
+    .sub {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    #popup_confirm_delete {
+        padding: 1.5rem;
+    }
+
+    #close-cadastro,
+    #close-edit {
+        font-size: 1.75rem;
+    }
+}
