@@ -496,6 +496,7 @@ screen and (orientation: portrait) {
             flex-direction: column;
             gap: 1.6rem;
             width: 100%;
+            margin-bottom: 15vw;
 
             .chart_card {
                 height: auto;
